@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Assistant, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    height: 82px;
+    width: 100%;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .05);
+}
+
+.logo_box {
+    position: absolute;
+    left: 2%;
+}
+
+.logo_box a img {
+    width: 40%;
+}
+
+.nav_bar {
+    position: relative;
+    left: 10%;
+    display: flex;
+    padding: 20px;
+    margin: 20px;
+    width: 40%;
+    justify-content: space-between;
+
+}
+
+.nav_bar a {
+    text-decoration: none;
+    color: #636466;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 30px 0;
+    border-bottom: 4px solid white;
+}
+
+.nav_bar a:hover {
+    border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+
+.login_box {
+    position: relative;
+    left: 10%;
+    display: flex;
+    width: 15%;
+    margin-left: 40px;
+    justify-content: space-evenly;
+
+}
+
+.login_box a {
+    color: #636466;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 30px 0;
+    border-bottom: 4px solid white;
+}
+
+.login_box a:hover {
+    border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+
+.donation {
+    position: relative;
+    left: 5%;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+    align-items: center;
+    height: 40px;
+    width: 9%;
+    background-color: rgb(243, 139, 0);
+    box-shadow: 1px 1px 1px rgb(97, 56, 2);
+    ;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 20px;
+    cursor: pointer;
+    padding-top: 9px;
+}
+
+.donation:hover {
+    scale: 1.05;
+}
+
+.dropdown_menu .drop_donation {
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    align-items: center;
+    height: 40px;
+    width: 50%;
+    position: relative;
+    left: 25%;
+    background-color: rgb(243, 139, 0);
+    box-shadow: 1px 1px 1px rgb(97, 56, 2);
+    ;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 20px;
+    cursor: pointer;
+    padding-top: 9px;
+}
+
+.drop_donation:hover {
+    scale: 1.05;
+}
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 80px;
+    width: 300px;
+    height: 370px;
+    background-color: #fff;
+    border-radius: 10px;
+
+}
+.dropdown_menu.open{
+    display: block;
+}
+
+.dropdown_menu a {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #636466;
+    font-weight: bold;
+}
+
+.dropdown_menu a:hover {
+    color: #78be20;
+    scale: 0.9;
+}
+
+.troggle_btn {
+    color: black;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+@media screen and (max-width:1000px) {
+    .nav_bar {
+        display: none;
+    }
+
+    .login_box {
+        display: none;
+    }
+
+    .donation {
+        display: none;
+    }
+
+    .troggle_btn {
+        display: block;
+        position: absolute;
+        left: 85%;
+    }
+}
+
+@media (min-width:992px) {
+    .dropdown_menu {
+        display: none;
+    }
+}
