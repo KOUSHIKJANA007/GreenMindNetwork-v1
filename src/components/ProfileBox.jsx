@@ -5,7 +5,8 @@ const ProfileBox = () => {
     return (
         <>
             <div className="person_box">
-                <Link to="">Koushik Jana</Link>
+                <Link to="#"><img className="dp_image" src="image/college.jpg" alt="" /></Link>
+                <Link className='dp_name' to="#">Koushik Jana</Link>
             </div>
         </>
     )

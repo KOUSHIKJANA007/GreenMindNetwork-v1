@@ -4,8 +4,12 @@
     font-family: Assistant, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+
+/* NAVBER START */
+
 header {
     position: fixed;
+    top: 0;
     display: flex;
     justify-content: space-evenly;
     height: 82px;
@@ -13,11 +17,13 @@ header {
     align-items: center;
     background-color: white;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .05);
+    z-index: 10;
 }
 
 .logo_box {
     position: absolute;
     left: 2%;
+
 }
 
 .logo_box a img {
@@ -30,8 +36,8 @@ header {
     display: flex;
     padding: 20px;
     margin: 20px;
-    width: 40%;
-    justify-content: space-between;
+    width: 50%;
+    justify-content: space-around;
 
 }
 
@@ -51,7 +57,7 @@ header {
 
 .login_box {
     position: relative;
-    left: 10%;
+    left: 8%;
     display: flex;
     width: 15%;
     margin-left: 40px;
@@ -73,27 +79,56 @@ header {
     color: #78be20;
 }
 
+.person_box {
+    position: relative;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.person_box a {
+    color: #636466;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 30px 0;
+}
+
+.dp_image {
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 80%;
+    background-size: cover;
+}
+
 .donation {
     position: relative;
     left: 5%;
     color: #ffffff;
     font-size: 20px;
     text-align: center;
-    border-radius: 5px;
-    align-items: center;
-    height: 40px;
+    border-radius: 10px;
+    height: 35px;
     width: 9%;
     background-color: rgb(243, 139, 0);
-    box-shadow: 1px 1px 1px rgb(97, 56, 2);
-    ;
     text-transform: uppercase;
     font-weight: 700;
     margin-right: 20px;
     cursor: pointer;
-    padding-top: 9px;
+    padding-top: 8px;
+    transition: 0.3s;
 }
 
 .donation:hover {
+    background-color: #FF681D;
+    box-shadow: 0px 1px 5px 5px rgba(241, 155, 7, 0.436);
+    scale: 1.01;
+}
+
+.donation:active {
     scale: 1.05;
 }
 
@@ -102,22 +137,26 @@ header {
     font-size: 20px;
     text-align: center;
     border-radius: 10px;
-    align-items: center;
-    height: 40px;
+    height: 35px;
     width: 50%;
     position: relative;
     left: 25%;
     background-color: rgb(243, 139, 0);
-    box-shadow: 1px 1px 1px rgb(97, 56, 2);
-    ;
     text-transform: uppercase;
     font-weight: 700;
     margin-right: 20px;
     cursor: pointer;
-    padding-top: 9px;
+    padding-top: 8px;
+    transition: 0.3s;
 }
 
 .drop_donation:hover {
+    background-color: #FF681D;
+    box-shadow: 0px 1px 5px 5px rgba(241, 155, 7, 0.436);
+    scale: 1.01;
+}
+
+.drop_donation:active {
     scale: 1.05;
 }
 
@@ -128,11 +167,13 @@ header {
     top: 80px;
     width: 300px;
     height: 370px;
-    background-color: #fff;
+    background-color: white;
+    overflow: hidden;
     border-radius: 10px;
-
+    transition: ease-in-out 0.1s;
 }
-.dropdown_menu.open{
+
+.dropdown_menu.open {
     display: block;
 }
 
@@ -145,11 +186,12 @@ header {
     text-decoration: none;
     color: #636466;
     font-weight: bold;
+    transition: 0.2s;
 }
 
 .dropdown_menu a:hover {
     color: #78be20;
-    scale: 0.9;
+    scale: 1.01;
 }
 
 .troggle_btn {
@@ -179,8 +221,269 @@ header {
     }
 }
 
+@media (max-width:450px) {
+    .dp_image {
+        height: 30px;
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 80%;
+        background-size: cover;
+    }
+
+    .person_box a {
+        font-size: 10px;
+    }
+
+    .logo_box a img {
+        width: 35%;
+    }
+}
+
 @media (min-width:992px) {
     .dropdown_menu {
         display: none;
     }
 }
+
+/* NAVBER END */
+/* FOOTER START */
+footer {
+    width: 100%;
+    position: relative;
+    top: 100px;
+    bottom: 20px;
+    z-index: 10;
+}
+
+.info {
+    margin-left: 200px;
+    margin-top: 30px;
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12%;
+    list-style-type: none;
+}
+
+.info ul li {
+    list-style-type: none;
+    line-height: 1.7;
+}
+
+.info ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.info ul li a:hover {
+    color: #78be20;
+}
+
+.copyright {
+    margin: 0 20px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    width: 70%;
+    border: 0;
+    position: relative;
+    left: 15%;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.copyright li {
+    list-style-type: none;
+}
+
+.slogan {
+    text-align: center;
+    margin: 24px;
+}
+
+.social_icons {
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 40px;
+    font-size: 30px;
+    margin: 30px 0 50px 0;
+}
+
+.social_icons li {
+    list-style-type: none;
+
+}
+
+.social_icons li a {
+    color: black;
+    height: 40px;
+}
+
+@media (max-width:500px) {
+    .info {
+        margin-left: 40px;
+    }
+}
+
+@media (max-width:500px) {
+    .social_icons {
+        gap: 10%;
+
+    }
+}
+
+/* FOOTER END */
+/* SIGN IN START */
+
+.login_container {
+    position: relative;
+    margin: 50px 50px 200px 50px;
+    padding: 50px;
+    width: 600px;
+    top: 100px;
+    left: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 5;
+    color: #374151;
+}
+
+.login_container h1 {
+    margin-bottom: 40px;
+    font-size: 40px;
+}
+
+.login_input_box {
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+    width: 350px;
+    position: relative;
+    left: 10%;
+}
+
+.login_input_box label {
+    font-family: Gotham SSm A,
+        Gotham SSm B,
+        arial,
+        sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.login_input {
+    height: 17px;
+    width: 100%;
+    border-radius: 8px;
+    padding: 12px 16px;
+    outline: none;
+    border: 1px solid #dadada;
+    transition: ease-in-out 0.2s;
+}
+
+.login_input:focus {
+    border: 1px solid #78be20;
+}
+
+.login_input_box_check {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    left: 10%;
+}
+
+.login_input_box_check label {
+    font-weight: 700;
+}
+
+.login_button {
+    position: relative;
+    left: 10%;
+}
+
+.login_button button {
+    width: 65%;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #78be20;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    font-size: 14px;
+    transition: ease-in-out 0.2s;
+}
+
+.login_button button:hover {
+    background-color: #599c07;
+}
+
+.login_button button:active {
+    background-color: #599c07;
+    scale: 1.02;
+    box-shadow: 0px 1px 5px 5px rgba(197, 233, 79, 0.555);
+    ;
+}
+
+@media (max-width:800px) {
+    .login_container {
+        left: 10%;
+        margin: 30px 30px 80px 30px;
+        padding: 30px;
+        width: 400px;
+    }
+}
+
+@media (max-width:400px) {
+    .login_container {
+        left: 10%;
+        margin: 15px 15px 170px 15px;
+        padding: 15px;
+        width: 300px;
+
+    }
+
+    .login_container h1 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .login_input_box {
+        left: 0%;
+        width: 80%;
+    }
+
+    .login_input_box_check {
+        left: 0%;
+    }
+
+    .login_button {
+        left: 0%;
+    }
+
+    .login_button button {
+        width: 90%;
+    }
+}
+
+@media (mix-width:801px) and (max-width:950) {
+    .login_container {
+        left: 15%;
+    }
+}
+
+/*SIGN IN END*/

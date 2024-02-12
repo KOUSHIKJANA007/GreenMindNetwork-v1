@@ -6,7 +6,7 @@ const LoginBox = () => {
     <>
           <div className="login_box">
               <Link to="">sign up</Link>
-              <Link to="">login</Link>
+              <Link to="/signin">login</Link>
           </div>
     </>
   )

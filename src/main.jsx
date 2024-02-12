@@ -5,11 +5,17 @@ import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import greenMindsStore from './store'
+import Home from './routes/Home'
+import SignIn from './routes/SignIn'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />,
+    children:[
+      {path:"/",element: <Home/>},
+      {path:"/signin",element: <SignIn/>}
+    ]
   }
 ])
 
