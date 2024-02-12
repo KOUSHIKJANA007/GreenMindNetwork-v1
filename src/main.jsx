@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import greenMindsStore from './store'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
+import SignUp from './routes/SignUp'
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     element: <App />,
     children:[
       {path:"/",element: <Home/>},
-      {path:"/signin",element: <SignIn/>}
+      {path:"/signin",element: <SignIn/>},
+      {path:"/signup",element: <SignUp/>},
     ]
   }
 ])

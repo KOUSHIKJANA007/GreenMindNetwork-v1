@@ -92,7 +92,7 @@ const Header = () => {
             <Link onClick={handleList} to="#" >blog</Link>
             <Link onClick={handleList} to="#" >contact us</Link>
             <Link onClick={handleList} to="#" >support us</Link>
-            <Link onClick={handleList} to="#">sign up</Link>
+            <Link onClick={handleList} to="/signup">sign up</Link>
             <Link onClick={handleList} to="/signin">login</Link>
             <div className="drop_donation">donate</div>
           </div>}
