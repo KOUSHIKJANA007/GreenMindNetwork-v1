@@ -25,6 +25,10 @@ const SignUp = () => {
             <input className='signup_input' type="number" name='mobile' id='mobile' />
         </div>
         <div className="signup_input_box">
+            <label htmlFor="date">DOB</label>
+            <input className='signup_input' type="date" name='date' id='date' />
+        </div>
+        <div className="signup_input_box">
             <label htmlFor="password">Password</label>
             <input className='signup_input' type="password" name='password' id='password' />
         </div>

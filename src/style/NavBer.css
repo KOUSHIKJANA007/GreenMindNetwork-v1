@@ -1,0 +1,248 @@
+header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-evenly;
+    height: 82px;
+    width: 100%;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .05);
+    z-index: 10;
+}
+
+.logo_box {
+    position: absolute;
+    left: 2%;
+
+}
+
+.logo_box a img {
+    width: 40%;
+}
+
+.nav_bar {
+    position: relative;
+    left: 10%;
+    display: flex;
+    padding: 20px;
+    margin: 20px;
+    width: 50%;
+    justify-content: space-around;
+
+}
+
+.nav_bar a {
+    text-decoration: none;
+    color: #636466;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 30px 0;
+    border-bottom: 4px solid white;
+}
+
+.nav_bar a:hover {
+    border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+
+.login_box {
+    position: relative;
+    left: 8%;
+    display: flex;
+    width: 15%;
+    margin-left: 40px;
+    justify-content: space-evenly;
+
+}
+
+.login_box a {
+    color: #636466;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 30px 0;
+    border-bottom: 4px solid white;
+}
+
+.login_box a:hover {
+    border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+
+.person_box {
+    position: relative;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.person_box a {
+    color: #636466;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 30px 0;
+}
+
+.dp_image {
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 78%;
+    background-size: cover;
+}
+
+.dp_name {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.donation {
+    position: relative;
+    left: 5%;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    height: 35px;
+    width: 9%;
+    background-color: rgb(243, 139, 0);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 20px;
+    cursor: pointer;
+    padding-top: 8px;
+    transition: 0.3s;
+}
+
+.donation:hover {
+    background-color: #FF681D;
+    box-shadow: 0px 1px 5px 5px rgba(241, 155, 7, 0.436);
+    scale: 1.01;
+}
+
+.donation:active {
+    scale: 1.05;
+}
+
+.dropdown_menu .drop_donation {
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    height: 35px;
+    width: 50%;
+    position: relative;
+    left: 25%;
+    background-color: rgb(243, 139, 0);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 20px;
+    cursor: pointer;
+    padding-top: 8px;
+    transition: 0.3s;
+}
+
+.drop_donation:hover {
+    background-color: #FF681D;
+    box-shadow: 0px 1px 5px 5px rgba(241, 155, 7, 0.436);
+    scale: 1.01;
+}
+
+.drop_donation:active {
+    scale: 1.05;
+}
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 80px;
+    width: 300px;
+    height: 370px;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: ease-in-out 0.1s;
+}
+
+.dropdown_menu.open {
+    display: block;
+}
+
+.dropdown_menu a {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #636466;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.dropdown_menu a:hover {
+    color: #78be20;
+    scale: 1.01;
+}
+
+.troggle_btn {
+    color: black;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+@media screen and (max-width:1000px) {
+    .nav_bar {
+        display: none;
+    }
+
+    .login_box {
+        display: none;
+    }
+
+    .donation {
+        display: none;
+    }
+
+    .troggle_btn {
+        display: block;
+        position: absolute;
+        left: 85%;
+    }
+}
+
+@media (max-width:450px) {
+    .dp_image {
+        height: 30px;
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 80%;
+        background-size: cover;
+    }
+
+    .person_box a {
+        font-size: 10px;
+    }
+
+    .logo_box a img {
+        width: 35%;
+    }
+}
+
+@media (min-width:992px) {
+    .dropdown_menu {
+        display: none;
+    }
+}
+
+@media (min-width:100px) and (max-width:1350px) {
+    .person_box {
+        left: 7%;
+    }
+}

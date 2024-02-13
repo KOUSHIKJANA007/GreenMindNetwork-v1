@@ -77,6 +77,7 @@ const Header = () => {
         {toggleProfile.Login
           ?
           <div ref={mobileMenuRef} className={dropDown ? "dropdown_menu open" : "dropdown_menu"}>
+            <Link onClick={handleList} to="/">home</Link>
             <Link onClick={handleList} to="#">about</Link>
             <Link onClick={handleList} to="#" >awarness camp</Link>
             <Link onClick={handleList} to="#" >blog</Link>
