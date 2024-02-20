@@ -3,11 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const toggleProfileSlice = createSlice({
     name: "toggleProfile",
     initialState: {
-        Login: true,
+        Login: false,
     },
     reducers: {
-        loginDone: (state) => {
+        loginDone: (state,action) => {
             state.Login = true;
+            localStorage.setItem("data",JSON.stringify(action.payload))
+        },
+        logoutDone: (state) => {
+            localStorage.removeItem("data");
+            state.Login = false;
+           
         },
     }
 });

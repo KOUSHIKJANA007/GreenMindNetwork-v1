@@ -1,0 +1,139 @@
+.post_container {
+    position: relative;
+    top: 150px;
+    left: 15%;
+    width: 60%;
+    height: 150vh;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    z-index: 5;
+    color: #464748;
+    ;
+}
+
+.post_container h2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.post_data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.post_input {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.Post_image{
+    border: none;
+}
+.post_input label {
+    font-size: 20px;
+}
+
+
+.Post_heading,
+.Post_sub_heading {
+    height: 28px;
+    outline: none;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+}
+
+.Post_heading,
+.Post_sub_heading,
+.Post_content {
+    border: 1px solid #dadada;
+    border-radius: 5px;
+}
+
+.Post_heading:focus {
+    border: 1px solid #78be20;
+}
+.Post_sub_heading:focus {
+    border: 1px solid #78be20;
+}
+.Post_content:focus {
+    border: 1px solid #78be20;
+}
+
+
+.Post_content {
+    outline: none;
+    padding: 5px 10px 5px 10px;
+}
+
+.post_buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.post_buttons button {
+    height: 40px;
+    width: 20%;
+    margin-right: 40px;
+    border-radius: 9px;
+    border: none;
+    outline: none;
+}
+
+.post_buttons .post_button {
+    background-color: #78be20;
+
+}
+
+.post_buttons .post_button:hover {
+    background-color: #5b9f09;
+    box-shadow: 0px 0px 2px 3px #aff35d;
+
+}
+
+.post_buttons .post_button:active {
+    scale: 1.05;
+
+}
+
+.post_buttons .reset_button {
+    background-color: hsl(26, 95%, 49%);
+}
+
+.post_buttons .reset_button:hover {
+    background-color: hsl(26, 93%, 40%);
+    box-shadow: 0px 0px 2px 3px hsla(26, 100%, 54%, 0.53);
+}
+
+.post_buttons .reset_button:active {
+    scale: 1.05;
+}
+
+@media (max-width:500px) {
+    .post_container {
+        width: 80%;
+        left: 3%;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+@media (min-width:501px) and (max-width:850px) {
+    .post_container {
+        width: 80%;
+        left: 8%;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+@media (min-width:851px) and (max-width:1400px){
+    .post_container{
+        width: 80%;
+        left: 8%;
+    }
+}

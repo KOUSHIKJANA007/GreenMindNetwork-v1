@@ -1,40 +1,38 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { MdClose } from "react-icons/md";
+import { doLogOut } from '../auth';
+import { toast } from 'react-toastify';
 
-const ProfileBox = () => {
+const ProfileBox = ({ user }) => {
     const [toggleProfileCard, setToggleProfileCard] = useState(false);
-    const mobileMenuRef = useRef();
-
-    const closeOpenMenus = useCallback(
-        (e) => {
-            if (
-                mobileMenuRef.current &&
-                toggleProfileCard &&
-                !mobileMenuRef.current.contains(e.target)
-            ) {
-                setToggleProfileCard(false);
-            }
-        },
-        [toggleProfileCard]
-    );
-    useEffect(() => {
-        document.addEventListener("mousedown", closeOpenMenus);
-
-    }, [closeOpenMenus]);
+    const navigate = useNavigate();
 
 
+    const handleEdit = () => {
+        setToggleProfileCard(false)
+    }
     const handleProfileCard = () => {
         setToggleProfileCard(true);
     }
     const handleProfileCardCancel = () => {
         setToggleProfileCard(false);
     }
+    const handleLogout = () => {
+        doLogOut(() => {
+            // toast.success("Logout successfull")
+            navigate("/signin")
+            window.location.reload()
+        })
+    }
+    let today=new Date();
+    let dob=new Date(user.dob);
+    let age =today.getFullYear()-dob.getFullYear();
     return (
         <>
-            <div className="person_box" ref={mobileMenuRef}>
+            <div className="person_box">
                 <Link to="#"><img className="dp_image" src="image/college.jpg" alt="" onClick={handleProfileCard} /></Link>
-                <Link className='dp_name' to="#" onClick={handleProfileCard}>Koushik Jana</Link>
+                <Link className='dp_name' to="#" onClick={handleProfileCard}>{user.fname+" "+user.lname}</Link>
             </div>
             <div className={toggleProfileCard ? "profile_card_container open" : "profile_card_container"}>
                 <MdClose onClick={handleProfileCardCancel} className='close_btn' />
@@ -42,14 +40,14 @@ const ProfileBox = () => {
                     <img src="image/college.jpg" alt="" />
                 </div>
                 <div className="profile_card_info">
-                    <p className="profile_name"><span>Name</span>KoushikJana</p>
-                    <p className="profile_dob"><span>DOB</span>06-05-2003</p>
-                    <p className="profile_email"><span>Email</span>koushikj389@gmail.com</p>
-                    <p className="profile_mobile"><span>Mobile</span>7891085911</p>
-                    <p className="profile_joined"><span>Joined</span>13-02-2024</p>
+                    <p className="profile_name"><span>Name</span>{user.fname + " " + user.lname}</p>
+                    <p className="profile_dob"><span>DOB</span>{user.dob}</p>
+                    <p className="profile_email"><span>Email</span>{user.email}</p>
+                    <p className="profile_mobile"><span>Mobile</span>{user.mobile}</p>
+                    <p className="profile_joined"><span>Age</span>{age}</p>
                     <div className="profile_card_button">
-                        <button type='submit' className="edit_btn"><Link to="/editprofile">Edit</Link></button>
-                        <button className="logout_btn"><Link to="#">Logout</Link></button>
+                        <button type='submit' className="edit_btn" onClick={handleEdit}><Link to="/editprofile">Edit</Link></button>
+                        <button className="logout_btn" onClick={handleLogout} >Logout</button>
                     </div>
                 </div>
             </div>

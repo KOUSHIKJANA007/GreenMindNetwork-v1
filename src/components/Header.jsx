@@ -1,17 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import LoginBox from './LoginBox'
 import ProfileBox from './ProfileBox'
 import { FaBars } from "react-icons/fa";
 import { TiDeleteOutline } from "react-icons/ti";
-import { profileAction } from '../store/toggleProfileSlice'
-
+import { getCurrentUserDetails, isLoggedIn } from '../auth';
 const Header = () => {
-  const toggleProfile = useSelector((store) => store.toggleProfile);
   const [dropDown, setDropDown] = useState();
+  const [login,setLogin]=useState(false);
+  const [user, setUser] = useState(undefined);
+  useEffect(()=>{
+    setLogin(isLoggedIn());
+    setUser(getCurrentUserDetails());
+  },[login],[user])
   const mobileMenuRef = useRef();
-
   const closeOpenMenus = useCallback(
     (e) => {
       if (
@@ -48,16 +50,16 @@ const Header = () => {
         <nav className="nav_bar">
           <Link to="#">about</Link>
           <Link to="#" >awarness camp</Link>
-          <Link to="#" >blog</Link>
+          <Link to="/articles" >Articles</Link>
           <Link to="#" >contact us</Link>
           <Link to="#" >support us</Link>
         </nav>
 
 
         {
-          toggleProfile.Login
+         login
             ?
-            <ProfileBox />
+            <ProfileBox user={user}/>
             :
             <LoginBox />
         }
@@ -74,13 +76,13 @@ const Header = () => {
           }
 
         </div>
-        {toggleProfile.Login
+        {login
           ?
           <div ref={mobileMenuRef} className={dropDown ? "dropdown_menu open" : "dropdown_menu"}>
             <Link onClick={handleList} to="/">home</Link>
             <Link onClick={handleList} to="#">about</Link>
             <Link onClick={handleList} to="#" >awarness camp</Link>
-            <Link onClick={handleList} to="#" >blog</Link>
+            <Link onClick={handleList} to="/articles" >articles</Link>
             <Link onClick={handleList} to="#" >contact us</Link>
             <Link onClick={handleList} to="#" >support us</Link>
             <div className="drop_donation">donate</div>
@@ -90,7 +92,7 @@ const Header = () => {
           <div ref={mobileMenuRef} className={dropDown ? "dropdown_menu open" : "dropdown_menu"}>
             <Link onClick={handleList} to="#">about</Link>
             <Link onClick={handleList} to="#" >awarness camp</Link>
-            <Link onClick={handleList} to="#" >blog</Link>
+            <Link onClick={handleList} to="/articles" >Articles</Link>
             <Link onClick={handleList} to="#" >contact us</Link>
             <Link onClick={handleList} to="#" >support us</Link>
             <Link onClick={handleList} to="/signup">sign up</Link>

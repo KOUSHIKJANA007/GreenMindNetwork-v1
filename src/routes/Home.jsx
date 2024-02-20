@@ -2,35 +2,11 @@ import React from 'react'
 const Home = () => {
   return (
     <>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
-      <h1>this is home page</h1>
+      <div className="home_container">
+          <div className="home_image">
+            <img src="" alt="" />
+          </div>
+      </div>
     </>
 
   )
