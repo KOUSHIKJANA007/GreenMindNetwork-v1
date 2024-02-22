@@ -1,19 +1,21 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom";
+
 
 const Protected = ({ Component }) => {
+  const { isLogin } = useSelector((store) => store.user);
   const navigate = useNavigate()
- useEffect(()=>{
-   if (localStorage.getItem("data") == null) {
-     navigate("/signin")
-   }
- },[])
-
+  useEffect(() => {
+    if (!isLogin) {
+      navigate("/signin")
+    }
+  }, [])
+  console.log(isLogin);
   return (
     <>
-      {localStorage.getItem("data") != null &&
-        <Component />
-      }
+      {isLogin && <Component />}
+
     </>
   )
 }

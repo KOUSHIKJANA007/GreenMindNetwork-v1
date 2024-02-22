@@ -44,7 +44,7 @@
 .profile_card_button {
     position: relative;
     top: 20px;
-    right: 5%;
+    right: 1%;
     display: flex;
     gap: 20px;
 }
@@ -61,7 +61,7 @@
 
 .profile_card_info {
     position: relative;
-    left: 15%;
+    left: 10%;
 }
 
 .profile_card_info p {

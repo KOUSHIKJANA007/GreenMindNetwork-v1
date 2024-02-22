@@ -1,22 +1,20 @@
 import { Outlet } from "react-router-dom"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
-import FetchArticles from "../components/FetchArticles"
-import LoadingBar from "react-top-loading-bar"
-import { useSelector } from "react-redux"
-import { useState } from "react"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+import LoadingBar from "react-top-loading-bar";
+import { useEffect, useState } from "react";
 function App() {
-  const fetchStatus=useSelector((store)=>store.fetchStatus)
+  const { loading } = useSelector((store) => store.user);
   const [progress, setProgress] = useState(100)
   return (
     <>
       <Header />
-      <FetchArticles/>
-      <ToastContainer />
-      {fetchStatus.fetching ? <LoadingBar color="#78be20" progress={progress}/>:<Outlet/>}
-      <Footer/>
+      <ToastContainer position="bottom-right" />
+      {loading ? <LoadingBar color="#78be20" progress={progress} /> : <Outlet />}
+      <Footer />
     </>
   )
 }

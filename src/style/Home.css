@@ -1,0 +1,170 @@
+.home_container {
+    background-image: url("image/home.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 500px;
+    width: 100%;
+    top: 90px;
+    display: flex;
+}
+
+
+.home_content {
+    position: relative;
+    top: 150px;
+    text-shadow: 0 0 7px rgb(0, 0, 0, .5);
+    padding: 10px 10px 40px 10px;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    color: white;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.home_content h1 {
+    position: relative;
+    font-size: 45px;
+}
+
+.home_content p {
+    width: 70%;
+    font-size: 20px;
+}
+
+.home_content button {
+    height: 40px;
+    width: 15%;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    text-transform: capitalize;
+    background-color: #78be20;
+    border: none;
+    box-shadow: 2px 4px 12px 2px rgba(0, 0, 0, .9);
+    cursor: pointer;
+}
+
+.home_content button:hover {
+    background-color: #8de71f;
+    text-shadow: 0 0 7px #fff;
+}
+
+.home_content button:active {
+    scale: 1.02;
+}
+
+@media (min-width:600px) and (max-width:1100px) {
+    
+    .home_content {
+        top: 40px;
+    }
+
+    .home_content h1 {
+        font-size: 35px;
+        left: 2%;
+    }
+
+    .home_content p {
+        width: 70%;
+        font-size: 19px;
+    }
+
+    .home_content button {
+        height: 40px;
+        width: 28%;
+    }
+}
+
+@media (min-width:501px) and (max-width:600px) {
+   
+    .home_content {
+        top: 35px;
+        width: 80%;
+    }
+
+    .home_content h1 {
+        font-size: 35px;
+        left: 13%;
+    }
+
+    .home_content p {
+        width: 70%;
+        font-size: 19px;
+    }
+
+    .home_content button {
+        height: 40px;
+        width: 28%;
+    }
+}
+@media (min-width:401px) and (max-width:500px){
+    .home_content {
+            top: 35px;
+            width: 80%;
+        }
+    
+        .home_content h1 {
+            font-size: 25px;
+            left: 13%;
+        }
+    
+        .home_content p {
+            width: 70%;
+            font-size: 15px;
+        }
+    
+        .home_content button {
+            height: 35px;
+            width: 35%;
+        }
+}
+@media (min-width:301px) and (max-width:400px) {
+    .home_content {
+        top: 35px;
+        width: 80%;
+    }
+
+    .home_content h1 {
+        font-size: 25px;
+        left: 6%;
+    }
+
+    .home_content p {
+        width: 90%;
+        font-size: 15px;
+    }
+
+    .home_content button {
+        height: 32px;
+        width: 49%;
+    }
+}
+@media  (max-width:300px) {
+    .home_content {
+        top: 25px;
+        width: 80%;
+    }
+
+    .home_content h1 {
+        font-size: 25px;
+        left: 3%;
+    }
+
+    .home_content p {
+        width: 100%;
+        font-size: 15px;
+        padding-left: 12px;
+    }
+
+    .home_content button {
+        height: 35px;
+        width: 52%;
+    }
+}

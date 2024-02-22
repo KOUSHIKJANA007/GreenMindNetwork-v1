@@ -167,6 +167,7 @@ header {
     overflow: hidden;
     border-radius: 10px;
     transition: ease-in-out 0.1s;
+
 }
 
 .dropdown_menu.open {

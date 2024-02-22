@@ -1,58 +1,56 @@
-import React, { useState } from 'react'
-import { Form, Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
-import { signIn } from '../service/user-service';
-import { doLogin } from '../auth';
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux";
+import { Form, Link, useNavigate } from "react-router-dom";
+import { loginAction, loginUser } from "../store/userDetails";
+import { toast } from "react-toastify";
+import { unwrapResult } from "@reduxjs/toolkit";
+
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [loginData, setLoginData] = useState({
-    username: '',
-    password: ''
-  })
-  const handleChange = (event, property) => {
-    setLoginData({ ...loginData, [property]: event.target.value })
+  const dispatch = useDispatch();
+  const [loginData, setLoginData] = useState();
+  const handleLoginData = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (loginData.username.trim() == '' || loginData.password.trim() == '') {
+  const handleLoginFormData = (e) => {
+    e.preventDefault();
+    if (document.getElementById("username").value.trim() == '' || document.getElementById("password").value.trim() == '') {
       toast.error("username or password is required")
       return;
     }
-    signIn(loginData).then((data) => {
 
-      doLogin(data, () => {
-      })
-
-      setLoginData({
-        username: '',
-        password: ''
-      })
-      // toast.success("login successfull")
-      navigate("/")
-
-      window.location.reload()
-    })
-      .catch(error => {
-        if (error.response.status == 400 || error.response.status == 404) {
-          toast.error(error.response.data.message)
-        }
-        else {
-          toast.error("something went wrong...")
+    dispatch(loginUser(loginData))
+      .then(unwrapResult)
+      .then((obj) => {
+        if (obj.token != null) {
+          toast.success("Login successfully done")
+          localStorage.setItem("data", JSON.stringify(obj.user));
+          localStorage.setItem("token", JSON.stringify(obj.token));
+          dispatch(loginAction.setUser(obj.user))
+          dispatch(loginAction.doLogin())
+          navigate("/userhome")
+        } else {
+          toast.error(obj.message)
         }
       })
+
+      .catch((obj) => {
+        toast.error(obj.message)
+      })
+
   }
   return (
     <>
-      <Form onSubmit={handleSubmit} className="login_container">
+      <Form className="login_container" onSubmit={handleLoginFormData} >
         <h1>Sign In To Access This Page</h1>
         <div className="login_input_box">
           <label htmlFor="username">Username</label>
-          <input className='login_input' type="text" value={loginData.username} onChange={(e) => handleChange(e, 'username')} id='username' />
+          <input className='login_input' type="text" name="username" onChange={handleLoginData} id='username' />
         </div>
         <div className="login_input_box">
           <label htmlFor="password">Password</label>
-          <input className='login_input' type="password" value={loginData.password} onChange={(e) => handleChange(e, 'password')} id='password' />
+          <input className='login_input' type="password" name="password" onChange={handleLoginData} id='password' />
         </div>
         <div className="login_input_box_check">
 
