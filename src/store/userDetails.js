@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 
 export const createUser = createAsyncThunk("createUser", async (data) => {
 
@@ -42,28 +41,24 @@ export const uploadUserImage = createAsyncThunk("uploadUserImage", async (data) 
     let image = data.image;
     formData.append("image", image);
     let token = localStorage.getItem("token");
-    const response = fetch(`http://localhost:8080/api/user/image/upload/${data.userId}`, {
+    const response = await fetch(`http://localhost:8080/api/user/image/upload/${data.userId}`, {
         method: "POST",
         headers: {
             Authorization: "Bearer" + token
         },
         body: formData
     })
-    const res = await response;
-    if (response.ok) {
-        return res;
-    } else {
-        toast.error(response.message)
-    }
+    const res = await response.json();
+    return res;
 })
-export const fetchUserImage = createAsyncThunk("fetchUserImage", async (imagename) => {
-    const response = fetch(`http://localhost:8080/api/user/image/${imagename}`, {
+export const fetchUserById = createAsyncThunk("fetchUserById", async (userId) => {
+    const response = await fetch(`http://localhost:8080/api/user/${userId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         },
     })
-    return response;
+    return await response.json();
 })
 const userSlice = createSlice({
     name: "userDetail",
@@ -72,7 +67,7 @@ const userSlice = createSlice({
         error: null,
         isLogin: false,
         users: [],
-        userImage: []
+        isEdit:false
     },
     reducers: {
         doLogin: (state) => {
@@ -86,9 +81,12 @@ const userSlice = createSlice({
         setUser: (state, action) => {
             state.users = action.payload;
         },
-        setUserImage: (state, action) => {
-            state.userImage = action.payload;
-        }
+        setEditDone: (state) => {
+            state.isEdit = true;
+        },
+        setEditEnd: (state) => {
+            state.isEdit = false;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(createUser.pending, (state) => {
@@ -117,6 +115,7 @@ const userSlice = createSlice({
             }),
             builder.addCase(updateUser.fulfilled, (state, action) => {
                 state.loading = false;
+                console.log("after edit", action.payload)
             }),
             builder.addCase(updateUser.rejected, (state, action) => {
                 state.loading = false;
@@ -127,19 +126,20 @@ const userSlice = createSlice({
             }),
             builder.addCase(uploadUserImage.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log(action.payload);
+                console.log("After upload", action.payload);
             }),
             builder.addCase(uploadUserImage.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             }),
-            builder.addCase(fetchUserImage.pending, (state) => {
+            builder.addCase(fetchUserById.pending, (state) => {
                 state.loading = true;
             }),
-            builder.addCase(fetchUserImage.fulfilled, (state, action) => {
+            builder.addCase(fetchUserById.fulfilled, (state, action) => {
                 state.loading = false;
+                console.log("user data from db", action.payload)
             }),
-            builder.addCase(fetchUserImage.rejected, (state, action) => {
+            builder.addCase(fetchUserById.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

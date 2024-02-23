@@ -15,11 +15,12 @@ const reducer = combineReducers({
 })
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({
-    reducer: persistedReducer ,
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
     }),
 })
+
 
 export const persistor = persistStore(greenMindStore);
 export default greenMindStore

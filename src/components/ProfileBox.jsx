@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserImage, loginAction } from '../store/userDetails';
+import {  loginAction } from '../store/userDetails';
 import { toast } from 'react-toastify';
-import { unwrapResult } from '@reduxjs/toolkit';
+import { BASE_URL } from '../store/helper';
 
 const ProfileBox = ({ users }) => {
-    const { userImage } = useSelector((store) => store.user);
+    console.log("users==",users);
     const [toggleProfileCard, setToggleProfileCard] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,35 +23,24 @@ const ProfileBox = ({ users }) => {
         navigate("/signin");
     }
 
-
-    // useEffect(() => {
-    //     console.log(users);
-    //     dispatch(fetchUserImage(users.imageName))
-    //         .then(unwrapResult)
-    //         .then((obj) => {
-    //             console.log(obj.url);
-    //             if (obj.url != null) {
-    //                 dispatch(loginAction.setUserImage(obj.url))
-    //             }
-    //         })
-    //         .catch((obj) => {
-    //             toast.error(obj)
-    //         })
-    // }, [userImage])
     let today = new Date();
     let date = new Date(users.dob);
     let age = today.getFullYear() - date.getFullYear();
-    console.log("image.....", userImage);
     return (
         <>
             <div className="person_box">
-                <Link to="#"><img className="dp_image" src={`http://localhost:8080/api/user/image/${users.imageName}`} alt="" onClick={handleProfileCard} /></Link>
+                {users.imageName 
+                    ?
+                    <Link to="#"><img className="dp_image" src={BASE_URL+"/api/user/image/"+users.imageName} alt="" onClick={handleProfileCard} /></Link>
+                :
+                <Link to="#"><img className="dp_image" src="image/profile.avif" alt="" onClick={handleProfileCard} /></Link>
+                }
                 <Link className='dp_name' to="#" onClick={handleProfileCard}>{users.fname + " " + users.lname}</Link>
             </div>
             <div className={toggleProfileCard ? "profile_card_container open" : "profile_card_container"}>
                 <MdClose onClick={handleProfileCardCancel} className='close_btn' />
                 <div className="profile_card_logo">
-                    <img src={`http://localhost:8080/api/user/image/${users.imageName}`} alt="" />
+                    <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
                 </div>
                 <div className="profile_card_info">
                     <p className="profile_name"><span>Name</span>{users.fname + " " + users.lname}</p>

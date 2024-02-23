@@ -5,13 +5,15 @@ import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import LoadingBar from "react-top-loading-bar";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
+import FetchUser from "../components/FetchUser";
 function App() {
   const { loading } = useSelector((store) => store.user);
   const [progress, setProgress] = useState(100)
   return (
     <>
       <Header />
+      <FetchUser/>
       <ToastContainer position="bottom-right" />
       {loading ? <LoadingBar color="#78be20" progress={progress} /> : <Outlet />}
       <Footer />

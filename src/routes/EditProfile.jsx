@@ -4,12 +4,13 @@ import { Form, useNavigate } from "react-router-dom"
 import { loginAction, updateUser, uploadUserImage } from "../store/userDetails";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../store/helper";
 
 
 const EditProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { users,userImage } = useSelector((store) => store.user);
+    const { users } = useSelector((store) => store.user);
     const [editData, setEditData] = useState({});
     const [image, setImage] = useState(null);
     const handleOnChange = (e) => {
@@ -21,19 +22,25 @@ const EditProfile = () => {
     }, [])
     const handleSubmitEditData = (e) => {
         e.preventDefault();
+
         dispatch(updateUser(editData))
-        .then(unwrapResult)
+            .then(unwrapResult)
             .then((obj) => {
-                dispatch(uploadUserImage({image:image,userId:obj.id}))
-                    .then((obj) => {
-                        console.log("Image",obj);
+                dispatch(uploadUserImage({ image: image, userId: users.id }))
+                    .then((data) => {
+                         if(data.payload != null){
+                            dispatch(loginAction.setEditDone())
+                         }
+                         else{
+                            toast.error(data.payload)
+                         }
                     })
                     .catch((err) => {
                         toast.error(err)
                     })
                 if (obj.id != null) {
                     toast.success("Edit successfull")
-                    dispatch(loginAction.setUser(obj))
+                    dispatch(loginAction.setEditDone())
                     navigate("/userhome");
                 }
                 else {
@@ -44,14 +51,10 @@ const EditProfile = () => {
             })
             .catch((obj) => console.log({ obj }))
 
-
     }
     const handleImageUpload = (event) => {
-        console.log(event.target.files[0]);
         setImage(event.target.files[0]);
     }
-
-
 
     return (
         <>
@@ -60,7 +63,7 @@ const EditProfile = () => {
                 <div className="profile_image">
 
                     <label htmlFor='file_upload'>
-                        <img src={`http://localhost:8080/api/user/image/${users.imageName}`} alt="" />
+                        <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
                     </label>
                     <input type="file" id='file_upload' name="image" onChange={handleImageUpload} />
 

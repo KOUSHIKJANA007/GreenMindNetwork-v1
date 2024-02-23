@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoginBox from './LoginBox'
 import ProfileBox from './ProfileBox'
 import { FaBars } from "react-icons/fa";
 import { TiDeleteOutline } from "react-icons/ti";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const Header = () => {
   const [dropDown, setDropDown] = useState();
   const { users, isLogin } = useSelector((store) => store.user);
@@ -17,6 +17,10 @@ const Header = () => {
   const handleList = () => {
     setDropDown(false);
   }
+
+
+
+
   return (
     <>
       <header>

@@ -32,8 +32,8 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/signin", element: <SignIn /> },
-      { path: "/signup", element: <SignUp />},
-      { path: "/editprofile", element: <Protected Component={EditProfile}/> },
+      { path: "/signup", element: <SignUp /> },
+      { path: "/editprofile", element: <Protected Component={EditProfile} /> },
       { path: "/articles", element: <Protected Component={Article} /> },
       { path: "/createpost", element: <Protected Component={CreatePost} /> },
       { path: "/articlecontent", element: <Protected Component={ArticleContent} /> },
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={greenMindStore}>
-      <PersistGate persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
       <RouterProvider router={router} />
       </PersistGate>
     </Provider>
