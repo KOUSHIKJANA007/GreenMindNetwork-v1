@@ -24,13 +24,14 @@ import UserHome from './routes/UserHome'
 import { Provider } from 'react-redux'
 import greenMindStore, { persistor } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
+import Public from './user-routes/public.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <Home /> },
+      { path: "/", element: <Public Component={Home}/> },
       { path: "/signin", element: <SignIn /> },
       { path: "/signup", element: <SignUp /> },
       { path: "/editprofile", element: <Protected Component={EditProfile} /> },

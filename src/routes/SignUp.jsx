@@ -1,11 +1,13 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, useNavigate } from "react-router-dom";
 import { createUser } from "../store/userDetails";
 import { toast } from "react-toastify";
 import { unwrapResult } from "@reduxjs/toolkit";
+import LoadingBar from "react-top-loading-bar";
 
 const SignUp = () => {
+    const { loading } = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -37,6 +39,7 @@ const SignUp = () => {
     }
     return (
         <>
+            {loading && <LoadingBar color="#78be20" />}
             <Form className="signup_container" onSubmit={handleSubmitSignUpData}>
                 <h1>register here</h1>
                 <div className="signup_input_box_name">

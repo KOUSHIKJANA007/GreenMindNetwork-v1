@@ -14,7 +14,7 @@ function App() {
     <>
       <Header />
       <FetchUser/>
-      <ToastContainer position="bottom-right" />
+      <ToastContainer autoClose={3000} position="bottom-right" />
       {loading ? <LoadingBar color="#78be20" progress={progress} /> : <Outlet />}
       <Footer />
     </>

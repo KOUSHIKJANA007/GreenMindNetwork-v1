@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Link, useNavigate } from "react-router-dom";
 import { loginAction, loginUser } from "../store/userDetails";
 import { toast } from "react-toastify";
 import { unwrapResult } from "@reduxjs/toolkit";
+import LoadingBar from "react-top-loading-bar";
 
 
 const SignIn = () => {
+  const { loading } = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState();
@@ -42,6 +44,7 @@ const SignIn = () => {
   }
   return (
     <>
+      {loading && <LoadingBar color="#78be20" />}
       <Form className="login_container" onSubmit={handleLoginFormData} >
         <h1>Sign In To Access This Page</h1>
         <div className="login_input_box">

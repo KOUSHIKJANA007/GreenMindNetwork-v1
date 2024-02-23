@@ -5,12 +5,13 @@ import { loginAction, updateUser, uploadUserImage } from "../store/userDetails";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../store/helper";
+import LoadingBar from "react-top-loading-bar";
 
 
 const EditProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { users } = useSelector((store) => store.user);
+    const { users,loading } = useSelector((store) => store.user);
     const [editData, setEditData] = useState('');
     const [image, setImage] = useState(null);
     const handleOnChange = (e) => {
@@ -58,6 +59,7 @@ const EditProfile = () => {
 
     return (
         <>
+            {loading && <LoadingBar color="#78be20" />}
             <Form encType="multipart/form-data" className="signup_container" onSubmit={handleSubmitEditData}>
                 <h1>Edit Profile Details</h1>
                 <div className="profile_image">
