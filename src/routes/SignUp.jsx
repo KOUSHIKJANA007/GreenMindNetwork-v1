@@ -13,8 +13,6 @@ const SignUp = () => {
 
     const setSignupData = (e) => {
         setUsers({ ...users, [e.target.name]: e.target.value })
-        console.log(users);
-        console.log(document.getElementById("check").value);
     }
 
     const handleSubmitSignUpData = (e) => {
@@ -22,7 +20,6 @@ const SignUp = () => {
         dispatch(createUser(users))
             .then(unwrapResult)
             .then((obj) => {
-                console.log({ obj });
                 if (obj.id != null) {
                     toast.success("Registration successfull")
                     navigate("/signin");

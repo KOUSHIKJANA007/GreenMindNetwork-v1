@@ -11,6 +11,6 @@
     border-radius: 100%;
     border: 4px solid #78be20;
 }
-.profile_image>input{
+.profile_image input{
     display: none;
 }

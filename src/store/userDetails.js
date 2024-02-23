@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 export const createUser = createAsyncThunk("createUser", async (data) => {
 
@@ -67,7 +68,7 @@ const userSlice = createSlice({
         error: null,
         isLogin: false,
         users: [],
-        isEdit:false
+        isEdit: false
     },
     reducers: {
         doLogin: (state) => {
@@ -115,7 +116,6 @@ const userSlice = createSlice({
             }),
             builder.addCase(updateUser.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log("after edit", action.payload)
             }),
             builder.addCase(updateUser.rejected, (state, action) => {
                 state.loading = false;
@@ -126,7 +126,6 @@ const userSlice = createSlice({
             }),
             builder.addCase(uploadUserImage.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log("After upload", action.payload);
             }),
             builder.addCase(uploadUserImage.rejected, (state, action) => {
                 state.loading = false;
@@ -137,7 +136,6 @@ const userSlice = createSlice({
             }),
             builder.addCase(fetchUserById.fulfilled, (state, action) => {
                 state.loading = false;
-                console.log("user data from db", action.payload)
             }),
             builder.addCase(fetchUserById.rejected, (state, action) => {
                 state.loading = false;

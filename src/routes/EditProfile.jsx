@@ -11,7 +11,7 @@ const EditProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { users } = useSelector((store) => store.user);
-    const [editData, setEditData] = useState({});
+    const [editData, setEditData] = useState('');
     const [image, setImage] = useState(null);
     const handleOnChange = (e) => {
         setEditData({ ...editData, [e.target.name]: e.target.value });
@@ -28,12 +28,12 @@ const EditProfile = () => {
             .then((obj) => {
                 dispatch(uploadUserImage({ image: image, userId: users.id }))
                     .then((data) => {
-                         if(data.payload != null){
+                        if (data.payload != null) {
                             dispatch(loginAction.setEditDone())
-                         }
-                         else{
+                        }
+                        else {
                             toast.error(data.payload)
-                         }
+                        }
                     })
                     .catch((err) => {
                         toast.error(err)
@@ -49,7 +49,7 @@ const EditProfile = () => {
                     toast.error(obj.email)
                 }
             })
-            .catch((obj) => console.log({ obj }))
+            .catch((obj) => toast.error(obj.message))
 
     }
     const handleImageUpload = (event) => {
@@ -63,7 +63,13 @@ const EditProfile = () => {
                 <div className="profile_image">
 
                     <label htmlFor='file_upload'>
-                        <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
+                        {
+                            (users.imageName != "default.jpg")
+                            ?
+                            <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
+                            :
+                            <img src="image/profile.avif" alt="" />
+                        }
                     </label>
                     <input type="file" id='file_upload' name="image" onChange={handleImageUpload} />
 

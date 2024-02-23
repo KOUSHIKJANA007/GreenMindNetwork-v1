@@ -18,9 +18,6 @@ const Header = () => {
     setDropDown(false);
   }
 
-
-
-
   return (
     <>
       <header>
@@ -45,12 +42,6 @@ const Header = () => {
         </nav>
 
 
-
-
-
-
-
-
         {
           isLogin
             ?
@@ -58,8 +49,6 @@ const Header = () => {
             :
             <LoginBox />
         }
-
-
 
 
         <div className="donation">donate</div>
