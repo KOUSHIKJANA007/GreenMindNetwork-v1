@@ -7,10 +7,10 @@ const ArticleContent = () => {
     <>
       <div className="article_container">
         <div className="article_img">
-          {/* <img src="image/college.jpg" alt="" /> */}
+          <img src="image/college.jpg" alt="" />
         </div>
         <div className="article_content">
-         
+          
         </div>
       </div>
     </>

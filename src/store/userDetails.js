@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { localStorageWithExpiry } from "./helper";
 
 export const createUser = createAsyncThunk("createUser", async (data) => {
 
@@ -14,7 +15,8 @@ export const createUser = createAsyncThunk("createUser", async (data) => {
 })
 export const updateUser = createAsyncThunk("updateUser", async (data) => {
 
-    let token = localStorage.getItem("token");
+    let token = localStorageWithExpiry.getItem("token");
+    console.log(token);
     const response = await fetch(`http://localhost:8080/api/user/${data.id}`, {
         method: "PUT",
         headers: {
@@ -41,7 +43,7 @@ export const uploadUserImage = createAsyncThunk("uploadUserImage", async (data) 
     let formData = new FormData();
     let image = data.image;
     formData.append("image", image);
-    let token = localStorage.getItem("token");
+    let token = localStorageWithExpiry.getItem("token");
     const response = await fetch(`http://localhost:8080/api/user/image/upload/${data.userId}`, {
         method: "POST",
         headers: {
@@ -87,7 +89,7 @@ const userSlice = createSlice({
         },
         setEditEnd: (state) => {
             state.isEdit = false;
-        },
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(createUser.pending, (state) => {

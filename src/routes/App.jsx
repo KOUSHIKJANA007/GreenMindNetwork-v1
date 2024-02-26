@@ -3,17 +3,26 @@ import Footer from "../components/Footer"
 import Header from "../components/Header"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoadingBar from "react-top-loading-bar";
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import FetchUser from "../components/FetchUser";
+import { localStorageWithExpiry } from "../store/helper";
+import { loginAction } from "../store/userDetails";
 function App() {
+  const dispatch=useDispatch();
   const { loading } = useSelector((store) => store.user);
   const [progress, setProgress] = useState(100)
+
+  useEffect(() => {
+    if(localStorageWithExpiry.isExpire("token")){
+      dispatch(loginAction.doLogout());
+    }
+  }, [])
   return (
     <>
       <Header />
-      <FetchUser/>
+      <FetchUser />
       <ToastContainer autoClose={3000} position="bottom-right" />
       {loading ? <LoadingBar color="#78be20" progress={progress} /> : <Outlet />}
       <Footer />

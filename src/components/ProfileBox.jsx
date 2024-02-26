@@ -1,8 +1,8 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import {  loginAction } from '../store/userDetails';
+import { loginAction } from '../store/userDetails';
 import { toast } from 'react-toastify';
 import { BASE_URL } from '../store/helper';
 
@@ -30,10 +30,10 @@ const ProfileBox = ({ users }) => {
             <div className="person_box">
                 {
                     (users.imageName != "default.jpg")
-                    ?
-                    <Link to="#"><img className="dp_image" src={BASE_URL+"/api/user/image/"+users.imageName} alt="" onClick={handleProfileCard} /></Link>
-                    :
-                    <Link to="#"><img className="dp_image" src="image/profile.avif" alt="" onClick={handleProfileCard} /></Link>
+                        ?
+                        <Link to="#"><img className="dp_image" src={BASE_URL + "/api/user/image/" + users.imageName} alt="" onClick={handleProfileCard} /></Link>
+                        :
+                        <Link to="#"><img className="dp_image" src="image/profile.avif" alt="" onClick={handleProfileCard} /></Link>
                 }
                 <Link className='dp_name' to="#" onClick={handleProfileCard}>{users.fname + " " + users.lname}</Link>
             </div>
@@ -41,14 +41,14 @@ const ProfileBox = ({ users }) => {
                 <MdClose onClick={handleProfileCardCancel} className='close_btn' />
                 <div className="profile_card_logo">
 
-                   { 
+                    {
                         (users.imageName != "default.jpg")
-                        ?
-                        <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
-                        :
-                        <img src="image/profile.avif" alt="" />
+                            ?
+                            <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
+                            :
+                            <img src="image/profile.avif" alt="" />
                     }
-                    
+
                 </div>
                 <div className="profile_card_info">
                     <p className="profile_name"><span>Name</span>{users.fname + " " + users.lname}</p>

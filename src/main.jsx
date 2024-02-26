@@ -11,6 +11,7 @@ import '../src/style/EditProfile.css'
 import '../src/style/CreatePost.css'
 import '../src/style/Article.css'
 import '../src/style/Home.css'
+import '../src/style/UserArticleItem.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -25,6 +26,7 @@ import { Provider } from 'react-redux'
 import greenMindStore, { persistor } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
 import Public from './user-routes/public.jsx'
+import UserPosts from './routes/userPosts.jsx'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,7 @@ const router = createBrowserRouter([
       { path: "/createpost", element: <Protected Component={CreatePost} /> },
       { path: "/articlecontent", element: <Protected Component={ArticleContent} /> },
       { path: "/userhome", element: <Protected Component={UserHome} /> },
+      { path: "/userposts", element: <Protected Component={UserPosts} /> },
     ]
   }
 ])

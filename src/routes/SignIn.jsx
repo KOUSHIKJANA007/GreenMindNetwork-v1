@@ -5,6 +5,7 @@ import { loginAction, loginUser } from "../store/userDetails";
 import { toast } from "react-toastify";
 import { unwrapResult } from "@reduxjs/toolkit";
 import LoadingBar from "react-top-loading-bar";
+import { localStorageWithExpiry } from "../store/helper";
 
 
 const SignIn = () => {
@@ -27,8 +28,8 @@ const SignIn = () => {
       .then((obj) => {
         if (obj.token != null) {
           toast.success("Login successfully done")
-          localStorage.setItem("data", JSON.stringify(obj.user));
-          localStorage.setItem("token", JSON.stringify(obj.token));
+          localStorageWithExpiry.setItem("data", JSON.stringify(obj.user), 7200000);
+          localStorageWithExpiry.setItem("token", JSON.stringify(obj.token), 7200000);
           dispatch(loginAction.setUser(obj.user))
           dispatch(loginAction.doLogin())
           navigate("/userhome")
