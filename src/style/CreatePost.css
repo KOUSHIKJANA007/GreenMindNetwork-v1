@@ -33,9 +33,11 @@
     flex-direction: column;
     gap: 6px;
 }
-.Post_image{
+
+.Post_image {
     border: none;
 }
+
 .post_input label {
     font-size: 20px;
 }
@@ -56,12 +58,15 @@
     border-radius: 5px;
 }
 
+
 .Post_heading:focus {
     border: 1px solid #78be20;
 }
+
 .Post_sub_heading:focus {
     border: 1px solid #78be20;
 }
+
 .Post_content:focus {
     border: 1px solid #78be20;
 }
@@ -123,6 +128,7 @@
         margin-right: 10px;
     }
 }
+
 @media (min-width:501px) and (max-width:850px) {
     .post_container {
         width: 80%;
@@ -131,8 +137,9 @@
         margin-right: 10px;
     }
 }
-@media (min-width:851px) and (max-width:1400px){
-    .post_container{
+
+@media (min-width:851px) and (max-width:1400px) {
+    .post_container {
         width: 80%;
         left: 8%;
     }

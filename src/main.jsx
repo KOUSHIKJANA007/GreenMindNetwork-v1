@@ -12,6 +12,7 @@ import '../src/style/CreatePost.css'
 import '../src/style/Article.css'
 import '../src/style/Pagination.css'
 import '../src/style/Home.css'
+import '../src/style/ArticleContent.css'
 import '../src/style/UserArticleItem.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
@@ -35,12 +36,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Public Component={Home}/> },
-      { path: "/signin", element: <SignIn /> },
-      { path: "/signup", element: <SignUp /> },
+      { path: "/signin", element: <Public Component={SignIn} /> },
+      { path: "/signup", element: <Public Component={SignUp} /> },
       { path: "/editprofile", element: <Protected Component={EditProfile} /> },
       { path: "/articles", element: <Protected Component={Article} /> },
       { path: "/createpost", element: <Protected Component={CreatePost} /> },
-      { path: "/articlecontent", element: <Protected Component={ArticleContent} /> },
+      { path: "/articlecontent/:postId", element: <Protected Component={ArticleContent} /> },
       { path: "/userhome", element: <Protected Component={UserHome} /> },
       { path: "/userposts", element: <Protected Component={UserPosts} /> },
     ]

@@ -12,7 +12,7 @@ export const fetchPosts = createAsyncThunk("fetchPosts", async (pageNumber) => {
     })
     return await response.json();
 })
-export const createPost = createAsyncThunk("createPost", async (data, thunkAPI) => {
+export const createPost = createAsyncThunk("createPost", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
     const response = await fetch(`http://localhost:8080/api/post/${data.userId}`, {
         method: "POST",
@@ -38,7 +38,15 @@ export const uploadPostImage = createAsyncThunk("uploadPostImage", async (data) 
     })
     return await response.json();
 })
-
+export const getPostById = (createAsyncThunk("getPostById", async (postId) => {
+    const response = await fetch(`http://localhost:8080/api/post/${postId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    return await response.json();
+}))
 export const postByUser = createAsyncThunk("postByUser", async (data) => {
     const response = await fetch(`http://localhost:8080/api/post/user/${data.userId}?pageNumber=${data.pageNumber}`, {
         method: "GET",
@@ -62,12 +70,17 @@ const postSlice = createSlice({
     initialState: {
         loading: false,
         posts: [],
+        singlePost: [],
         isPostCreate: false,
         error: null
     },
     reducers: {
         setPost: (state, action) => {
             state.posts = (action.payload);
+        },
+        setSinglePost: (state, action) => {
+            state.singlePost = (action.payload);
+            console.log("post details", action.payload)
         },
         setPostCreatedDone: (state) => {
             state.isPostCreate = true;
@@ -124,6 +137,16 @@ const postSlice = createSlice({
                 state.loading = false
             }),
             builder.addCase(searchPost.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            }),
+            builder.addCase(getPostById.pending, (state) => {
+                state.loading = true
+            }),
+            builder.addCase(getPostById.fulfilled, (state) => {
+                state.loading = false
+            }),
+            builder.addCase(getPostById.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

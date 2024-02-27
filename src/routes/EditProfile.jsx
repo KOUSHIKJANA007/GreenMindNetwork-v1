@@ -19,6 +19,7 @@ const EditProfile = () => {
 
     }
     useEffect(() => {
+        window.scroll(0,0)
         setEditData(users)
     }, [])
     const handleSubmitEditData = (e) => {
@@ -65,13 +66,7 @@ const EditProfile = () => {
                 <div className="profile_image">
 
                     <label htmlFor='file_upload'>
-                        {
-                            (users.imageName != "default.jpg")
-                            ?
                             <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
-                            :
-                            <img src="image/profile.avif" alt="" />
-                        }
                     </label>
                     <input type="file" id='file_upload' name="image" onChange={handleImageUpload} />
 

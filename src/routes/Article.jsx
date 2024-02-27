@@ -30,12 +30,13 @@ const Article = () => {
         console.log({ err });
         toast.error(err)
       })
-  }, [isPostCreate,pageNumber])
+  }, [isPostCreate, pageNumber])
 
 
   const handleSearch = () => {
     const keyword = searchElement.current.value;
-    if (!keyword) {
+    console.log("key", keyword);
+    if (!keyword.trim(" ")) {
       toast.error("Please enter anything for search")
     }
     else {
@@ -52,7 +53,6 @@ const Article = () => {
 
   }
 
-  console.log("here post", { posts });
   return (
     <>
       {loading && <LoadingBar color="#78be20" />}
@@ -75,7 +75,7 @@ const Article = () => {
             </div>
             :
             <div className="article_display_container">
-              {posts.content && posts.content.map((article) =>
+              {posts?.content?.map((article) =>
                 <ArticleItem article={article} key={article?.id} />
               )}
             </div>}

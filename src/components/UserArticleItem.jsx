@@ -10,7 +10,7 @@ const UserArticleItem = ({ article }) => {
                     <img src={BASE_URL + `/api/post/image/${article.imageName}`} alt="" />
                 </div>
                 <div className="user_article_item_heading">
-                    <h1 className='article_title' ><Link to="/articlecontent">{article.title}</Link></h1>
+                    <h1 className='article_title' ><Link to={`/articlecontent/${article.id}`}>{article.title}</Link></h1>
                     <h2 className='article_sub_title'>{article.subTitle}</h2>
                 </div>
            </div>

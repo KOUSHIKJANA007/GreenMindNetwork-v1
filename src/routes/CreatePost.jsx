@@ -1,20 +1,27 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Form, useNavigate } from "react-router-dom"
 import { createPost, postAction, uploadPostImage } from "../store/postDetails";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import JoditEditor from "jodit-react";
 
 
 const CreatePost = () => {
     const { users } = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const editor = useRef(null);
     const [postData, setPostData] = useState('');
+    const [content, setContent] = useState('');
     const [image, setImage] = useState('');
     const handleOnChange = (e) => {
         setPostData({ ...postData, [e.target.name]: e.target.value });
         console.log(postData);
+    }
+
+    const handleContent=(data)=>{
+        setPostData({...postData,'content':data})
     }
     const handleOnChangeImage = (e) => {
         setImage(e.target.files[0])
@@ -27,13 +34,13 @@ const CreatePost = () => {
 
         dispatch(createPost({ postData: postData, userId: users.id }))
             .then((obj) => {
-                if(obj.payload?.id != null){
+                if (obj.payload?.id != null) {
                     dispatch(uploadPostImage({ image: image, postId: obj.payload?.id }))
                         .then(unwrapResult)
                         .then((res) => {
-                           if(res?.id == null){
-                            toast.error("Image not uploaded")
-                           }
+                            if (res?.id == null) {
+                                toast.error("Image not uploaded")
+                            }
                         })
                         .catch((err) => {
                             toast.error({ err })
@@ -42,18 +49,18 @@ const CreatePost = () => {
                     toast.success("post created successfully")
                     navigate("/articles")
                 }
-                else{
-                    console.log({obj});
+                else {
+                    console.log({ obj });
                     toast.error(obj.payload?.title)
                     toast.error(obj.payload?.subTitle)
                     toast.error(obj.payload?.content)
                 }
             })
-            .catch((err)=>{
-                toast.error({err})
+            .catch((err) => {
+                toast.error({ err })
             })
 
-       
+
     }
     return (
         <>
@@ -74,7 +81,13 @@ const CreatePost = () => {
                     </div>
                     <div className="post_input">
                         <label htmlFor="Post_content">enter post content</label>
-                        <textarea className="Post_content" type="text" name="content" onChange={handleOnChange} id="Post_content" rows={20} required />
+                        {/* <textarea className="Post_content" type="text" name="content" onChange={handleOnChange} id="Post_content" rows={20} required /> */}
+
+                        <JoditEditor
+                            ref={editor}
+                            value={content}
+                            onChange={handleContent}
+                        />
                     </div>
                     <div className="post_buttons">
                         <button type='submit' className="post_button">Post</button>

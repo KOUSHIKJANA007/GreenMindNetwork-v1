@@ -41,6 +41,7 @@ const UserPosts = () => {
             dispatch(searchPost(keyword))
                 .then(unwrapResult)
                 .then((data) => {
+                    console.log("data", { data });
                     dispatch(postAction.setPost(data))
                 })
                 .catch((err) => {
@@ -50,6 +51,7 @@ const UserPosts = () => {
         }
 
     }
+    console.log("post data for search", posts);
     return (
         <>
             {loading && <LoadingBar color="#78be20" />}
@@ -72,7 +74,7 @@ const UserPosts = () => {
                         </div>
                         :
                         <div className="article_display_container">
-                            {posts?.content.map((article) =>
+                            {posts?.content?.map((article) =>
                                 <UserArticleItem article={article} key={article.id} />
                             )}
                         </div>}
