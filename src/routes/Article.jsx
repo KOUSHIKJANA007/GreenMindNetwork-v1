@@ -11,7 +11,7 @@ import LoadingBar from 'react-top-loading-bar';
 import { Pagination } from '../components/Pagination';
 
 const Article = () => {
-  const { posts, loading, isPostCreate } = useSelector((store) => store.post);
+  const { posts, loading, isPostCreate, DeletePost } = useSelector((store) => store.post);
   const dispatch = useDispatch();
   const searchElement = useRef();
   const [pageNumber, setPageNumber] = useState(0);
@@ -30,7 +30,7 @@ const Article = () => {
         console.log({ err });
         toast.error(err)
       })
-  }, [isPostCreate, pageNumber])
+  }, [isPostCreate, pageNumber,DeletePost])
 
 
   const handleSearch = () => {

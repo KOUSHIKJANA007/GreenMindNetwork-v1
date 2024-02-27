@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { Pagination } from '../components/Pagination';
 
 const UserPosts = () => {
-    const { posts, loading } = useSelector((store) => store.post);
+    const { posts, loading, DeletePost } = useSelector((store) => store.post);
     const { users } = useSelector((store) => store.user);
     const searchElement = useRef();
     const dispatch = useDispatch();
@@ -27,12 +27,13 @@ const UserPosts = () => {
                 console.log({ data });
                 dispatch(postAction.setPost(data))
                 dispatch(postAction.setPostCreatedEnd())
+                dispatch(postAction.setDeletePostEnd())
             })
             .catch((err) => {
                 console.log({ err });
                 toast.error(err)
             })
-    }, [])
+    }, [DeletePost])
     const handleSearch = () => {
         const keyword = searchElement.current.value;
         if (!keyword) {

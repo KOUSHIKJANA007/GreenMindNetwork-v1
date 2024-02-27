@@ -25,9 +25,9 @@ export const createPost = createAsyncThunk("createPost", async (data) => {
     return await response.json();
 })
 
-export const updatePost = createAsyncThunk("updatePost",async(data)=>{
+export const updatePost = createAsyncThunk("updatePost", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/post/${data.postId}`,{
+    const response = await fetch(`http://localhost:8080/api/post/${data.postId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -37,7 +37,17 @@ export const updatePost = createAsyncThunk("updatePost",async(data)=>{
     })
     return await response.json();
 })
-
+export const deletePost = createAsyncThunk("deletePost", async (postId) => {
+    let token = localStorageWithExpiry.getItem("token");
+    const response = await fetch(`http://localhost:8080/api/post/${postId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer" + token
+        }
+    })
+    return await response.json();
+})
 export const uploadPostImage = createAsyncThunk("uploadPostImage", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData()
@@ -85,6 +95,7 @@ const postSlice = createSlice({
         posts: [],
         singlePost: [],
         isPostCreate: false,
+        DeletePost:false,
         error: null
     },
     reducers: {
@@ -100,6 +111,12 @@ const postSlice = createSlice({
         },
         setPostCreatedEnd: (state) => {
             state.isPostCreate = false;
+        },
+        setDeletePostDone:(state)=>{
+            state.DeletePost=true;
+        },
+        setDeletePostEnd:(state)=>{
+            state.DeletePost=false;
         }
     },
     extraReducers: (builder) => {
@@ -170,6 +187,16 @@ const postSlice = createSlice({
                 state.loading = false
             }),
             builder.addCase(updatePost.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            }),
+            builder.addCase(deletePost.pending, (state) => {
+                state.loading = true
+            }),
+            builder.addCase(deletePost.fulfilled, (state) => {
+                state.loading = false
+            }),
+            builder.addCase(deletePost.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
