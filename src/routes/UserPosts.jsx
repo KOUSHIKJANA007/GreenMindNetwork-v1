@@ -20,6 +20,7 @@ const UserPosts = () => {
         setPageNumber(index)
     }
     useEffect(() => {
+        window.scroll(0, 0);
         dispatch(postByUser({ pageNumber: pageNumber, userId: users.id }))
             .then(unwrapResult)
             .then((data) => {

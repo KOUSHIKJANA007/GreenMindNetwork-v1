@@ -25,6 +25,19 @@ export const createPost = createAsyncThunk("createPost", async (data) => {
     return await response.json();
 })
 
+export const updatePost = createAsyncThunk("updatePost",async(data)=>{
+    let token = localStorageWithExpiry.getItem("token");
+    const response = await fetch(`http://localhost:8080/api/post/${data.postId}`,{
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer" + token
+        },
+        body: JSON.stringify(data.postData)
+    })
+    return await response.json();
+})
+
 export const uploadPostImage = createAsyncThunk("uploadPostImage", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData()
@@ -147,6 +160,16 @@ const postSlice = createSlice({
                 state.loading = false
             }),
             builder.addCase(getPostById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            }),
+            builder.addCase(updatePost.pending, (state) => {
+                state.loading = true
+            }),
+            builder.addCase(updatePost.fulfilled, (state) => {
+                state.loading = false
+            }),
+            builder.addCase(updatePost.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

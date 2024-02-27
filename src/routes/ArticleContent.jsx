@@ -15,10 +15,8 @@ const ArticleContent = () => {
     dispatch(getPostById(postId))
       .then(unwrapResult)
       .then((data) => {
-        console.log("this is article fetch", { data });
-
         dispatch(postAction.setSinglePost(data))
-
+        
       })
       .catch((err) => {
         toast.error({ err })

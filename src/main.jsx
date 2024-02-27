@@ -29,6 +29,7 @@ import greenMindStore, { persistor } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
 import Public from './user-routes/public.jsx'
 import UserPosts from './routes/UserPosts.jsx'
+import EditPost from './routes/EditPost.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
       { path: "/articlecontent/:postId", element: <Protected Component={ArticleContent} /> },
       { path: "/userhome", element: <Protected Component={UserHome} /> },
       { path: "/userposts", element: <Protected Component={UserPosts} /> },
+      { path: "/editpost/:postId", element: <Protected Component={EditPost} /> },
     ]
   }
 ])

@@ -24,8 +24,7 @@ const CreatePost = () => {
         setPostData({...postData,'content':data})
     }
     const handleOnChangeImage = (e) => {
-        setImage(e.target.files[0])
-        console.log(e.target.files[0]);
+        setImage(e.target.files[0]);
     }
     const handlePostform = async (e) => {
         e.preventDefault();
@@ -81,7 +80,6 @@ const CreatePost = () => {
                     </div>
                     <div className="post_input">
                         <label htmlFor="Post_content">enter post content</label>
-                        {/* <textarea className="Post_content" type="text" name="content" onChange={handleOnChange} id="Post_content" rows={20} required /> */}
 
                         <JoditEditor
                             ref={editor}

@@ -16,7 +16,7 @@ const UserArticleItem = ({ article }) => {
            </div>
             <div className="user_article_item_buttons">
                 <button className='post_comment_button' type="submit"><Link to="">Comment</Link></button>
-                <button className='post_update_button' type="submit"><Link to="">Update</Link></button>
+                <button className='post_update_button' type="submit"><Link to={`/editpost/${article.id}`}>Update</Link></button>
                 <button className='post_delete_button' type="submit"><Link to="">Delete</Link></button>
             </div>
         </div>
