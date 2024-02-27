@@ -8,23 +8,29 @@ import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { IoCreateOutline } from "react-icons/io5";
 import LoadingBar from 'react-top-loading-bar';
+import { Pagination } from '../components/Pagination';
 
 const Article = () => {
   const { posts, loading, isPostCreate } = useSelector((store) => store.post);
   const dispatch = useDispatch();
   const searchElement = useRef();
+  const [pageNumber, setPageNumber] = useState(0);
+  const handlePageNumber = (index) => {
+    setPageNumber(index)
+  }
   useEffect(() => {
-    dispatch(fetchPosts())
+    dispatch(fetchPosts(pageNumber))
       .then(unwrapResult)
       .then((data) => {
-        dispatch(postAction.setPost(data?.content))
+        dispatch(postAction.setPost(data))
         dispatch(postAction.setPostCreatedEnd())
+        window.scroll(0, 0)
       })
       .catch((err) => {
         console.log({ err });
         toast.error(err)
       })
-  }, [isPostCreate])
+  }, [isPostCreate,pageNumber])
 
 
   const handleSearch = () => {
@@ -45,13 +51,15 @@ const Article = () => {
     }
 
   }
+
+  console.log("here post", { posts });
   return (
     <>
       {loading && <LoadingBar color="#78be20" />}
       <div className="article_container">
         <div className="all_posts_article_container">
           <div className="post_navigation_button">
-            <button type='submit' className='all_posts' onClick={()=>{dispatch(postAction.setPostCreatedDone())}}><Link to="/articles">all posts</Link></button>
+            <button type='submit' className='all_posts' onClick={() => { dispatch(postAction.setPostCreatedDone()) }}><Link to="/articles">all posts</Link></button>
             <button type='submit' className='my_posts'><Link to="/userposts">my posts</Link></button>
           </div>
           <div className="search_article_container">
@@ -67,14 +75,14 @@ const Article = () => {
             </div>
             :
             <div className="article_display_container">
-              {posts && posts.map((article) =>
+              {posts.content && posts.content.map((article) =>
                 <ArticleItem article={article} key={article?.id} />
               )}
             </div>}
         <div className="create_post_button">
           <button><Link to="/createpost"><span><IoCreateOutline className='create_post_icon' /></span>create post</Link></button>
         </div>
-
+        <Pagination handlePageNumber={handlePageNumber} posts={{ posts }} />
       </div>
     </>
   )

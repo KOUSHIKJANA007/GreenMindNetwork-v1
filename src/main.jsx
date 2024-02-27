@@ -10,6 +10,7 @@ import '../src/style/SignUp.css'
 import '../src/style/EditProfile.css'
 import '../src/style/CreatePost.css'
 import '../src/style/Article.css'
+import '../src/style/Pagination.css'
 import '../src/style/Home.css'
 import '../src/style/UserArticleItem.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
@@ -26,7 +27,7 @@ import { Provider } from 'react-redux'
 import greenMindStore, { persistor } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
 import Public from './user-routes/public.jsx'
-import UserPosts from './routes/userPosts.jsx'
+import UserPosts from './routes/UserPosts.jsx'
 
 const router = createBrowserRouter([
   {

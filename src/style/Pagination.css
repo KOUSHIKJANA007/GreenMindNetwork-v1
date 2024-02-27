@@ -1,0 +1,53 @@
+.pagination_container {
+    margin: 10px 30px 10px 10px;
+    padding: 10px 30px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.next_button button {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.previous_button button {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.previous_icon {
+    font-size: 30px;
+
+}
+
+.next_icon {
+    font-size: 30px;
+}
+
+.middle_button button {
+    height: 35px;
+    width: 60px;
+    border-radius: 5px;
+    border: 2px solid #dadada;
+    ;
+    cursor: pointer;
+
+}
+
+.page_numbers {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 25px;
+    color: black;
+}
+
+.page_number_buttons {
+    display: flex;
+    gap: 30px;
+}
+
+#active {
+    background-color: #78be20;
+}

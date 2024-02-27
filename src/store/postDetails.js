@@ -3,8 +3,8 @@ import { localStorageWithExpiry } from "./helper";
 
 
 
-export const fetchPosts = createAsyncThunk("fetchPosts", async () => {
-    const response = await fetch("http://localhost:8080/api/posts", {
+export const fetchPosts = createAsyncThunk("fetchPosts", async (pageNumber) => {
+    const response = await fetch(`http://localhost:8080/api/posts?pageNumber=${pageNumber}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -39,8 +39,8 @@ export const uploadPostImage = createAsyncThunk("uploadPostImage", async (data) 
     return await response.json();
 })
 
-export const postByUser = createAsyncThunk("postByUser", async (userId) => {
-    const response = await fetch(`http://localhost:8080/api/post/user/${userId}`, {
+export const postByUser = createAsyncThunk("postByUser", async (data) => {
+    const response = await fetch(`http://localhost:8080/api/post/user/${data.userId}?pageNumber=${data.pageNumber}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json"
@@ -48,14 +48,14 @@ export const postByUser = createAsyncThunk("postByUser", async (userId) => {
     })
     return await response.json();
 })
-export const searchPost = createAsyncThunk("searchPost",async(keyword)=>{
-    const response = await fetch(`http://localhost:8080/api/post/search/${keyword}`,{
-    method: "GET",
-    headers: {
-        "Content-type": "application/json"
-    }
-})
-return await response.json();
+export const searchPost = createAsyncThunk("searchPost", async (keyword) => {
+    const response = await fetch(`http://localhost:8080/api/post/search/${keyword}`, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    return await response.json();
 })
 const postSlice = createSlice({
     name: "postSlice",
@@ -118,8 +118,8 @@ const postSlice = createSlice({
                 state.error = action.payload;
             }),
             builder.addCase(searchPost.pending, (state) => {
-            state.loading = true
-        }),
+                state.loading = true
+            }),
             builder.addCase(searchPost.fulfilled, (state) => {
                 state.loading = false
             }),

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar'
 import { Link } from 'react-router-dom';
@@ -8,17 +8,23 @@ import { postAction, postByUser, searchPost } from '../store/postDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import UserArticleItem from '../components/UserArticleItem';
 import { toast } from 'react-toastify';
+import { Pagination } from '../components/Pagination';
 
 const UserPosts = () => {
     const { posts, loading } = useSelector((store) => store.post);
     const { users } = useSelector((store) => store.user);
     const searchElement = useRef();
     const dispatch = useDispatch();
+    const [pageNumber, setPageNumber] = useState(0);
+    const handlePageNumber = (index) => {
+        setPageNumber(index)
+    }
     useEffect(() => {
-        dispatch(postByUser(users.id))
+        dispatch(postByUser({ pageNumber: pageNumber, userId: users.id }))
             .then(unwrapResult)
             .then((data) => {
-                dispatch(postAction.setPost(data.content))
+                console.log({ data });
+                dispatch(postAction.setPost(data))
                 dispatch(postAction.setPostCreatedEnd())
             })
             .catch((err) => {
@@ -66,7 +72,7 @@ const UserPosts = () => {
                         </div>
                         :
                         <div className="article_display_container">
-                            {posts?.map((article) =>
+                            {posts?.content.map((article) =>
                                 <UserArticleItem article={article} key={article.id} />
                             )}
                         </div>}
@@ -74,6 +80,7 @@ const UserPosts = () => {
                     <button><Link to="/createpost"><span><IoCreateOutline className='create_post_icon' /></span>create post</Link></button>
                 </div>
 
+                <Pagination handlePageNumber={handlePageNumber} posts={{ posts }} />
             </div>
         </>
     )
