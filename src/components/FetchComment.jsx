@@ -28,11 +28,13 @@ const FetchComment = ({ postId }) => {
 
     return (
         <>
-           {
-            comment?.map((item)=>
-                  <CommentItem comment={item}/>
-            )
-           }
+            {comment == "" ?
+                <h2>No Comments</h2>
+                :
+                comment?.map((item) =>
+                    <CommentItem comment={item} />
+                )
+            }
 
         </>
     )

@@ -12,6 +12,7 @@ import '../src/style/CreatePost.css'
 import '../src/style/Article.css'
 import '../src/style/Pagination.css'
 import '../src/style/Home.css'
+import '../src/style/Donation.css'
 import '../src/style/ArticleContent.css'
 import '../src/style/UserArticleItem.css'
 import '../src/style/Comments.css'
@@ -32,6 +33,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Public from './user-routes/public.jsx'
 import UserPosts from './routes/UserPosts.jsx'
 import EditPost from './routes/EditPost.jsx'
+import Donation from './routes/Donation.jsx'
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,7 @@ const router = createBrowserRouter([
       { path: "/userhome", element: <Protected Component={UserHome} /> },
       { path: "/userposts", element: <Protected Component={UserPosts} /> },
       { path: "/editpost/:postId", element: <Protected Component={EditPost} /> },
+      { path: "/donation", element: <Protected Component={Donation} /> },
     ]
   }
 ])

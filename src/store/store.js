@@ -5,6 +5,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import postDetails from "./postDetails";
 import commentDetails from "./commentDetails";
+import donationDetails from "./donationDetails";
 
 const persistConfig = {
     key: "root",
@@ -15,7 +16,8 @@ const persistConfig = {
 const reducer = combineReducers({
     user: userDetails,
     post:postDetails,
-    comment:commentDetails
+    comment:commentDetails,
+    donation:donationDetails
 })
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({
