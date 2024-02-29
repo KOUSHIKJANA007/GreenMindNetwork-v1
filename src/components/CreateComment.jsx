@@ -5,6 +5,7 @@ import { BASE_URL } from '../store/helper';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { commentAction, createComment } from '../store/commentDetails';
 import { toast } from 'react-toastify';
+import ReactTextareaAutosize from 'react-textarea-autosize';
 
 const CreateComment = ({ postId }) => {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const CreateComment = ({ postId }) => {
                 <img src={BASE_URL + `/api/post/image/${users.imageName}`} alt="" />
             </div>
             <div className="comment_input">
-                <textarea type="text" ref={commentInput} name='comment' placeholder='Please give your opinion' />
+                <ReactTextareaAutosize type="text" ref={commentInput} name='comment' placeholder='Please give your opinion' />
             </div>
             <div className="comment_Button">
                 <button type='submit' onClick={handleComment}><IoMdSend className='comment_Button_icon' /></button>

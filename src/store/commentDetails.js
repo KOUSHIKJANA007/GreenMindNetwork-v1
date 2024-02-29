@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isDraft } from "@reduxjs/toolkit";
 import { localStorageWithExpiry } from "./helper";
 
 
@@ -23,11 +23,24 @@ export const getCommentByPost = createAsyncThunk("getCommentByPost",async(postId
     })
     return await response.json();
 })
+
+export const deleteComment = createAsyncThunk("deleteComment", async (commentId)=>{
+    let token = localStorageWithExpiry.getItem("token");
+    const response = await fetch(`http://localhost:8080/api/comment/${commentId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer" + token
+        }
+    })
+    return await response.json();
+})
 const commentDetails = createSlice({
     name: "commentDetails",
     initialState: {
         loading: false,
         error: null,
+        isDelete:false,
         isComment: false,
         comment:[]
     },
@@ -40,6 +53,12 @@ const commentDetails = createSlice({
         },
         setComment:(state,action)=>{
             state.comment=action.payload;
+        },
+        deleteStatusDone:(state)=>{
+            state.isDelete=true
+        },
+        deleteStatusEnd:(state)=>{
+            state.isDelete=false
         }
     },
     extraReducers: (builder) => {
@@ -60,6 +79,16 @@ const commentDetails = createSlice({
                 state.loading = false;
             }),
             builder.addCase(getCommentByPost.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            }),
+            builder.addCase(deleteComment.pending, (state, action) => {
+            state.loading = true;
+        }),
+            builder.addCase(deleteComment.fulfilled, (state, action) => {
+                state.loading = false;
+            }),
+            builder.addCase(deleteComment.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

@@ -1,0 +1,112 @@
+.comment_item_container {
+    max-width: 900px;
+    height: auto;
+    display: flex;
+    gap: 25px;
+    margin: 15px;
+}
+
+.comm_user_img {
+    height: 40px;
+    width: 40px;
+    border: 2.7px solid #78be20;
+    border-radius: 50%;
+
+}
+
+.comm_user_img img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.comm_content {
+    padding: 0px 8px 8px 8px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 2px solid #78be20;
+}
+
+.comm_user_content {
+    height: auto;
+    margin: 10px 10px 10px 10px;
+    width: auto;
+}
+
+.comm_user_name {
+    margin: 5px 10px 0px 10px;
+    color: #78be20;
+}
+
+#user_message {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.comment_action button {
+    border: none;
+    background-color: white;
+}
+
+.comment_action_icon {
+    color: black;
+    font-weight: 700;
+    font-size: 25px;
+    cursor: pointer;
+transition: .1s ease-in-out;
+}
+
+.comment_action_icon:active {
+    background-color: #8af00e;
+    filter: blur(5px);
+    border-radius: 50%;
+}
+
+.drop_down_content {
+    visibility: hidden;
+    position: absolute;
+    left: 85%;
+    height: 70px;
+    width: 90px;
+    background-color: #8be321;
+    border-radius: 10px;
+}
+
+.drop_down_content a {
+    text-decoration: none;
+    display: block;
+    margin: 2px;
+    padding: 4px;
+    font-size: 15px;
+    text-align: left;
+    text-transform: capitalize;
+    color: white;
+    font-weight: 500;
+    background-color: #8be321;
+}
+
+.drop_down_content a:hover {
+    background-color: #8df80a;
+    border-radius: 5px;
+}
+
+.drop_down_content a span {
+    margin: 4px;
+    font-size: 15px;
+}
+
+.comm_delete_icon {
+    padding-top: 4px;
+    font-size: 14px;
+}
+
+.comm_edit_icon {
+    font-size: 13px;
+}
+
+.ddopen {
+    visibility: visible;
+}

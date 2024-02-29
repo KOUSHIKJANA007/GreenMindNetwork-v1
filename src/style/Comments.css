@@ -1,5 +1,5 @@
 .comment_container {
-    height: 100px;
+    height: auto;
     width: 100%;
     display: flex;
     gap: 20px;
@@ -60,50 +60,54 @@
 
 @media (max-width:500px) {
     .user_image {
-            height: 35px;
-            width: 35px;
-        }
+        height: 35px;
+        width: 35px;
+    }
+
     .user_image img {
-            height: 35px;
-            width: 35px;
-        }
+        height: 35px;
+        width: 35px;
+    }
+
     .comment_input textarea {
         width: 90%;
         height: 40px;
         font-size: 18px;
     }
-    
-        .comment_Button_icon {
-            height: 30px;
-            width: 30px;
-            color: #78be20;
-            position: relative;
-            right: 60%;
-        }
+
+    .comment_Button_icon {
+        height: 30px;
+        width: 30px;
+        color: #78be20;
+        position: relative;
+        right: 60%;
+    }
 }
+
 @media (min-width:501px) and (max-width:1000px) {
     .user_image {
-            height: 45px;
-            width: 45px;
-        }
+        height: 45px;
+        width: 45px;
+    }
+
     .user_image img {
-            height: 45px;
-            width: 45px;
-        }
-        .comment_container{
-           
-        }
+        height: 45px;
+        width: 45px;
+    }
+
+    .comment_container {}
+
     .comment_input textarea {
         width: 94%;
         height: 40px;
         font-size: 18px;
     }
-    
-        .comment_Button_icon {
-            height: 40px;
-            width: 40px;
-            color: #78be20;
-            position: relative;
-            right: 60%;
-        }
+
+    .comment_Button_icon {
+        height: 40px;
+        width: 40px;
+        color: #78be20;
+        position: relative;
+        right: 60%;
+    }
 }

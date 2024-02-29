@@ -4,10 +4,11 @@ import { commentAction, getCommentByPost } from '../store/commentDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import CommentItem from './CommentItem';
+import { Link } from 'react-router-dom';
 
 const FetchComment = ({ postId }) => {
     const dispatch = useDispatch();
-    const { isComment, comment } = useSelector((store) => store.comment);
+    const { isComment, comment ,isDelete} = useSelector((store) => store.comment);
     console.log("comment", comment);
     useEffect(() => {
         dispatch(getCommentByPost(postId))
@@ -17,20 +18,24 @@ const FetchComment = ({ postId }) => {
                 console.log("hrllo");
                 dispatch(commentAction.setComment(data))
                 dispatch(commentAction.addCommentEnd())
+                dispatch(commentAction.deleteStatusEnd())
 
             })
             .catch((err) => {
                 toast.error(err)
             })
-    }, [isComment])
+    }, [isComment, isDelete])
 
     return (
         <>
-           {
+           {!comment ?
+           <h1>no comments</h1>
+           :
             comment?.map((item)=>
                   <CommentItem comment={item}/>
             )
            }
+
         </>
     )
 }
