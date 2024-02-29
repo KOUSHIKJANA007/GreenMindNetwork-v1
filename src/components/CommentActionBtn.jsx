@@ -8,7 +8,7 @@ import { commentAction, deleteComment } from '../store/commentDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-const CommentActionBtn = ({ toggle, handleToggle, commentId }) => {
+const CommentActionBtn = ({ toggle, handleToggle, commentId, handleEditForm }) => {
     const dispatch=useDispatch();
     const handleDeleteComment=()=>{
         let c=confirm("Are your sure to delete ?")
@@ -26,7 +26,10 @@ const CommentActionBtn = ({ toggle, handleToggle, commentId }) => {
         <>
             <button type='dropdown' onClick={handleToggle}><CiMenuKebab className='comment_action_icon' /></button>
             <div className={toggle ? "drop_down_content ddopen" : "drop_down_content"}>
-                <Link><span><MdEdit className='comm_edit_icon'/></span>edit</Link>
+                <Link onClick={()=>{
+                    handleEditForm()
+                    handleToggle()
+                    }}><span><MdEdit className='comm_edit_icon'/></span>edit</Link>
                 <Link onClick={()=>{
                     handleDeleteComment()
                     handleToggle()

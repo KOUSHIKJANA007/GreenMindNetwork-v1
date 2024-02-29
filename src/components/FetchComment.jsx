@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const FetchComment = ({ postId }) => {
     const dispatch = useDispatch();
-    const { isComment, comment ,isDelete} = useSelector((store) => store.comment);
+    const { isComment, comment, isDelete, isEdit } = useSelector((store) => store.comment);
     console.log("comment", comment);
     useEffect(() => {
         dispatch(getCommentByPost(postId))
@@ -19,18 +19,16 @@ const FetchComment = ({ postId }) => {
                 dispatch(commentAction.setComment(data))
                 dispatch(commentAction.addCommentEnd())
                 dispatch(commentAction.deleteStatusEnd())
-
+                dispatch(commentAction.editStatusEnd())
             })
             .catch((err) => {
                 toast.error(err)
             })
-    }, [isComment, isDelete])
+    }, [isComment, isDelete, isEdit])
 
     return (
         <>
-           {!comment ?
-           <h1>no comments</h1>
-           :
+           {
             comment?.map((item)=>
                   <CommentItem comment={item}/>
             )

@@ -35,12 +35,26 @@ export const deleteComment = createAsyncThunk("deleteComment", async (commentId)
     })
     return await response.json();
 })
+export const updateComment = createAsyncThunk("updateComment",async(data)=>{
+    let token = localStorageWithExpiry.getItem("token");
+    console.log("edit data",data);
+    const response = await fetch(`http://localhost:8080/api/comment/${data.commentId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer" + token
+        },
+        body: JSON.stringify({ "content": data.content.content })
+    });
+    return await response.json();
+})
 const commentDetails = createSlice({
     name: "commentDetails",
     initialState: {
         loading: false,
         error: null,
         isDelete:false,
+        isEdit:false,
         isComment: false,
         comment:[]
     },
@@ -59,7 +73,13 @@ const commentDetails = createSlice({
         },
         deleteStatusEnd:(state)=>{
             state.isDelete=false
-        }
+        },
+        editStatusStart:(state)=>{
+            state.isEdit=true
+        },
+        editStatusEnd:(state)=>{
+            state.isEdit=false
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(createComment.pending, (state, action) => {
@@ -89,6 +109,16 @@ const commentDetails = createSlice({
                 state.loading = false;
             }),
             builder.addCase(deleteComment.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            }),
+            builder.addCase(updateComment.pending, (state, action) => {
+            state.loading = true;
+        }),
+            builder.addCase(updateComment.fulfilled, (state, action) => {
+                state.loading = false;
+            }),
+            builder.addCase(updateComment.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })
