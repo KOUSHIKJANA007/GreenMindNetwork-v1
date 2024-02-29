@@ -84,7 +84,7 @@ const CreatePost = () => {
                         <JoditEditor
                             ref={editor}
                             value={content}
-                            onChange={handleContent}
+                            onChange={handleContent} 
                         />
                     </div>
                     <div className="post_buttons">

@@ -30,12 +30,12 @@ const Article = () => {
         console.log({ err });
         toast.error(err)
       })
-  }, [isPostCreate, pageNumber,DeletePost])
+  }, [isPostCreate, pageNumber, DeletePost])
 
 
   const handleSearch = () => {
     const keyword = searchElement.current.value;
-    console.log("key", keyword);
+    console.log(keyword);
     if (!keyword.trim(" ")) {
       toast.error("Please enter anything for search")
     }
@@ -52,7 +52,6 @@ const Article = () => {
     }
 
   }
-
   return (
     <>
       {loading && <LoadingBar color="#78be20" />}

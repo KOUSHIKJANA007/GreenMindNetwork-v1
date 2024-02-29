@@ -4,7 +4,7 @@ import LoginBox from './LoginBox'
 import ProfileBox from './ProfileBox'
 import { FaBars } from "react-icons/fa";
 import { TiDeleteOutline } from "react-icons/ti";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 const Header = () => {
   const [dropDown, setDropDown] = useState();
   const { users, isLogin } = useSelector((store) => store.user);

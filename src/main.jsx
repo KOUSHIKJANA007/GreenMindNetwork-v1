@@ -14,6 +14,8 @@ import '../src/style/Pagination.css'
 import '../src/style/Home.css'
 import '../src/style/ArticleContent.css'
 import '../src/style/UserArticleItem.css'
+import '../src/style/Comments.css'
+import '../src/style/FetchComment.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -40,9 +42,9 @@ const router = createBrowserRouter([
       { path: "/signin", element: <Public Component={SignIn} /> },
       { path: "/signup", element: <Public Component={SignUp} /> },
       { path: "/editprofile", element: <Protected Component={EditProfile} /> },
-      { path: "/articles", element: <Protected Component={Article} /> },
+      { path: "/articles", element: <Article/> },
       { path: "/createpost", element: <Protected Component={CreatePost} /> },
-      { path: "/articlecontent/:postId", element: <Protected Component={ArticleContent} /> },
+      { path: "/articlecontent/:postId", element: <ArticleContent/> },
       { path: "/userhome", element: <Protected Component={UserHome} /> },
       { path: "/userposts", element: <Protected Component={UserPosts} /> },
       { path: "/editpost/:postId", element: <Protected Component={EditPost} /> },

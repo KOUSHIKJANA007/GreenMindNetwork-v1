@@ -6,6 +6,8 @@ import { getPostById, postAction } from '../store/postDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import DOMPurify from 'dompurify';
+import CreateComment from '../components/CreateComment';
+import FetchComment from '../components/FetchComment';
 
 const ArticleContent = () => {
   const { singlePost } = useSelector((store) => store.post)
@@ -47,8 +49,11 @@ const ArticleContent = () => {
         <div className="post_content" dangerouslySetInnerHTML={sanitizedData()}>
           
         </div>
-        <div className="post_comment">
-
+        <div className="post_comment_input">
+          <CreateComment postId={postId}/>
+        </div>
+        <div className="post_comments">
+            <FetchComment postId={postId}/>
         </div>
       </div>
     </>
