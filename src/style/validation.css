@@ -1,0 +1,10 @@
+.email_val_heading{
+   position: relative;
+    left: 10%;
+}
+
+@media (max-width:500px){
+    .email_val_heading{
+        left: -5%;
+    }
+}

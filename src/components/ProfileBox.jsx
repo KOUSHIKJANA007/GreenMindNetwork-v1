@@ -11,10 +11,7 @@ const ProfileBox = ({ users }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleProfileCard = () => {
-        setToggleProfileCard(true);
-    }
-    const handleProfileCardCancel = () => {
-        setToggleProfileCard(false);
+        setToggleProfileCard(!toggleProfileCard);
     }
     const handleLogout = () => {
         dispatch(loginAction.doLogout());
@@ -34,7 +31,7 @@ const ProfileBox = ({ users }) => {
                 <Link className='dp_name' to="#" onClick={handleProfileCard}>{users.fname + " " + users.lname}</Link>
             </div>
             <div className={toggleProfileCard ? "profile_card_container open" : "profile_card_container"}>
-                <MdClose onClick={handleProfileCardCancel} className='close_btn' />
+                <MdClose onClick={handleProfileCard} className='close_btn' />
                 <div className="profile_card_logo">
                     <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
                 </div>
@@ -45,10 +42,10 @@ const ProfileBox = ({ users }) => {
                     <p className="profile_mobile"><span>Mobile</span>{users.mobile}</p>
                     <p className="profile_joined"><span>Age</span>{age}</p>
                     <div className="profile_card_button">
-                        <button type='submit' className="edit_btn" onClick={handleProfileCardCancel} ><Link to="/editprofile">Edit</Link></button>
+                        <button type='submit' className="edit_btn" onClick={handleProfileCard} ><Link to="/editprofile">Edit</Link></button>
                         <button className="logout_btn" onClick={() => {
                             handleLogout()
-                            handleProfileCardCancel()
+                            handleProfileCard()
                         }}>Logout</button>
                     </div>
                 </div>

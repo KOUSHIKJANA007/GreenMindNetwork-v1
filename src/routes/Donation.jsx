@@ -6,12 +6,20 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 const Donation = () => {
-    const {users}=useSelector((store)=>store.user);
+    const { users } = useSelector((store) => store.user);
     const amountInput = useRef();
     const dispatch = useDispatch()
     const handlePay = () => {
         const amountToPay = amountInput.current.value;
-        dispatch(createPayment({ amountToPay: amountToPay,userId:users?.id }))
+        if (amountToPay.trim() == "") {
+            toast.error("Please enter amount to procced")
+            return;
+        }
+        if (isNaN(amountToPay)) {
+            toast.error("Please enter valid amount to procced")
+            return;
+        }
+        dispatch(createPayment({ amountToPay: amountToPay, userId: users?.id }))
             .then(unwrapResult)
             .then((res) => {
                 if (res.status == 'created') {
@@ -19,30 +27,30 @@ const Donation = () => {
                         key: "rzp_test_k0FnFuJJ5UXZ3l",
                         amount: res.amount,
                         currency: "INR",
-                        name:"Green Mind Network Donation",
-                        image:"http://localhost:5173/userhome",
-                        order_id:res.id,
-                        handler:function (res) {
+                        name: "Green Mind Network Donation",
+                        image: "http://localhost:5173/userhome",
+                        order_id: res.id,
+                        handler: function (res) {
                             console.log(res.razorpay_payment_id);
                             console.log(res.razorpay_order_id);
                             console.log(res.razorpay_signature);
-                          
-                            dispatch(updatePayment({ paymentId: res.razorpay_payment_id, orderId: res.razorpay_order_id,status:"paid"}))
-                            .then(unwrapResult)
-                            .then((res)=>{
-                                toast.success("payment successfull")
-                            })
+
+                            dispatch(updatePayment({ paymentId: res.razorpay_payment_id, orderId: res.razorpay_order_id, status: "paid" }))
+                                .then(unwrapResult)
+                                .then((res) => {
+                                    toast.success("payment successfull")
+                                })
                         },
-                        prefill:{
-                            name:"Koushik Jana",
-                            email:"koushikj389@gmail.com",
-                            contact:"+91 7891085911"
+                        prefill: {
+                            name: "Koushik Jana",
+                            email: "koushikj389@gmail.com",
+                            contact: "+91 7891085911"
                         },
-                        notes:{
-                            address:"Green Mind Network"
+                        notes: {
+                            address: "Green Mind Network"
                         },
-                        theme:{
-                            color:"#3399cc"
+                        theme: {
+                            color: "#3399cc"
                         },
                     };
                     var rzp1 = new Razorpay(options);
@@ -56,9 +64,11 @@ const Donation = () => {
                         console.log(response.error.metadata.payment_id);
                         alert("payment failed")
                     });
+                    amountInput.current.value = "";
                     rzp1.open()
                 }
             })
+
     }
     return (
         <div className='amount_input'>

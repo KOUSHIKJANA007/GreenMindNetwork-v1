@@ -9,8 +9,10 @@ import { FaSearch } from "react-icons/fa";
 import { IoCreateOutline } from "react-icons/io5";
 import LoadingBar from 'react-top-loading-bar';
 import { Pagination } from '../components/Pagination';
+import { validationAction } from '../store/OtpValidation';
 
 const Article = () => {
+  const { progress } = useSelector((store) => store.validation);
   const { posts, loading, isPostCreate, DeletePost } = useSelector((store) => store.post);
   const dispatch = useDispatch();
   const searchElement = useRef();
@@ -19,6 +21,7 @@ const Article = () => {
     setPageNumber(index)
   }
   useEffect(() => {
+    dispatch(validationAction.setProgress(50))
     dispatch(fetchPosts(pageNumber))
       .then(unwrapResult)
       .then((data) => {
@@ -30,10 +33,12 @@ const Article = () => {
         console.log({ err });
         toast.error(err)
       })
+    dispatch(validationAction.setProgress(100))
   }, [isPostCreate, pageNumber, DeletePost])
 
 
   const handleSearch = () => {
+    dispatch(validationAction.setProgress(50));
     const keyword = searchElement.current.value;
     console.log(keyword);
     if (!keyword.trim(" ")) {
@@ -50,11 +55,11 @@ const Article = () => {
           toast.error(err)
         })
     }
-
+    dispatch(validationAction.setProgress(100))
   }
   return (
     <>
-      {loading && <LoadingBar color="#78be20" />}
+      {loading && <LoadingBar progress={progress} color="#78be20" />}
       <div className="article_container">
         <div className="all_posts_article_container">
           <div className="post_navigation_button">
@@ -68,7 +73,7 @@ const Article = () => {
         </div>
 
         {
-          !posts ?
+          posts.content=="" ?
             <div className="article_display_container_post_not_found">
               <h1>No posts found</h1>
             </div>

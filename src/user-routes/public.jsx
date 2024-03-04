@@ -10,6 +10,9 @@ const Public = ({ Component }) => {
         if (isLogin) {
             navigate("/userhome")
         }
+        else{
+            navigate("/")
+        }
     }, []);
     return (
         <>

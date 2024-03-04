@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 import postDetails from "./postDetails";
 import commentDetails from "./commentDetails";
 import donationDetails from "./donationDetails";
+import validationSlice from './OtpValidation'
 
 const persistConfig = {
     key: "root",
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     user: userDetails,
     post:postDetails,
     comment:commentDetails,
-    donation:donationDetails
+    donation:donationDetails,
+    validation: validationSlice
 })
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({

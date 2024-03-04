@@ -5,7 +5,7 @@ const LoginBox = () => {
   return (
     <>
       <div className="login_box">
-        <Link to="/signup">sign up</Link>
+        <Link to="/email-input">sign up</Link>
         <Link to="/signin">login</Link>
       </div>
     </>

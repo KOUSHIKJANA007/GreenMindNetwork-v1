@@ -6,10 +6,12 @@ import { toast } from "react-toastify";
 import { unwrapResult } from "@reduxjs/toolkit";
 import LoadingBar from "react-top-loading-bar";
 import { localStorageWithExpiry } from "../store/helper";
+import { validationAction } from "../store/OtpValidation";
 
 
 const SignIn = () => {
   const { loading } = useSelector((store) => store.user);
+  const { progress } = useSelector((store) => store.validation);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginData, setLoginData] = useState();
@@ -18,6 +20,7 @@ const SignIn = () => {
   }
   const handleLoginFormData = (e) => {
     e.preventDefault();
+    dispatch(validationAction.setProgress(50))
     if (document.getElementById("username").value.trim() == '' || document.getElementById("password").value.trim() == '') {
       toast.error("username or password is required")
       return;
@@ -41,11 +44,11 @@ const SignIn = () => {
       .catch((obj) => {
         toast.error(obj.message)
       })
-
+    dispatch(validationAction.setProgress(100))
   }
   return (
     <>
-      {loading && <LoadingBar color="#78be20" />}
+      {loading && <LoadingBar progress={progress} color="#78be20" />}
       <Form className="login_container" onSubmit={handleLoginFormData} >
         <h1>Sign In To Access This Page</h1>
         <div className="login_input_box">

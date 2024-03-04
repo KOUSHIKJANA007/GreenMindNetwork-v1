@@ -13,7 +13,6 @@ import { Pagination } from '../components/Pagination';
 const UserPosts = () => {
     const { posts, loading, DeletePost } = useSelector((store) => store.post);
     const { users } = useSelector((store) => store.user);
-    const searchElement = useRef();
     const dispatch = useDispatch();
     const [pageNumber, setPageNumber] = useState(0);
     const handlePageNumber = (index) => {
@@ -34,26 +33,7 @@ const UserPosts = () => {
                 toast.error(err)
             })
     }, [DeletePost])
-    const handleSearch = () => {
-        const keyword = searchElement.current.value;
-        if (!keyword) {
-            toast.error("Please enter anything for search")
-        }
-        else {
-            dispatch(searchPost(keyword))
-                .then(unwrapResult)
-                .then((data) => {
-                    console.log("data", { data });
-                    dispatch(postAction.setPost(data))
-                })
-                .catch((err) => {
-                    console.log({ err });
-                    toast.error(err)
-                })
-        }
-
-    }
-    console.log("post data for search", posts);
+   
     return (
         <>
             {loading && <LoadingBar color="#78be20" />}
@@ -63,14 +43,10 @@ const UserPosts = () => {
                         <button type='submit' className='all_posts' onClick={() => { dispatch(postAction.setPostCreatedDone()) }}><Link to="/articles">all posts</Link></button>
                         <button type='submit' className='my_posts'><Link to="/userposts">my posts</Link></button>
                     </div>
-                    <div className="search_article_container">
-                        <input type="text" ref={searchElement} placeholder='Search Posts Here' className='search_article' name="search" id="search" />
-                        <button type='submit' className='search_article_button' onClick={handleSearch}><span><FaSearch className='search_icon' /></span>search</button>
-                    </div>
                 </div>
 
                 {
-                    !posts ?
+                    posts?.content == "" ?
                         <div className="article_display_container_post_not_found">
                             <h1>No posts found</h1>
                         </div>

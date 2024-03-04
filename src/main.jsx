@@ -17,6 +17,7 @@ import '../src/style/ArticleContent.css'
 import '../src/style/UserArticleItem.css'
 import '../src/style/Comments.css'
 import '../src/style/FetchComment.css'
+import '../src/style/validation.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -34,6 +35,8 @@ import Public from './user-routes/public.jsx'
 import UserPosts from './routes/UserPosts.jsx'
 import EditPost from './routes/EditPost.jsx'
 import Donation from './routes/Donation.jsx'
+import EmailInput from './routes/EmailInput.jsx'
+import OtpInput from './routes/OtpInput.jsx'
 
 const router = createBrowserRouter([
   {
@@ -41,8 +44,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Public Component={Home}/> },
-      { path: "/signin", element: <Public Component={SignIn} /> },
-      { path: "/signup", element: <Public Component={SignUp} /> },
+      { path: "/signin", element: <SignIn/> },
+      { path: "/email-input", element: <EmailInput/> },
+      { path: "/otp-input", element: <OtpInput/> },
+      { path: "/signup", element: <SignUp/> },
       { path: "/editprofile", element: <Protected Component={EditProfile} /> },
       { path: "/articles", element: <Article/> },
       { path: "/createpost", element: <Protected Component={CreatePost} /> },

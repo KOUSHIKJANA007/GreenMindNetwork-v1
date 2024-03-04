@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoginBox from './LoginBox'
 import ProfileBox from './ProfileBox'
@@ -14,9 +14,6 @@ const Header = () => {
   const handleDropDownMenuClose = () => {
     setDropDown(false);
   }
-  const handleList = () => {
-    setDropDown(false);
-  }
 
   return (
     <>
@@ -26,7 +23,7 @@ const Header = () => {
           {
             isLogin
               ?
-              <Link to="/userhome"><img src="image/logo.png" alt="" /></Link>
+              <Link to="/userhome"><img src="image/logo.png" alt="logo" /></Link>
               :
               <Link to="/"><img src="image/logo.png" alt="" /></Link>
           }
@@ -51,7 +48,7 @@ const Header = () => {
         }
 
 
-        <div className="donation">donate</div>
+        <div className="donation"><Link to="/donation" onClick={handleDropDownMenuClose}>donation</Link></div>
         <div className="troggle_btn">
 
           {dropDown
@@ -69,24 +66,24 @@ const Header = () => {
 
             ?
             <div className={dropDown ? "dropdown_menu open" : "dropdown_menu"}>
-              <Link onClick={handleList} to="/">home</Link>
-              <Link onClick={handleList} to="#">about</Link>
-              <Link onClick={handleList} to="#" >awarness camp</Link>
-              <Link onClick={handleList} to="/articles" >articles</Link>
-              <Link onClick={handleList} to="#" >contact us</Link>
-              <Link onClick={handleList} to="#" >support us</Link>
-              <div className="drop_donation">donate</div>
+              <Link onClick={handleDropDownMenuClose} to="/" className='drop_options'>home</Link>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>about</Link>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>awarness camp</Link>
+              <Link onClick={handleDropDownMenuClose} to="/articles" className='drop_options'>articles</Link>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>contact us</Link>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>support us</Link>
+              <div className="drop_donation"><Link to="/donation" onClick={handleDropDownMenuClose}>donation</Link></div>
             </div>
             :
             <div className={dropDown ? "dropdown_menu open" : "dropdown_menu"}>
-              <Link onClick={handleList} to="#">about</Link>
-              <Link onClick={handleList} to="#" >awarness camp</Link>
-              <Link onClick={handleList} to="/articles" >Articles</Link>
-              <Link onClick={handleList} to="#" >contact us</Link>
-              <Link onClick={handleList} to="#" >support us</Link>
-              <Link onClick={handleList} to="/signup">sign up</Link>
-              <Link onClick={handleList} to="/signin">login</Link>
-              <div className="drop_donation">donate</div>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>about</Link>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>awarness camp</Link>
+              <Link onClick={handleDropDownMenuClose} to="/articles" className='drop_options'>Articles</Link>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>contact us</Link>
+              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>support us</Link>
+              <Link onClick={handleDropDownMenuClose} to="/email-input" className='drop_options'>sign up</Link>
+              <Link onClick={handleDropDownMenuClose} to="/signin" className='drop_options'>login</Link>
+              <div className="drop_donation"><Link to="/donation" onClick={handleDropDownMenuClose}>donation</Link></div>
             </div>
         }
       </header>

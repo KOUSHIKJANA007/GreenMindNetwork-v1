@@ -11,6 +11,7 @@ import FetchComment from '../components/FetchComment';
 
 const ArticleContent = () => {
   const { singlePost } = useSelector((store) => store.post)
+  const { isLogin } = useSelector((store) => store.user)
   const { postId } = useParams();
   const dispatch = useDispatch()
   useEffect(() => {
@@ -49,12 +50,19 @@ const ArticleContent = () => {
         <div className="post_content" dangerouslySetInnerHTML={sanitizedData()}>
           
         </div>
+        {
+        isLogin &&
+
         <div className="post_comment_input">
           <CreateComment postId={postId}/>
         </div>
+        }
+        {
+          isLogin &&
         <div className="post_comments">
             <FetchComment postId={postId}/>
         </div>
+        }
       </div>
     </>
   )

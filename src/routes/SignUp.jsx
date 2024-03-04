@@ -5,8 +5,10 @@ import { createUser } from "../store/userDetails";
 import { toast } from "react-toastify";
 import { unwrapResult } from "@reduxjs/toolkit";
 import LoadingBar from "react-top-loading-bar";
+import { validationAction } from "../store/OtpValidation";
 
 const SignUp = () => {
+    const { useremail, progress } = useSelector((store) => store.validation);
     const { loading } = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,12 +21,17 @@ const SignUp = () => {
 
     const handleSubmitSignUpData = (e) => {
         e.preventDefault();
+        dispatch(validationAction.setProgress(50))
         dispatch(createUser(users))
             .then(unwrapResult)
             .then((obj) => {
-                if (obj.id != null) {
+                if (obj.id != null && obj.id>0) {
+                    console.log(obj);
                     toast.success("Registration successfull")
                     navigate("/signin");
+                }else if(obj.id<=0){
+                    toast.error("Email already exist")
+                    navigate("/email-input")
                 }
                 else {
                     toast.error(obj.fname)
@@ -32,14 +39,18 @@ const SignUp = () => {
                     toast.error(obj.email)
                     toast.error(obj.password)
                 }
+                dispatch(validationAction.setProgress(100))
             })
-            .catch((obj) => console.log({ obj }))
+            .catch((obj) => {
+                console.log({obj});
+                // toast.error("Email already exixst");
+            })
 
 
     }
     return (
         <>
-            {loading && <LoadingBar color="#78be20" />}
+            {loading && <LoadingBar color="#78be20"progress={progress}/>}
             <Form className="signup_container" onSubmit={handleSubmitSignUpData}>
                 <h1>register here</h1>
                 <div className="signup_input_box_name">
@@ -55,7 +66,7 @@ const SignUp = () => {
                 </div>
                 <div className="signup_input_box">
                     <label htmlFor="email">email</label>
-                    <input className='signup_input' type="email" name="email" onChange={setSignupData} id='email' />
+                    <input className='signup_input' type="email" name="email" value={useremail} onChange={setSignupData} id='email' />
                 </div>
                 <div className="signup_input_box">
                     <label htmlFor="mobile">mobile</label>
