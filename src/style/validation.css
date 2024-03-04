@@ -3,8 +3,125 @@
     left: 10%;
 }
 
+.otp_val_container{
+   height: auto;
+   margin: 10px 10px 170px 10px;
+   padding: 10px;
+   width: 50%;
+   display: flex;
+   gap: 30px;
+   flex-direction: column;
+   position: relative;
+   top: 120px;
+   left: 25%;
+}
+.otp_val_container h2{
+   text-align: center;
+}
+.otp_val_container h2 span{
+    color: #78be20;
+}
+.otp_val_input_box{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    position: relative;
+    left: 25%;
+}
+.otp_val_input_box label{
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #78be20;
+    position: relative;
+    left: 1%;
+}
+.otp_val_input{
+    height: 28px;
+    padding: 5px 10px;
+    border-radius: 9px;
+    outline: none;
+    border: 1px solid #dadada;
+}
+.otp_val_input:focus{
+    border: 1px solid #78be20;
+}
+.otp_val_button button{
+    width: 50%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    position: relative;
+    left: 25%;
+    background-color: #78be20;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    cursor:pointer;
+    transition: .3s ease-in-out all;
+}
+.otp_val_button button:hover{
+    background-color: #559409;
+    text-shadow: 0 0 7px #fff;
+}
+.otp_val_button button:active{
+    transform: scale(1.03);
+}
 @media (max-width:500px){
     .email_val_heading{
         left: -5%;
+    }
+    .otp_val_container{
+        width: 90%;
+        left: 0%;
+    }
+    .otp_val_button button{
+        width: 100%;
+        left: 0%;
+    }
+    .otp_val_input_box{
+        width: 100%;
+        left: 0%;
+    }
+    .otp_val_container h2 {
+           font-size: 30px;
+           margin-bottom: 50px;
+    }
+}
+@media (min-width:501px) and (max-width:750px){
+    
+    .otp_val_container{
+        width: 90%;
+        left: 2%;
+    }
+    .otp_val_button button{
+        width: 80%;
+        left: 9%;
+    }
+    .otp_val_input_box{
+        width: 80%;
+        left: 9%;
+    }
+    .otp_val_container h2 {
+           font-size: 30px;
+           margin-bottom: 40px;
+    }
+}
+@media (min-width:751px) and (max-width:1100px){
+    
+    .otp_val_container{
+        width: 70%;
+        left: 13%;
+    }
+    .otp_val_button button{
+        width: 60%;
+        left: 20%;
+    }
+    .otp_val_input_box{
+        width: 60%;
+        left: 20%;
+    }
+    .otp_val_container h2 {
+           font-size: 32px;
+           margin-bottom: 40px;
     }
 }

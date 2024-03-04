@@ -17,6 +17,10 @@ const OtpInput = () => {
     const handleSubmit = (e) => {
         dispatch(validationAction.setProgress(50))
         e.preventDefault();
+        if (document.getElementById("otp").value.trim() == '') {
+            toast.error("Please enter otp");
+            return;
+        }
         dispatch(otpInput(otp))
             .then(unwrapResult)
             .then((data) => {
@@ -34,16 +38,16 @@ const OtpInput = () => {
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}
-            <Form className="login_container" onSubmit={handleSubmit} >
-                <h1 className='otp_val_heading'>Enter OTP send Which send on <span>{useremail}</span></h1>
+            <Form className="otp_val_container" onSubmit={handleSubmit} >
+                <h2>Enter OTP Which send on <span>{useremail}</span></h2>
 
-                <div className="login_input_box">
-                    <label htmlFor="otp">OTP</label>
-                    <input className='login_input' onChange={handleOnChange} type="text" name="otp" id='otp' />
+                <div className="otp_val_input_box">
+                    <label htmlFor="otp">Enter OTP Here</label>
+                    <input className='otp_val_input' onChange={handleOnChange} type="text" name="otp" id='otp' />
                 </div>
 
-                <div className="login_button">
-                    <button type='submit'>Login</button>
+                <div className="otp_val_button">
+                    <button type='submit'>Verify</button>
 
                 </div>
 

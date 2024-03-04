@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../store/userDetails';
 import { toast } from 'react-toastify';
 import { BASE_URL } from '../store/helper';
+import { validationAction } from '../store/OtpValidation';
+import LoadingBar from 'react-top-loading-bar';
 
 const ProfileBox = ({ users }) => {
+    const { progress } = useSelector((store) => store.validation);
+    const { loading } = useSelector((store) => store.user);
     const [toggleProfileCard, setToggleProfileCard] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -14,9 +18,11 @@ const ProfileBox = ({ users }) => {
         setToggleProfileCard(!toggleProfileCard);
     }
     const handleLogout = () => {
+        dispatch(validationAction.setProgress(50));
         dispatch(loginAction.doLogout());
         toast.success("Logout successfull");
         navigate("/signin");
+        dispatch(validationAction.setProgress(100));
     }
 
     let today = new Date();
@@ -24,10 +30,11 @@ const ProfileBox = ({ users }) => {
     let age = today.getFullYear() - date.getFullYear();
     return (
         <>
+            {loading && <LoadingBar color="#78be20" progress={progress} />}
             <div className="person_box">
-               
+
                 <Link to="#"><img className="dp_image" src={BASE_URL + "/api/user/image/" + users.imageName} alt="" onClick={handleProfileCard} /></Link>
-                
+
                 <Link className='dp_name' to="#" onClick={handleProfileCard}>{users.fname + " " + users.lname}</Link>
             </div>
             <div className={toggleProfileCard ? "profile_card_container open" : "profile_card_container"}>

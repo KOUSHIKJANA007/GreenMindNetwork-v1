@@ -16,6 +16,10 @@ const EmailInput = () => {
     }
     const handleSubmit = () => {
         dispatch(validationAction.setProgress(50))
+        if (document.getElementById("email").value.trim() == '') {
+            toast.error("Plaese enter email id");
+            return;
+        }
         dispatch(emailInput(email))
             .then(unwrapResult)
             .then((data) => {
@@ -34,16 +38,16 @@ const EmailInput = () => {
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}
-            <Form className="login_container" onSubmit={handleSubmit} >
-                <h1 className='email_val_heading'>Enter your valid email</h1>
+            <Form className="otp_val_container" onSubmit={handleSubmit} >
+                <h2 >Enter your valid email</h2>
 
-                <div className="login_input_box">
+                <div className="otp_val_input_box">
                     <label htmlFor="email">Email</label>
-                    <input className='login_input' onChange={handleOnChange} type="email" name="email" id='email' />
+                    <input className='otp_val_input' onChange={handleOnChange} type="email" name="email" id='email' />
                 </div>
 
-                <div className="login_button">
-                    <button type='submit'>Login</button>
+                <div className="otp_val_button">
+                    <button type='submit'>Verify</button>
 
                 </div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Form, useNavigate } from "react-router-dom";
 import { createUser } from "../store/userDetails";
@@ -19,6 +19,9 @@ const SignUp = () => {
         setUsers({ ...users, [e.target.name]: e.target.value })
     }
 
+    useEffect(()=>{
+        setUsers({ ...users, "email": useremail });
+    },[])
     const handleSubmitSignUpData = (e) => {
         e.preventDefault();
         dispatch(validationAction.setProgress(50))
@@ -66,7 +69,7 @@ const SignUp = () => {
                 </div>
                 <div className="signup_input_box">
                     <label htmlFor="email">email</label>
-                    <input className='signup_input' type="email" name="email" value={useremail} onChange={setSignupData} id='email' />
+                    <input disabled className='signup_input' type="email" name="email" value={useremail} id='email' />
                 </div>
                 <div className="signup_input_box">
                     <label htmlFor="mobile">mobile</label>
