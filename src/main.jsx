@@ -37,6 +37,9 @@ import EditPost from './routes/EditPost.jsx'
 import Donation from './routes/Donation.jsx'
 import EmailInput from './routes/EmailInput.jsx'
 import OtpInput from './routes/OtpInput.jsx'
+import ForgotEmail from './routes/ForgotEmail.jsx'
+import ChangePassword from './routes/ChangePassword.jsx'
+import ForgotOtpInput from './routes/ForgotOtpInput.jsx'
 
 const router = createBrowserRouter([
   {
@@ -46,7 +49,10 @@ const router = createBrowserRouter([
       { path: "/", element: <Public Component={Home}/> },
       { path: "/signin", element: <SignIn/> },
       { path: "/email-input", element: <EmailInput/> },
+      { path: "/forgot-email", element: <ForgotEmail/> },
       { path: "/otp-input", element: <OtpInput/> },
+      { path: "/newpassword", element: <ChangePassword/> },
+      { path: "/forgot-otp-input", element: <ForgotOtpInput/> },
       { path: "/signup", element: <SignUp/> },
       { path: "/editprofile", element: <Protected Component={EditProfile} /> },
       { path: "/articles", element: <Article/> },

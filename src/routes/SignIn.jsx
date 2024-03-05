@@ -69,10 +69,10 @@ const SignIn = () => {
 
         </div>
         <div className="forgot_link">
-          <Link to="#">forgot password?</Link>
+          <Link to="/forgot-email">forgot password?</Link>
         </div>
         <div className="register_link">
-          <p>Not a member? <Link to="/signup">Register here</Link></p>
+          <p>Not a member? <Link to="/email-input">Register here</Link></p>
         </div>
 
       </Form>

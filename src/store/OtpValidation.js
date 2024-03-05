@@ -20,6 +20,27 @@ export const otpInput = createAsyncThunk("otpInput", async (data) => {
     })
     return await response.json();
 })
+export const forgotEmail = createAsyncThunk("forgotEmail", async (data) => {
+    const response = await fetch("http://localhost:8080/api/email/forgot", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    return await response.json();
+})
+export const changePassword = createAsyncThunk("changePassword", async (data) => {
+    console.log(data);
+    const response = await fetch("http://localhost:8080/api/email/password", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    return await response.json();
+})
 
 const validationSlice = createSlice({
     name: "validationSlice",
@@ -52,6 +73,24 @@ const validationSlice = createSlice({
                 state.loading = false;
             }),
             builder.addCase(otpInput.rejected, (state) => {
+                state.loading = false;
+            }),
+            builder.addCase(forgotEmail.pending, (state) => {
+                state.loading = true;
+            }),
+            builder.addCase(forgotEmail.fulfilled, (state) => {
+                state.loading = false;
+            }),
+            builder.addCase(forgotEmail.rejected, (state) => {
+                state.loading = false;
+            }),
+            builder.addCase(changePassword.pending, (state) => {
+                state.loading = true;
+            }),
+            builder.addCase(changePassword.fulfilled, (state) => {
+                state.loading = false;
+            }),
+            builder.addCase(changePassword.rejected, (state) => {
                 state.loading = false;
             })
     }

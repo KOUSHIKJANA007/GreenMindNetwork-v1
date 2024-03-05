@@ -2,7 +2,7 @@
     position: relative;
     margin: 50px 50px 200px 50px;
     padding: 50px;
-    width: 600px;
+    width: 50%;
     top: 100px;
     left: 25%;
     display: flex;
@@ -69,24 +69,25 @@
 .login_button button {
     width: 65%;
     height: 40px;
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #78be20;
     border: none;
     cursor: pointer;
     font-weight: 700;
     text-transform: uppercase;
     color: white;
-    font-size: 14px;
+    font-size: 20px;
     transition: ease-in-out 0.2s;
 }
 
 .login_button button:hover {
     background-color: #599c07;
+    text-shadow: 0 0 7px #fff;
 }
 
 .login_button button:active {
     background-color: #599c07;
-    scale: 1.02;
+    transform: scale(1.02);
     box-shadow: 0px 1px 5px 5px rgba(197, 233, 79, 0.555);
 
 }
@@ -122,58 +123,242 @@
     color: #78be20;
 }
 
-@media (max-width:800px) {
-    .login_container {
-        left: 10%;
-        margin: 30px 30px 80px 30px;
-        padding: 30px;
-        width: 400px;
-    }
-}
+@media (max-width:450px) {
 
-@media (max-width:400px) {
     .login_container {
-        left: 8%;
-        margin: 15px 15px 170px 15px;
-        padding: 15px;
-        width: 300px;
+        margin: 5px 5px 200px 5px;
+        padding: 5px;
+        top: 150px;
+        left: 0%;
+        width: 100%;
 
     }
 
     .login_container h1 {
-        font-size: 28px;
+        margin-bottom: 60px;
+        font-size: 30px;
         text-align: center;
     }
 
     .login_input_box {
-        left: 0%;
-        width: 80%;
+        width: 90%;
+        left: 4%;
     }
 
     .login_input_box_check {
-        left: 0%;
+        left: 4%;
     }
 
     .login_button {
-        left: 0%;
+        left: 4%;
     }
 
     .login_button button {
-        width: 90%;
-    }
-
-    .forgot_link {
-        width: 50%;
-        left: 18%;
-    }
-
-    .register_link {
-        left: 2%;
+        width: 100%;
     }
 }
 
-@media (mix-width:801px) and (max-width:950) {
+@media (min-width:451px) and (max-width:700px) {
+
     .login_container {
-        left: 15%;
+        margin: 5px 5px 200px 5px;
+        padding: 5px;
+        top: 150px;
+        left: 4%;
+        width: 80%;
+
     }
+
+    .login_container h1 {
+        margin-bottom: 60px;
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .login_input_box {
+        width: 90%;
+        left: 4%;
+    }
+
+    .login_input_box_check {
+        left: 4%;
+    }
+
+    .login_button {
+        left: 4%;
+    }
+
+    .login_button button {
+        width: 100%;
+    }
+        .forgot_link {
+            left: 40%;
+        }
+    
+        .register_link {
+            left: 4%;
+        }
+}
+
+@media (min-width:701px) and (max-width:1000px) {
+    .login_container {
+        margin: 25px 25px 200px 25px;
+        padding: 25px;
+        width: 60%;
+        top: 150px;
+        left: 10%;
+
+    }
+
+    .login_container h1 {
+        margin-bottom: 60px;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .login_input_box {
+        width: 90%;
+        left: 4%;
+    }
+
+    .login_input_box_check {
+        left: 4%;
+    }
+
+    .login_button {
+        left: 4%;
+    }
+
+    .login_button button {
+        width: 96%;
+    }
+        .forgot_link {
+            left: 40%;
+        }
+    
+        .register_link {
+            left: 4%;
+        }
+}
+
+@media (min-width:1001px) and (max-width:1500px) {
+    .login_container {
+        margin: 50px 50px 200px 50px;
+        padding: 25px;
+        width: 40%;
+        top: 150px;
+        left: 24%;
+
+    }
+
+    .login_container h1 {
+        margin-bottom: 60px;
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .login_input_box {
+        width: 70%;
+        left: 14%;
+    }
+
+    .login_input_box_check {
+        left: 14%;
+    }
+
+    .login_button {
+        left: 14%;
+    }
+
+    .login_button button {
+        width: 76%;
+    }
+        .forgot_link {
+            left: 40%;
+        }
+    
+        .register_link {
+            left: 14%;
+        }
+}
+
+@media (min-width:1501px) and (max-width:1850px) {
+    .login_container {
+        margin: 50px 50px 200px 50px;
+        padding: 25px;
+        width: 40%;
+        top: 150px;
+        left: 24%;
+
+    }
+
+    .login_container h1 {
+        margin-bottom: 60px;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .login_input_box {
+        width: 90%;
+        left: 4%;
+    }
+
+    .login_input_box_check {
+        left: 4%;
+    }
+
+    .login_button {
+        left: 4%;
+    }
+
+    .login_button button {
+        width: 96%;
+    }
+
+    .forgot_link {
+        left: 40%;
+    }
+        .register_link {
+            left: 4%;
+        }
+}
+@media (min-width:1851px) {
+    .login_container {
+        margin: 50px 50px 200px 50px;
+        padding: 25px;
+        width: 40%;
+        top: 150px;
+        left: 24%;
+
+    }
+
+    .login_container h1 {
+        margin-bottom: 60px;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .login_input_box {
+        width: 90%;
+        left: 4%;
+    }
+
+    .login_input_box_check {
+        left: 4%;
+    }
+
+    .login_button {
+        left: 4%;
+    }
+
+    .login_button button {
+        width: 96%;
+    }
+
+    .forgot_link {
+        left: 40%;
+    }
+        .register_link {
+            left: 4%;
+        }
 }
