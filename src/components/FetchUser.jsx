@@ -7,7 +7,7 @@ const FetchUser = () => {
     const dispatch = useDispatch();
     const { users, isEdit } = useSelector((store) => store.user);
     useEffect(() => {
-        dispatch(fetchUserById(users.id))
+        dispatch(fetchUserById(users?.id))
             .then((data) => {
                 dispatch(loginAction.setUser(data.payload));
                 localStorage.setItem("data", JSON.stringify(data.payload));

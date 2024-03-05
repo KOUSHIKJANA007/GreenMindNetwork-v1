@@ -46,18 +46,24 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <Public Component={Home}/> },
-      { path: "/signin", element: <SignIn/> },
-      { path: "/email-input", element: <EmailInput/> },
-      { path: "/forgot-email", element: <ForgotEmail/> },
-      { path: "/otp-input", element: <OtpInput/> },
-      { path: "/newpassword", element: <ChangePassword/> },
-      { path: "/forgot-otp-input", element: <ForgotOtpInput/> },
-      { path: "/signup", element: <SignUp/> },
+      { path: "/", element: <Public Component={Home} /> },
+      { path: "/signin", element: <SignIn /> },
+      {
+        path: "/email-input", element: <EmailInput />, children: [
+          { path: "otp-input", element: <OtpInput />,children:[
+            { path: "signup", element: <SignUp /> },
+          ] },
+        ]
+      },
+      { path: "/forgot-email", element: <ForgotEmail />,children:[
+        { path: "forgot-otp-input", element: <ForgotOtpInput />,children:[
+          { path: "newpassword", element: <ChangePassword /> },
+        ] },
+      ] },
       { path: "/editprofile", element: <Protected Component={EditProfile} /> },
-      { path: "/articles", element: <Article/> },
+      { path: "/articles", element: <Article /> },
       { path: "/createpost", element: <Protected Component={CreatePost} /> },
-      { path: "/articlecontent/:postId", element: <ArticleContent/> },
+      { path: "/articlecontent/:postId", element: <ArticleContent /> },
       { path: "/userhome", element: <Protected Component={UserHome} /> },
       { path: "/userposts", element: <Protected Component={UserPosts} /> },
       { path: "/editpost/:postId", element: <Protected Component={EditPost} /> },
@@ -70,7 +76,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={greenMindStore}>
       <PersistGate loading={null} persistor={persistor}>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </PersistGate>
     </Provider>
   </React.StrictMode>,

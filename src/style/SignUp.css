@@ -1,3 +1,4 @@
+
 .signup_container {
     width: 25%;
     position: relative;
@@ -11,6 +12,8 @@
     text-transform: capitalize;
     color: #374151;
     font-weight: 700;
+
+    background-size: cover;
     z-index: 5;
 }
 

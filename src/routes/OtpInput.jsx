@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, useNavigate } from 'react-router-dom';
+import { Form, Outlet, useNavigate } from 'react-router-dom';
 import { otpInput, validationAction } from '../store/OtpValidation';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
@@ -11,6 +11,7 @@ const OtpInput = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [otp, setOtp] = useState('');
+    const [switchForm, setSwitchForm] = useState(false);
     const handleOnChange = (e) => {
         setOtp({ ...otp, [e.target.name]: e.target.value });
     }
@@ -26,7 +27,8 @@ const OtpInput = () => {
             .then((data) => {
                 if (data.success) {
                     toast.success(data.message);
-                    navigate("/signup");
+                    setSwitchForm(true);
+                    navigate("/email-input/otp-input/signup");
                 }
                 else {
                     toast.error(data.message);
@@ -38,6 +40,11 @@ const OtpInput = () => {
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}
+            {
+            switchForm
+             ? 
+             <Outlet/>
+             :
             <Form className="otp_val_container" onSubmit={handleSubmit} >
                 <h2>Enter OTP Which send on <span>{useremail}</span></h2>
 
@@ -50,9 +57,8 @@ const OtpInput = () => {
                     <button type='submit'>Verify</button>
 
                 </div>
-
-
             </Form>
+            }
         </>
     )
 }

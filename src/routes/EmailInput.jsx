@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, useNavigate } from 'react-router-dom'
+import { Form, Outlet, useNavigate } from 'react-router-dom'
 import { emailInput, validationAction } from '../store/OtpValidation';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
@@ -11,6 +11,7 @@ const EmailInput = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [email, setEmail] = useState('');
+    const [switchForm, setSwitchForm] = useState(false);
     const handleOnChange = (e) => {
         setEmail({ ...email, [e.target.name]: e.target.value });
     }
@@ -26,7 +27,8 @@ const EmailInput = () => {
                 if (data.success == true) {
                     dispatch(validationAction.setEmail(email.email));
                     toast.success(data.message);
-                    navigate("/otp-input")
+                    setSwitchForm(true)
+                    navigate("/email-input/otp-input")
                 }
                 if (data.success == false) {
                     toast.error("Email is already exist")
@@ -38,6 +40,10 @@ const EmailInput = () => {
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}
+            {
+            switchForm ? 
+            <Outlet />
+            :
             <Form className="otp_val_container" onSubmit={handleSubmit} >
                 <h2 >Enter your valid email</h2>
 
@@ -53,6 +59,7 @@ const EmailInput = () => {
 
 
             </Form>
+            }
         </>
     )
 }

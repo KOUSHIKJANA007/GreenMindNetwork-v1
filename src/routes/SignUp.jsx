@@ -12,9 +12,12 @@ const SignUp = () => {
     const { loading } = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const[agree,setAgree]=useState(false);
     const [users, setUsers] = useState({});
 
+    const setTermandCondition=()=>{
+        setAgree(!agree);
+    }
     const setSignupData = (e) => {
         setUsers({ ...users, [e.target.name]: e.target.value })
     }
@@ -25,6 +28,10 @@ const SignUp = () => {
     const handleSubmitSignUpData = (e) => {
         e.preventDefault();
         dispatch(validationAction.setProgress(50))
+        if(!agree){
+            toast.error("Please check Terms and conditions");
+            return;
+        }
         dispatch(createUser(users))
             .then(unwrapResult)
             .then((obj) => {
@@ -84,7 +91,7 @@ const SignUp = () => {
                     <input className='signup_input' type="password" name="password" onChange={setSignupData} id='password' />
                 </div>
                 <div className="signup_input_box_check">
-                    <input className='login_input_check' type="checkbox" name="check" id="check" />
+                    <input onClick={setTermandCondition} className='login_input_check' type="checkbox" name="check" id="check" />
                     <label htmlFor="check">Agree trems and conditions</label>
                 </div>
                 <div className="signup_button">
