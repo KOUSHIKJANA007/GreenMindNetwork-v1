@@ -12,6 +12,7 @@ import { Pagination } from '../components/Pagination';
 import { validationAction } from '../store/OtpValidation';
 
 const Article = () => {
+  document.title = "Articles";
   const { progress } = useSelector((store) => store.validation);
   const { posts, loading, isPostCreate, DeletePost } = useSelector((store) => store.post);
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ const Article = () => {
         </div>
 
         {
-          posts.content=="" ?
+          posts.content == "" ?
             <div className="article_display_container_post_not_found">
               <h1>No posts found</h1>
             </div>

@@ -10,6 +10,7 @@ import { validationAction } from "../store/OtpValidation";
 
 
 const SignIn = () => {
+  document.title = "Login";
   const { loading } = useSelector((store) => store.user);
   const { progress } = useSelector((store) => store.validation);
   const navigate = useNavigate();
@@ -24,9 +25,11 @@ const SignIn = () => {
   const getCookieData = () => {
     var user = getCookie('user_username');
     var pass = getCookie('user_password');
-    document.getElementById("username").value = user;
-    document.getElementById("password").value = pass;
-    setLoginData({ ...loginData, "username": user, "password": pass })
+    if(user.trim()!='' && pass.trim()!=''){
+      document.getElementById("username").value = user;
+      document.getElementById("password").value = pass;
+      setLoginData({ ...loginData, "username": user, "password": pass })
+    }
   }
   const getCookie = (cookie_name) => {
     var name = cookie_name + "=";
@@ -46,7 +49,7 @@ const SignIn = () => {
   const handleLoginData = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
-  
+
   const handleLoginFormData = (e) => {
     e.preventDefault();
     dispatch(validationAction.setProgress(50))

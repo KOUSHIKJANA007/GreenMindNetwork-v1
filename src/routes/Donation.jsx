@@ -6,6 +6,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 const Donation = () => {
+    document.title="Donate"
     const { users } = useSelector((store) => store.user);
     const amountInput = useRef();
     const dispatch = useDispatch()

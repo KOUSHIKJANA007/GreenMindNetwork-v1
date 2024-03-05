@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar';
 
 const EmailInput = () => {
+    document.title = "Sign Up"
     const { loading, progress } = useSelector((store) => store.validation)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -41,24 +42,24 @@ const EmailInput = () => {
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}
             {
-            switchForm ? 
-            <Outlet />
-            :
-            <Form className="otp_val_container" onSubmit={handleSubmit} >
-                <h2 >Enter your valid email</h2>
+                switchForm ?
+                    <Outlet />
+                    :
+                    <Form className="otp_val_container" onSubmit={handleSubmit} >
+                        <h2 >Enter your valid email</h2>
 
-                <div className="otp_val_input_box">
-                    <label htmlFor="email">Email</label>
-                    <input className='otp_val_input' onChange={handleOnChange} type="email" name="email" id='email' />
-                </div>
+                        <div className="otp_val_input_box">
+                            <label htmlFor="email">Email</label>
+                            <input className='otp_val_input' onChange={handleOnChange} type="email" name="email" id='email' />
+                        </div>
 
-                <div className="otp_val_button">
-                    <button type='submit'>Verify</button>
+                        <div className="otp_val_button">
+                            <button type='submit'>Verify</button>
 
-                </div>
+                        </div>
 
 
-            </Form>
+                    </Form>
             }
         </>
     )

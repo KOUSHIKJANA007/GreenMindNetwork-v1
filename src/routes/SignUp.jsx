@@ -23,6 +23,7 @@ const SignUp = () => {
     }
 
     useEffect(()=>{
+        document.title="Sign up page"
         setUsers({ ...users, "email": useremail });
     },[])
     const handleSubmitSignUpData = (e) => {

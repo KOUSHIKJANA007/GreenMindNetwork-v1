@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { Pagination } from '../components/Pagination';
 
 const UserPosts = () => {
+    document.title = "My Articles";
     const { posts, loading, DeletePost } = useSelector((store) => store.post);
     const { users } = useSelector((store) => store.user);
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const UserPosts = () => {
                 toast.error(err)
             })
     }, [DeletePost])
-   
+
     return (
         <>
             {loading && <LoadingBar color="#78be20" />}

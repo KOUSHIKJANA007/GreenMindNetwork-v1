@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar';
 
 const OtpInput = () => {
+    document.title = "Sign Up";
     const { useremail, loading, progress } = useSelector((store) => store.validation);
     const navigate = useNavigate()
     const dispatch = useDispatch()
