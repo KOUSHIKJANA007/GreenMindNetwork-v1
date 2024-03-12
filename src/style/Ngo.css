@@ -175,7 +175,7 @@
     height: 40px;
     width: 50%;
     font-size: 20px;
-   
+
     font-weight: 700;
     cursor: pointer;
     border: none;
@@ -185,7 +185,7 @@
 }
 
 .ngo_2nd_button button a {
-color: white;
+    color: white;
     text-transform: capitalize;
     text-decoration: none;
 }
@@ -229,4 +229,77 @@ color: white;
     .ngo_2nd_button button {
         width: 80%;
     }
+}
+
+
+
+/* NGO ITEM STYLE HERE */
+
+
+.all_ngo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 5px 25px;
+}
+
+.all_ngo_items_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px
+}
+
+.all_ngo_item {
+    border: 3px solid #78be20;
+    border-radius: 5px;
+    height: auto;
+    width: 300px;
+    padding: 8px 8px 25px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-transform: capitalize;
+    box-shadow: #7ed116 1px 0px 30px 4px;
+    transition: all .3s ease-in-out .3s;
+}
+
+.all_ngo_item:hover {
+    transform: scale(1.02);
+}
+
+.all_ngo_heading {
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.all_ngo_item_img a img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.all_ngo_item_name {
+    text-align: center;
+}
+
+.all_ngo_item_name h2 a {
+    text-decoration: none;
+    font-family: 20px;
+    color: #67b608;
+
+}
+
+.all_ngo_item_name h2 {
+    transition: all .3s ease-in-out .2s;
+}
+
+.all_ngo_item_name h2:hover {
+    transform: scale(1.02);
+}
+
+.all_ngo_item_slogan {
+    text-align: center;
 }

@@ -13,6 +13,15 @@ export const createNgo = createAsyncThunk("createNgo", async (data) => {
     })
     return await response.json();
 })
+export const getAllNgos = createAsyncThunk("getAllNgos",async()=>{
+    const response = await fetch("http://localhost:8080/api/ngo/",{
+        method:"GET",
+        headers:{
+            "Content-Type": "application/json",
+        }
+    })
+    return await response.json();
+})
 export const uploadNgoLogo = createAsyncThunk("uploadNgoLogo", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData();
@@ -68,10 +77,20 @@ export const uploadRegistrationProof = createAsyncThunk("uploadRegistrationProof
 const ngoDetails = createSlice({
     name: "ngoDetails",
     initialState: {
-        loading: false
+        loading: false,
+        ngoData:null,
+        isFetch:false
     },
     reducers: {
-
+        setNgoData:(state,action)=>{
+            state.ngoData=action.payload;
+        },
+        setFetchDone:(state)=>{
+            state.isFetch=true;
+        },
+        setFetchEnd:(state)=>{
+            state.isFetch=false;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(createNgo.pending,(state,action)=>{
@@ -122,4 +141,5 @@ const ngoDetails = createSlice({
     }
 })
 
+export const ngoAction=ngoDetails.actions;
 export default ngoDetails.reducer;

@@ -49,7 +49,7 @@ const ProfileBox = ({ users }) => {
                     <p className="profile_mobile"><span>Mobile</span>{users?.mobile}</p>
                     <p className="profile_joined"><span>Age</span>{age}</p>
                     <div className="profile_card_button">
-                        <button type='submit' className="edit_btn" onClick={handleProfileCard} ><Link to="/editprofile">Edit</Link></button>
+                        <button type='submit' className="edit_btn" onClick={handleProfileCard} ><Link to="/user-profile">Profile</Link></button>
                         <button className="logout_btn" onClick={() => {
                             handleLogout()
                             handleProfileCard()

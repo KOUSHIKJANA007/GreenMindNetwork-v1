@@ -44,6 +44,7 @@ import ChangePassword from './routes/ChangePassword.jsx'
 import ForgotOtpInput from './routes/ForgotOtpInput.jsx'
 import Ngo from './routes/Ngo.jsx'
 import RegisterNgo from './routes/RegisterNgo.jsx'
+import UserProfile from './routes/UserProfile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -73,7 +74,8 @@ const router = createBrowserRouter([
       { path: "/editpost/:postId", element: <Protected Component={EditPost} /> },
       { path: "/donation", element: <Protected Component={Donation} /> },
       {path:"/ngo",element:<Ngo/>},
-      { path:"/ngo-register",element:<RegisterNgo/>}
+      { path:"/ngo-register",element:<RegisterNgo/>},
+      { path:"/user-profile",element:<Protected Component={UserProfile}/>}
     ]
   }
 ])

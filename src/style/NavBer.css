@@ -145,7 +145,6 @@ header {
     box-shadow: 0px 1px 5px 5px rgba(241, 155, 7, 0.436);
     transform: scale(1.01);
 }
-
 .donation:active {
     transform: scale(1.05);
 }

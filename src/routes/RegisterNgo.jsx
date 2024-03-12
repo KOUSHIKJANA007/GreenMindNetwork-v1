@@ -1,8 +1,8 @@
 import JoditEditor from 'jodit-react'
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Form } from 'react-router-dom';
-import { createNgo, uploadIdentityProof, uploadNgoLogo, uploadRegistrationProof, uploadTaxProof } from '../store/ngoDetails';
+import { Form, useNavigate } from 'react-router-dom';
+import { createNgo, ngoAction, uploadIdentityProof, uploadNgoLogo, uploadRegistrationProof, uploadTaxProof } from '../store/ngoDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar';
@@ -11,8 +11,9 @@ import { validationAction } from '../store/OtpValidation';
 const RegisterNgo = () => {
     document.title="Register NGO"
     const editor = useRef(null);
+    const navigate=useNavigate();
     const { users } = useSelector((store) => store.user);
-    const { loading } = useSelector((store) => store.ngo);
+    const { loading, isFetch } = useSelector((store) => store.ngo);
     const { progress } = useSelector((store) => store.validation);
     const dispatch = useDispatch();
     const [description, setDescription] = useState('');
@@ -42,7 +43,7 @@ const RegisterNgo = () => {
     }
     const handleSubmitNgoData = (e) => {
         e.preventDefault();
-        dispatch(validationAction.setProgress(50));
+       
         if(document.getElementById("name")?.value?.trim()==''){
             toast.error("NGO's name should not be null");
             return;
@@ -67,41 +68,51 @@ const RegisterNgo = () => {
             toast.error("NGO's description should not be null");
             return;
         }
+        dispatch(validationAction.setProgress(50));
         dispatch(createNgo({ ngoData: ngoData, userId: users.id }))
             .then(unwrapResult)
             .then((data) => {
                 console.log({data});
-                dispatch(validationAction.setProgress(70))
+               
                 if (data?.id) {
                     dispatch(uploadNgoLogo({ logo: logo, ngoId: data?.id }))
                         .then((obj) => {
-                            console.log("logo", { obj });
+                          console.log("logo",{obj});
                             if (obj.payload == undefined) {
-                                toast.error("Logo is not uploaded")
+                                toast.error("Logo is not uploaded");
+                                return;
                             }
+                            dispatch(uploadIdentityProof({ identityOfHead: identityOfHead, ngoId: data?.id }))
+                                .then((obj) => {
+                                    dispatch(validationAction.setProgress(70))
+                                    if (obj.payload == undefined) {
+                                        toast.error("pan is not uploaded");
+                                        return;
+                                    }
+                                    dispatch(uploadTaxProof({ imageOfTax: imageOfTax, ngoId: data?.id }))
+                                        .then((obj) => {
+
+                                            if (obj.payload == undefined) {
+                                                toast.error("Tax is not uploaded");
+                                                return;
+                                            }
+                                            dispatch(uploadRegistrationProof({ registerImage: registerImage, ngoId: data?.id }))
+                                                .then((obj) => {
+
+                                                    if (obj.payload == undefined) {
+                                                        toast.error("reg is not uploaded");
+                                                        return;
+                                                    }
+                                                })
+                                        })
+                                })
                         })
-                    dispatch(uploadIdentityProof({ identityOfHead: identityOfHead, ngoId: data?.id }))
-                        .then((obj) => {
-                            console.log("identity", { obj });
-                            if (obj.payload == undefined) {
-                                toast.error("pan is not uploaded")
-                            }
-                        })
-                    dispatch(uploadTaxProof({ imageOfTax: imageOfTax, ngoId: data?.id }))
-                        .then((obj) => {
-                            console.log("tax", { obj });
-                            if (obj.payload == undefined) {
-                                toast.error("Tax is not uploaded")
-                            }
-                        })
-                    dispatch(uploadRegistrationProof({ registerImage: registerImage, ngoId: data?.id }))
-                        .then((obj) => {
-                            console.log("reg", { obj });
-                            if (obj.payload == undefined) {
-                                toast.error("reg is not uploaded")
-                            }
-                        })
+                   
+                    
+                   
+                        dispatch(ngoAction.setFetchDone());
                         toast.success("NGO register successfully");
+                        navigate("/ngo");
                 }
                 else{
                    toast.error(data.description);
@@ -110,12 +121,13 @@ const RegisterNgo = () => {
                    toast.error(data.address);
                    toast.error(data.mobile);
                 }
+                dispatch(validationAction.setProgress(100))  
             })
             .catch((err)=>{
                 toast.error("Hello",err)
             })
 
-        dispatch(validationAction.setProgress(100))    
+        
     }
     return (
         <>

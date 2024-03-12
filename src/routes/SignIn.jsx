@@ -11,6 +11,7 @@ import { validationAction } from "../store/OtpValidation";
 
 const SignIn = () => {
   document.title = "Login";
+  window.scroll(0, 0);
   const { loading } = useSelector((store) => store.user);
   const { progress } = useSelector((store) => store.validation);
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const SignIn = () => {
   const getCookieData = () => {
     var user = getCookie('user_username');
     var pass = getCookie('user_password');
-    if(user.trim()!='' && pass.trim()!=''){
+    if (user.trim() != '' && pass.trim() != '') {
       document.getElementById("username").value = user;
       document.getElementById("password").value = pass;
       setLoginData({ ...loginData, "username": user, "password": pass })

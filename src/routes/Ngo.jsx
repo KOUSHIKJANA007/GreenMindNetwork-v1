@@ -1,10 +1,24 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import NgoItem from '../components/NgoItem'
+import { getAllNgos, ngoAction } from '../store/ngoDetails'
+import { unwrapResult } from '@reduxjs/toolkit'
 
 const Ngo = () => {
     document.title = "NGO Partner Programme"
+    const dispatch=useDispatch();
     const { isLogin }=useSelector((store)=>store.user);
+    const { ngoData,isFetch,loading }=useSelector((store)=>store.ngo);
+
+    useEffect(()=>{
+        dispatch(getAllNgos())
+        .then(unwrapResult)
+        .then((data)=>{
+           dispatch(ngoAction.setNgoData(data))
+        })
+        dispatch(ngoAction.setFetchEnd());
+    }, [isFetch])
     return (
         <>
             <div className="ngo_container">
@@ -68,6 +82,16 @@ const Ngo = () => {
                         </div>
                     </div>
 
+                </div>
+                <div className="all_ngo">
+                    <div className="all_ngo_heading">
+                        <h1>our partner NGOS is here </h1>
+                    </div>
+                    <div className="all_ngo_items_container">
+                       {ngoData.map((item)=>
+                       <NgoItem key={item.id} ngoDatas={item}/>
+                       )}
+                    </div>
                 </div>
             </div>
         </>
