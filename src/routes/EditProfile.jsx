@@ -9,9 +9,10 @@ import LoadingBar from "react-top-loading-bar";
 
 
 const EditProfile = () => {
+    document.title = "Edit Profile"
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { users,loading } = useSelector((store) => store.user);
+    const { users, loading } = useSelector((store) => store.user);
     const [editData, setEditData] = useState('');
     const [image, setImage] = useState(null);
     const handleOnChange = (e) => {
@@ -19,7 +20,7 @@ const EditProfile = () => {
 
     }
     useEffect(() => {
-        window.scroll(0,0)
+        window.scroll(0, 0)
         setEditData(users)
     }, [])
     const handleSubmitEditData = (e) => {
@@ -66,7 +67,7 @@ const EditProfile = () => {
                 <div className="profile_image">
 
                     <label htmlFor='file_upload'>
-                            <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
+                        <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
                     </label>
                     <input type="file" id='file_upload' name="image" onChange={handleImageUpload} />
 

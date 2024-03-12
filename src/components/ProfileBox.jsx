@@ -37,7 +37,7 @@ const ProfileBox = ({ users }) => {
 
                 <Link className='dp_name' to="#" onClick={handleProfileCard}>{users?.fname + " " + users?.lname}</Link>
             </div>
-            <div className={toggleProfileCard ? "profile_card_container open" : "profile_card_container"}>
+            <div className={toggleProfileCard ? "profile_card_container person_box_open" : "profile_card_container"}>
                 <MdClose onClick={handleProfileCard} className='close_btn' />
                 <div className="profile_card_logo">
                     <img src={BASE_URL + "/api/user/image/" + users?.imageName} alt="" />

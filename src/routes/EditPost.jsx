@@ -7,6 +7,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 const EditPost = () => {
+    document.title="Edit Article"
     const editor = useRef();
     const navigate = useNavigate()
     const { postId } = useParams();

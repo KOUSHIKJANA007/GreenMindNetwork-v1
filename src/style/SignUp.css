@@ -99,7 +99,7 @@
 }
 
 .signup_button button:active {
-    scale: 1.02;
+   transform:  scale(1.02);
 }
 
 @media (max-width:660px) {

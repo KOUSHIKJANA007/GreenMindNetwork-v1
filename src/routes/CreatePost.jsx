@@ -20,8 +20,8 @@ const CreatePost = () => {
         console.log(postData);
     }
 
-    const handleContent=(data)=>{
-        setPostData({...postData,'content':data})
+    const handleContent = (data) => {
+        setPostData({ ...postData, 'content': data })
     }
     const handleOnChangeImage = (e) => {
         setImage(e.target.files[0]);
@@ -84,7 +84,7 @@ const CreatePost = () => {
                         <JoditEditor
                             ref={editor}
                             value={content}
-                            onChange={handleContent} 
+                            onChange={handleContent}
                         />
                     </div>
                     <div className="post_buttons">

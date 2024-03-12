@@ -10,16 +10,18 @@ import CreateComment from '../components/CreateComment';
 import FetchComment from '../components/FetchComment';
 
 const ArticleContent = () => {
+
   const { singlePost } = useSelector((store) => store.post)
   const { isLogin } = useSelector((store) => store.user)
   const { postId } = useParams();
   const dispatch = useDispatch()
+  document.title = singlePost?.title
   useEffect(() => {
     dispatch(getPostById(postId))
       .then(unwrapResult)
       .then((data) => {
         dispatch(postAction.setSinglePost(data))
-        
+
       })
       .catch((err) => {
         toast.error({ err })
@@ -48,20 +50,20 @@ const ArticleContent = () => {
           <hr className='post_horizon' />
         </div>
         <div className="post_content" dangerouslySetInnerHTML={sanitizedData()}>
-          
+
         </div>
         {
-        isLogin &&
+          isLogin &&
 
-        <div className="post_comment_input">
-          <CreateComment postId={postId}/>
-        </div>
+          <div className="post_comment_input">
+            <CreateComment postId={postId} />
+          </div>
         }
         {
           isLogin &&
-        <div className="post_comments">
-            <FetchComment postId={postId}/>
-        </div>
+          <div className="post_comments">
+            <FetchComment postId={postId} />
+          </div>
         }
       </div>
     </>

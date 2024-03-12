@@ -1,7 +1,7 @@
 .profile_card_container {
     visibility: hidden;
     position: absolute;
-    top: 90%;
+    top: -390px;
     left: 75%;
     border: 3px solid #78be20;
     height: 360px;
@@ -13,12 +13,13 @@
     background-color: rgb(244, 244, 244);
     font-size: 13px;
     z-index: 5;
-    transition: ease-in-out 0.1s;
+    transition: all 0.5s ease-in-out 0.2s;
 
 }
 
-.profile_card_container.open {
+.person_box_open {
     visibility: visible;
+    transform: translateY(470px);
 }
 
 .close_btn {

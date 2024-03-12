@@ -7,6 +7,7 @@ import postDetails from "./postDetails";
 import commentDetails from "./commentDetails";
 import donationDetails from "./donationDetails";
 import validationSlice from './OtpValidation'
+import ngoDetails from "./ngoDetails";
 
 const persistConfig = {
     key: "root",
@@ -19,7 +20,8 @@ const reducer = combineReducers({
     post:postDetails,
     comment:commentDetails,
     donation:donationDetails,
-    validation: validationSlice
+    validation: validationSlice,
+    ngo:ngoDetails
 })
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({

@@ -76,6 +76,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: all 3s ease-in-out 2s;
 }
 
 
@@ -192,11 +193,11 @@ header {
     background-color: white;
     overflow: hidden;
     border-radius: 10px;
-    transition: ease-in-out 0.1s;
+    /* transition: all 20s ease-in-out 20s; */
 
 }
 
-.dropdown_menu.open {
+.open {
     display: block;
 }
 
@@ -274,12 +275,14 @@ header {
         left: 7%;
     }
 }
-@media (min-width:1001px) and (max-width:1350px){
-    .donation{
-       width: 11%;
-       left:4%;
+
+@media (min-width:1001px) and (max-width:1350px) {
+    .donation {
+        width: 11%;
+        left: 4%;
     }
-    .login_box{
+
+    .login_box {
         left: 7%;
     }
 }
