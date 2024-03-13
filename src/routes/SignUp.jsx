@@ -87,6 +87,28 @@ const SignUp = () => {
                     <label htmlFor="date">DOB</label>
                     <input className='signup_input' type="date" name="dob" onChange={setSignupData} id='date' />
                 </div>
+
+
+
+                <div className="signup_input_box">
+                    <label htmlFor="youtubeLink">YouTube Link</label>
+                    <input className='signup_input' type="text" name="youtubeLink"  onChange={setSignupData} id='youtubeLink' />
+                </div>
+                <div className="signup_input_box">
+                    <label htmlFor="instagramLink">Instagram Link</label>
+                    <input className='signup_input' type="text" name="instagramLink"  onChange={setSignupData} id='instagramLink' />
+                </div>
+                <div className="signup_input_box">
+                    <label htmlFor="twitterLink">Twitter Link</label>
+                    <input className='signup_input' type="text" name="twitterLink"  onChange={setSignupData} id='twitterLink' />
+                </div>
+                <div className="signup_input_box">
+                    <label htmlFor="facebookLink">Facebook Link</label>
+                    <input className='signup_input' type="text" name="facebookLink"  onChange={setSignupData} id='facebookLink' />
+                </div>
+
+
+
                 <div className="signup_input_box">
                     <label htmlFor="password">Password</label>
                     <input className='signup_input' type="password" name="password" onChange={setSignupData} id='password' />

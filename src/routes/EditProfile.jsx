@@ -95,6 +95,22 @@ const EditProfile = () => {
                     <label htmlFor="date">DOB</label>
                     <input className='signup_input' type="date" name="dob" value={editData && editData.dob} onChange={handleOnChange} id='date' />
                 </div>
+                <div className="signup_input_box">
+                    <label htmlFor="youtubeLink">YouTube Link</label>
+                    <input className='signup_input' type="text" name="youtubeLink" value={editData && editData.youtubeLink} onChange={handleOnChange} id='youtubeLink' />
+                </div>
+                <div className="signup_input_box">
+                    <label htmlFor="instagramLink">Instagram Link</label>
+                    <input className='signup_input' type="text" name="instagramLink" value={editData && editData.instagramLink} onChange={handleOnChange} id='instagramLink' />
+                </div>
+                <div className="signup_input_box">
+                    <label htmlFor="twitterLink">Twitter Link</label>
+                    <input className='signup_input' type="text" name="twitterLink" value={editData && editData.twitterLink} onChange={handleOnChange} id='twitterLink' />
+                </div>
+                <div className="signup_input_box">
+                    <label htmlFor="facebookLink">Facebook Link</label>
+                    <input className='signup_input' type="text" name="facebookLink" value={editData && editData.facebookLink} onChange={handleOnChange} id='facebookLink' />
+                </div>
                 <div className="signup_button">
                     <button type='submit'>Save</button>
                 </div>

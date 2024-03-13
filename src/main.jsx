@@ -20,6 +20,7 @@ import '../src/style/FetchComment.css'
 import '../src/style/validation.css'
 import '../src/style/RegisterNgo.css'
 import '../src/style/Ngo.css'
+import '../src/style/UserProfile.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -45,6 +46,8 @@ import ForgotOtpInput from './routes/ForgotOtpInput.jsx'
 import Ngo from './routes/Ngo.jsx'
 import RegisterNgo from './routes/RegisterNgo.jsx'
 import UserProfile from './routes/UserProfile.jsx'
+import UserNgo from './routes/UserNgo.jsx'
+import ProtectNgo from './user-routes/ProtectNgo.jsx'
 
 const router = createBrowserRouter([
   {
@@ -73,8 +76,8 @@ const router = createBrowserRouter([
       { path: "/userposts", element: <Protected Component={UserPosts} /> },
       { path: "/editpost/:postId", element: <Protected Component={EditPost} /> },
       { path: "/donation", element: <Protected Component={Donation} /> },
-      {path:"/ngo",element:<Ngo/>},
-      { path:"/ngo-register",element:<RegisterNgo/>},
+      { path: "/ngo", element: <ProtectNgo Component1={Ngo} Component2={UserNgo} />},
+      { path:"/ngo-register",element:<Protected Component={RegisterNgo}/>},
       { path:"/user-profile",element:<Protected Component={UserProfile}/>}
     ]
   }
