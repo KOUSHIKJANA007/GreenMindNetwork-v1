@@ -8,7 +8,6 @@ import { unwrapResult } from '@reduxjs/toolkit'
 const Ngo = () => {
     document.title = "NGO Partner Programme"
     const dispatch = useDispatch();
-    const { isLogin } = useSelector((store) => store.user);
     const { ngoData, isFetch, loading } = useSelector((store) => store.ngo);
 
     useEffect(() => {
@@ -31,12 +30,7 @@ const Ngo = () => {
                         <p>Join our Environmental NGO Partner programme and become part of a dynamic and collaborative network dedicated to preserving and restoring the environment. By joining forces with other passionate organizations, you'll have the opportunity to leverage collective expertise, resources, and influence to address pressing environmental issues. Gain access to capacity-building workshops, funding opportunities, and advocacy initiatives to enhance your organization's impact. Together, we can create meaningful change and build a sustainable future for generations to come. Join us in making a difference today!</p>
                         <div className="ngo_button">
                             <button type='submit'>
-                                {
-                                    isLogin ?
-                                        <Link to="/ngo-register">Join our programme</Link>
-                                        :
-                                        <Link to="/email-input">Join our programme</Link>
-                                }
+                                <Link to="/email-input">Join our programme</Link>
                             </button>
                         </div>
                     </div>
@@ -49,12 +43,7 @@ const Ngo = () => {
                         <p>NGOs can connect with other charitable organizations and potentially collaborate on projects or share resources through your donation platform. This networking can lead to valuable partnerships and synergies that enhance the effectiveness of their work.Being associated with a reputable donation website can enhance the credibility of participating NGOs. Donors may feel more confident contributing to organizations listed on a trusted platform, which can lead to increased donations and support.</p>
                         <div className="ngo_2nd_button">
                             <button type='submit'>
-                                {
-                                    isLogin ?
-                                        <Link to="/ngo-register">Join our programme</Link>
-                                        :
-                                        <Link to="/email-input">Join our programme</Link>
-                                }
+                                <Link to="/email-input">Join our programme</Link>
                             </button>
                         </div>
 

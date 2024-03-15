@@ -35,7 +35,7 @@ const UserProfile = () => {
                 </div>
                 <div className="profile_nav_options">
                   <button className='profile_nav_button'><Link to="/userposts">my posts</Link></button>
-                  <button className='profile_nav_button'><Link>my NGO</Link></button>
+                  <button className='profile_nav_button'><Link to={`/ngo-content/${users.id}`}>my NGO</Link></button>
                   <button className='profile_nav_button' ><Link to="/editprofile">edit profile</Link></button>
                   <button className='profile_nav_button'><Link to="">my posts</Link></button>
                 </div>

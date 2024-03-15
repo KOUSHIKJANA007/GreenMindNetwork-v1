@@ -22,6 +22,15 @@ export const getAllNgos = createAsyncThunk("getAllNgos",async()=>{
     })
     return await response.json();
 })
+export const getNgoByUser = createAsyncThunk("getNgoByUser",async(userId)=>{
+    const response = await fetch(`http://localhost:8080/api/ngo/user/${userId}`,{
+        method:"GET",
+        headers:{
+            "Content-Type": "application/json",
+        }
+    })
+    return await response.json();
+})
 export const uploadNgoLogo = createAsyncThunk("uploadNgoLogo", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData();
@@ -79,11 +88,15 @@ const ngoDetails = createSlice({
     initialState: {
         loading: false,
         ngoData:null,
-        isFetch:false
+        isFetch:false,
+        userNgo:null
     },
     reducers: {
         setNgoData:(state,action)=>{
             state.ngoData=action.payload;
+        },
+        setUserNgoData:(state,action)=>{
+            state.userNgo=action.payload;
         },
         setFetchDone:(state)=>{
             state.isFetch=true;
@@ -136,6 +149,15 @@ const ngoDetails = createSlice({
             state.loading=false;
         })
         builder.addCase(uploadRegistrationProof.rejected,(state,action)=>{
+            state.loading=false;
+        })
+        builder.addCase(getNgoByUser.pending,(state,action)=>{
+            state.loading=true;
+        })
+        builder.addCase(getNgoByUser.fulfilled,(state,action)=>{
+            state.loading=false;
+        })
+        builder.addCase(getNgoByUser.rejected,(state,action)=>{
             state.loading=false;
         })
     }

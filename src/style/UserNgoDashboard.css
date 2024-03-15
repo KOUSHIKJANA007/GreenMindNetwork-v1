@@ -1,0 +1,507 @@
+.user_ngo_dash_main_container {
+  position: relative;
+  top: 100px;
+  margin: 5px 25px 5px 25px;
+  padding-bottom: 100px;
+  width: 96%;
+}
+
+.user_ngo_dash_container {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  border-radius: 15px;
+  padding: 25px 5px 25px 15px;
+  background-color: #78be20;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.59);
+}
+.user_ngo_dash_logo {
+  width: 20%;
+  margin: 5px 25px 5px 5px;
+}
+.user_ngo_dash_logo img {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+  box-shadow: #f5f10b 1px 0px 30px 4px;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.3s ease-in-out 0.2s;
+}
+.user_ngo_dash_logo img:hover {
+  transform: scale(1.02);
+}
+.user_ngo_dash_details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.user_ngo_dash_details_name {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.user_ngo_dash_details_contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 10px;
+}
+.user_ngo_dash_details_contact h3 {
+  display: flex;
+  gap: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.user_ngo_dash_details_contact h3 span {
+  font-size: 25px;
+}
+
+/* NAV OPTIONS START */
+
+.user_ngo_dash_nav_options {
+  display: flex;
+  background-color: white;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.39);
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  /* border: 1px solid black; */
+  font-size: 23px;
+  text-transform: uppercase;
+  font-weight: 700;
+  height: 40px;
+  margin: 15px 0px 5px 0px;
+  padding: 5px 5px 5px 15px;
+  border-radius: 10px;
+}
+.user_ngo_dash_nav_options_about a {
+  text-decoration: none;
+  color: #636466;
+  padding: 2px 10px 2px 10px;
+  border-radius: 5px;
+}
+.user_ngo_dash_nav_options_photos a {
+  text-decoration: none;
+  color: #636466;
+  padding: 2px 10px 2px 10px;
+  border-radius: 5px;
+}
+.user_ngo_dash_nav_options_events a {
+  text-decoration: none;
+  color: #636466;
+  padding: 2px 10px 2px 10px;
+  border-radius: 5px;
+}
+
+.user_ngo_dash_nav_options_property.active {
+  background-color: #78be20;
+  color: white;
+}
+.user_ngo_dash_content {
+  /* border: 1px solid black; */
+  background-color: white;
+  margin: 15px 0px 15px 0px;
+  padding: 35px 5px 35px 15px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.39);
+}
+
+/* NGO EVENT CSS START FROM HERE */
+/* *****************************************************************************************************
+*****************************************************************************************************
+***************************************************************************************************** */
+.user_ngo_dash_content_events {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.69);
+  margin: 9px;
+  padding: 5px;
+  border-radius: 7px;
+  gap: 15px;
+  transition: all 0.2s ease-in-out 0.1s;
+}
+.user_ngo_dash_content_events:hover {
+  transform: scale(1.01);
+}
+
+.user_ngo_dash_content_events_img {
+  width: 100%;
+}
+.user_ngo_dash_content_events_img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+}
+.user_ngo_dash_content_events_progress {
+  width: 90%;
+}
+.user_ngo_dash_content_events_progress label {
+  font-weight: 600;
+  padding: 10px;
+}
+.event_progress {
+  width: 100%;
+}
+.user_ngo_dash_content_events_title {
+  text-align: center;
+}
+.user_ngo_dash_content_events_title h3 a {
+  text-decoration: none;
+  color: #535354;
+}
+.user_ngo_dash_content_events_title h3 {
+  font-size: 18px;
+  text-transform: capitalize;
+}
+.user_ngo_dash_content_events_buttons {
+  display: flex;
+  gap: 20px;
+  width: 90%;
+}
+.user_ngo_dash_content_events_buttons button {
+  height: 30px;
+  margin: 10px;
+  padding: 0px 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#ngo_edit_button {
+  background-color: #ec6f08;
+}
+#ngo_edit_button a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+}
+#ngo_delete_button {
+  background-color: #ec2a08;
+}
+#ngo_delete_button a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+}
+#ngo_edit_button:hover {
+  background-color: #bc5806;
+  text-shadow: 0 0 7px #fff;
+}
+#ngo_edit_button:active {
+  transform: scale(1.02);
+}
+#ngo_delete_button:hover {
+  background-color: #bd2207;
+  text-shadow: 0 0 7px #fff;
+}
+#ngo_delete_button:active {
+  transform: scale(1.02);
+}
+.user_ngo_dash_create_event {
+  position: fixed;
+  width: 100vw;
+  top: 90%;
+  left: 45%;
+  z-index: 999;
+}
+.user_ngo_dash_create_event button {
+  background-color: #f43c09;
+  height: 40px;
+  width: 30%;
+  border: none;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.9);
+}
+.user_ngo_dash_create_event button a {
+  text-decoration: none;
+  color: white;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 18px;
+}
+.user_ngo_dash_create_event button:hover {
+  background-color: #cd3705;
+  text-shadow: 0 0 7px #fff;
+}
+.user_ngo_dash_create_event button:active {
+  transform: scale(1.02);
+}
+.event_create_icon {
+  margin-right: 2px;
+  font-size: 15px;
+}
+@media (max-width: 400px) {
+  .user_ngo_dash_container {
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0;
+  }
+  .user_ngo_dash_logo {
+    width: 100%;
+  }
+  .user_ngo_dash_main_container {
+    width: 98%;
+    margin: 0px 0px 0px 8px;
+  }
+  .user_ngo_dash_nav_options {
+    margin: 20px 0px 0px 0px;
+    width: 88%;
+    gap: 10px;
+    font-size: 16px;
+  }
+  .user_ngo_dash_content {
+    width: 90%;
+    margin: 20px 0px 0px 0px;
+    padding: 35px 7.5px 35px 7.5px;
+    gap: 10px;
+  }
+  .user_ngo_dash_content_events {
+    width: 410px;
+    margin: 5px;
+  }
+   .user_ngo_dash_create_event button {
+    width: 48%;
+  }
+  .user_ngo_dash_create_event {
+    left: 27%;
+  }
+}
+@media (min-width: 401px) and (max-width: 500px) {
+  .user_ngo_dash_container {
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0;
+  }
+  .user_ngo_dash_logo {
+    width: 100%;
+    padding-left: 15px;
+  }
+  .user_ngo_dash_main_container {
+    top: 110px;
+    width: 96%;
+    margin: 0px 0px 0px 10px;
+  }
+  .user_ngo_dash_container {
+    width: 94%;
+    padding: 25px 10px 25px 10px;
+  }
+  .user_ngo_dash_nav_options {
+    margin: 20px 0px 0px 0px;
+    width: 94%;
+    gap: 20px;
+  }
+  .user_ngo_dash_content {
+    width: 94%;
+    margin: 20px 0px 0px 0px;
+    padding: 35px 7.5px 35px 7.5px;
+    gap: 10px;
+  }
+  .user_ngo_dash_content_events {
+    width: 410px;
+    margin: 5px;
+  }
+  .user_ngo_dash_logo img {
+    width: 100%;
+    height: 220px;
+  }
+  .user_ngo_dash_container {
+    width: 94%;
+    padding: 25px 10px 25px 10px;
+  }
+  .user_ngo_dash_create_event button {
+    width: 40%;
+  }
+  .user_ngo_dash_create_event {
+    left: 55%;
+  }
+}
+@media (min-width: 501px) and (max-width: 800px) {
+  .user_ngo_dash_container {
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0;
+  }
+  .user_ngo_dash_logo {
+    width: 100%;
+    margin-left: 15px;
+  }
+  .user_ngo_dash_details {
+    margin-left: 16px;
+  }
+  .user_ngo_dash_logo img {
+    width: 100%;
+    height: 320px;
+  }
+  .user_ngo_dash_main_container {
+    top: 110px;
+    width: 100%;
+    margin: 0px 0px 0px 10px;
+  }
+  .user_ngo_dash_container {
+    width: 94%;
+    padding: 25px 10px 25px 10px;
+  }
+  .user_ngo_dash_nav_options {
+    margin: 20px 0px 0px 0px;
+    width: 94%;
+    gap: 20px;
+  }
+  .user_ngo_dash_content {
+    width: 94%;
+    margin: 20px 0px 0px 0px;
+    padding: 35px 7.5px 35px 7.5px;
+    gap: 10px;
+  }
+   .user_ngo_dash_create_event button {
+    width: 30%;
+  }
+  .user_ngo_dash_create_event {
+    left: 65%;
+  }
+}
+@media (min-width: 801px) and (max-width: 1000px) {
+  .user_ngo_dash_container {
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0;
+  }
+  .user_ngo_dash_logo {
+    width: 100%;
+    margin-left: 15px;
+  }
+  .user_ngo_dash_details {
+    margin-left: 16px;
+  }
+  .user_ngo_dash_logo img {
+    width: 100%;
+    height: 350px;
+  }
+  .user_ngo_dash_main_container {
+    top: 110px;
+    width: 97%;
+    margin: 0px 0px 0px 24px;
+  }
+  .user_ngo_dash_container {
+    width: 94%;
+    padding: 25px 10px 25px 10px;
+  }
+  .user_ngo_dash_nav_options {
+    margin: 20px 0px 0px 0px;
+    width: 94%;
+    gap: 20px;
+  }
+  .user_ngo_dash_content {
+    width: 94%;
+    margin: 20px 0px 0px 0px;
+    padding: 35px 7.5px 35px 7.5px;
+    gap: 10px;
+  }
+  .user_ngo_dash_create_event button {
+    width: 23%;
+  }
+  .user_ngo_dash_create_event {
+    left: 68%;
+  }
+}
+@media (min-width: 1001px) and (max-width: 1300px) {
+  .user_ngo_dash_logo img {
+    width: 100%;
+    height: 250px;
+  }
+  .user_ngo_dash_logo {
+    padding-left: 15px;
+    width: 300px;
+  }
+  .user_ngo_dash_create_event button {
+    width: 15%;
+  }
+  .user_ngo_dash_create_event {
+    left: 80%;
+  }
+}
+@media (min-width: 1301px) and (max-width: 1700px) {
+  .user_ngo_dash_logo img {
+    width: 100%;
+    height: 250px;
+  }
+  .user_ngo_dash_logo {
+    padding-left: 15px;
+    width: 300px;
+  }
+  .user_ngo_dash_create_event button {
+    width: 13%;
+  }
+  .user_ngo_dash_create_event {
+    left: 83%;
+  }
+}
+@media (min-width: 1701px) and (max-width: 2200px) {
+  .user_ngo_dash_logo img {
+    width: 100%;
+    height: 350px;
+  }
+  .user_ngo_dash_logo {
+    padding-left: 15px;
+    width: 390px;
+  }
+  .user_ngo_dash_create_event button {
+    width: 11%;
+    height: 50px;
+  }
+  .user_ngo_dash_create_event button a{
+    font-size: 23px;
+  }
+  .user_ngo_dash_create_event {
+    left: 85%;
+  }
+  .event_create_icon{
+    font-size: 20px;
+    margin-right: 5px;
+  }
+}
+@media (min-width: 2201px) {
+  .user_ngo_dash_logo img {
+    width: 100%;
+    height: 350px;
+  }
+  .user_ngo_dash_logo {
+    padding-left: 15px;
+    width: 390px;
+  }
+  .user_ngo_dash_details_contact h3 {
+    gap: 15px;
+  }
+  .user_ngo_dash_details_contact h3 span {
+    font-size: 32px;
+  }
+  .user_ngo_dash_details_name h1 {
+    font-size: 50px;
+  }
+   .user_ngo_dash_create_event button {
+    width: 8%;
+    height: 50px;
+  }
+  .user_ngo_dash_create_event button a{
+    font-size: 23px;
+  }
+  .user_ngo_dash_create_event {
+    left: 85%;
+  }
+  .event_create_icon{
+    font-size: 20px;
+    margin-right: 5px;
+  }
+}

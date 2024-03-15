@@ -23,7 +23,7 @@ const Header = () => {
           {
             isLogin
               ?
-              <Link to="/userhome"><img src="image/logo.png" alt="logo" /></Link>
+              <Link to="/userhome"><img src="/public/image/logo.png" alt="logo" /></Link>
               :
               <Link to="/"><img src="image/logo.png" alt="" /></Link>
           }
