@@ -11,7 +11,7 @@ const UserNgoItem = ({ ngoDatas }) => {
                 <Link><img src={BASE_URL + `/api/ngo/image/${ngoDatas?.logo}`} alt="" /></Link>
             </div>
             <div className="all_ngo_item_name">
-                <h2><Link to={`/ngo-content/${users.id}`}>{ngoDatas?.name}</Link></h2>
+                <h2><Link to={`/ngo-content/${users.id}/${ngoDatas?.id}`}>{ngoDatas?.name}</Link></h2>
             </div>
             <div className="all_ngo_item_slogan">
                 <p>{ngoDatas?.slogan}</p>

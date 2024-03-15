@@ -14,15 +14,17 @@ import { validationAction } from '../store/OtpValidation';
 import { BASE_URL } from '../store/helper';
 import { IoIosCreate } from "react-icons/io";
 import { toast } from 'react-toastify';
+import { eventAction, getEventByNgo } from '../store/eventDetails';
 
 const UserNgoDashboard = () => {
     window.scroll(0,0);
     const { userNgo,loading } = useSelector((store) => store.ngo);
     const { progress } = useSelector((store) => store.validation);
+    const { events } = useSelector((store) => store.event);
     const [toggleMenu, setToggleMenu] = useState(1);
     const navigate=useNavigate();
     const dispatch=useDispatch();
-    const {userId}=useParams();
+    const {userId,ngoId}=useParams();
     const handleToggle=(data)=>{
         setToggleMenu(data);
     }
@@ -43,6 +45,16 @@ const UserNgoDashboard = () => {
         })
         .catch((err)=>{
             console.log(err);
+        })
+    },[])
+    useEffect(()=>{
+        dispatch(getEventByNgo(ngoId))
+        .then(unwrapResult)
+        .then((data)=>{
+           dispatch(eventAction.setEvent(data));
+        })
+        .catch((err)=>{
+            toast.error(err)
         })
     },[])
     return (
@@ -74,13 +86,10 @@ const UserNgoDashboard = () => {
                     </div>
                 </div>
                 <div className="user_ngo_dash_content">
-                    {toggleMenu=='1' && <NgoEvents/>}
-                    {toggleMenu=='1' && <NgoEvents/>}
-                    {toggleMenu=='1' && <NgoEvents/>}
-                    {toggleMenu=='1' && <NgoEvents/>}
-                    {toggleMenu=='1' && <NgoEvents/>}
-                    {toggleMenu=='1' && <NgoEvents/>}
-                    {toggleMenu=='1' && <NgoEvents/>}
+                    {toggleMenu=='1' && 
+                    events.map((item)=>
+                    <NgoEvents key={item.id} event={item}/>
+                    )}
                     {toggleMenu=='2' && <NgoDetails/>}
                     {toggleMenu=='3' && <NgoPhotos/>}
                 </div>

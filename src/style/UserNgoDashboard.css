@@ -144,9 +144,14 @@
 .user_ngo_dash_content_events_progress {
   width: 90%;
 }
-.user_ngo_dash_content_events_progress label {
+.user_ngo_dash_content_events_progress h4 {
   font-weight: 600;
-  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #78be20;
+}
+.user_ngo_dash_content_events_progress h4 span{
+  color: #535354;
 }
 .event_progress {
   width: 100%;
@@ -168,7 +173,7 @@
   width: 90%;
 }
 .user_ngo_dash_content_events_buttons button {
-  height: 30px;
+  height: 38px;
   margin: 10px;
   padding: 0px 10px;
   width: 100%;

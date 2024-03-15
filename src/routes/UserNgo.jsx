@@ -5,6 +5,7 @@ import NgoItem from '../components/NgoItem';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import UserNgoItem from '../components/UserNgoItem';
+import { FaCashRegister } from "react-icons/fa";
 
 const UserNgo = () => {
   document.title = "NGO Dashboard"
@@ -60,9 +61,10 @@ const UserNgo = () => {
             )}
           </div>
         </div>
-       
+       <div className="ngo_create_button">
+          <button><Link to="/ngo-register"><FaCashRegister className='ngo_create_icon'/>create ngo</Link></button>
+       </div>
       </div>
-
     </>
   )
 }

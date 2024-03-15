@@ -82,7 +82,7 @@ const router = createBrowserRouter([
       { path: "/ngo", element: <ProtectNgo Component1={Ngo} Component2={UserNgo} />},
       { path:"/ngo-register",element:<Protected Component={RegisterNgo}/>},
       { path:"/user-profile",element:<Protected Component={UserProfile}/>},
-      { path:"/ngo-content/:userId",element:<Protected Component={UserNgoDashboard}/>}
+      { path:"/ngo-content/:userId/:ngoId",element:<Protected Component={UserNgoDashboard}/>}
     ]
   }
 ])

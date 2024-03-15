@@ -1,86 +1,199 @@
 .ngo_details_container {
-    height: auto;
-    position: relative;
-    top: 140px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    margin: 10px 10px 200px 10px;
+  height: auto;
+  position: relative;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 10px 10px 200px 10px;
 }
 
 .all_ngo_details_heading {
-    text-align: center;
-    text-transform: uppercase;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .all_ngo_details_heading h1 {
-    color: #636466;
+  color: #636466;
 }
 
 .all_ngo_details_container {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .user_ngo_details_container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .user_ngo_details_heading {
-    text-align: center;
-    text-transform: uppercase;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .user_ngo_details_heading h1 {
-    color: #636466;
+  color: #636466;
 }
 
 .ngo_not_found {
-    border: 3px solid #78be20;
-    height: auto;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    border-radius: 15px;
-    padding: 2px 25px;
+  border: 3px solid #78be20;
+  height: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 15px;
+  padding: 2px 25px;
 }
 
 .ngo_not_found h2 {
-    color: #3c3c3e;
-    text-transform: capitalize;
-    padding: 20px 5px;
-    margin: 10px 5px;
+  color: #3c3c3e;
+  text-transform: capitalize;
+  padding: 20px 5px;
+  margin: 10px 5px;
 }
 
 .ngo_not_found button {
-    height: 35px;
-    margin-bottom: 25px;
-    padding: 1px 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #78be20;
-    box-shadow: 2px 4px 12px 2px rgba(0, 0, 0, .5);
-    transition: all .1s ease-in-out .1s;
+  height: 35px;
+  margin-bottom: 25px;
+  padding: 1px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #78be20;
+  box-shadow: 2px 4px 12px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.1s ease-in-out 0.1s;
 }
 
 .ngo_not_found button:hover {
-    background-color: #4f8b06;
-    text-shadow: 0 0 7px #fff;
+  background-color: #4f8b06;
+  text-shadow: 0 0 7px #fff;
 }
 
-.ngo_not_found button:active{
-   transform: scale(1.03);
+.ngo_not_found button:active {
+  transform: scale(1.03);
 }
 
 .ngo_not_found button a {
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    text-transform: capitalize;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+.ngo_create_button {
+  position: fixed;
+  top: 80%;
+  left: 80%;
+  width: 100vw;
+  z-index: 999;
+}
+.ngo_create_button button {
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  width: 12%;
+  background-color: #78be20;
+  box-shadow: 0 4px 20px 0 rgb(232, 238, 47);
+  cursor: pointer;
+}
+.ngo_create_button button:hover {
+  background-color: #5ea409;
+  text-shadow: 0 0 7px #fff;
+}
+.ngo_create_button button:active {
+  transform: scale(1.02);
+}
+.ngo_create_button button a {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 700;
+}
+.ngo_create_icon {
+  margin-right: 5px;
+}
+@media (max-width: 400px) {
+  .ngo_create_button button {
+    width: 50%;
+  }
+  .ngo_create_button {
+    top: 85%;
+    left: 28%;
+  }
+}
+@media (min-width: 401px) and (max-width:500px){
+  .ngo_create_button button {
+    width: 50%;
+  }
+  .ngo_create_button {
+    top: 90%;
+    left: 25%;
+  }
+}
+@media (min-width: 501px) and (max-width:800px){
+  .ngo_create_button button {
+    width: 27%;
+  }
+  .ngo_create_button {
+    top: 90%;
+    left: 70%;
+  }
+}
+@media (min-width: 801px) and (max-width:1200px){
+  .ngo_create_button button {
+    width: 20%;
+  }
+  .ngo_create_button {
+    top: 90%;
+    left: 70%;
+  }
+}
+@media (min-width: 1201px) and (max-width:1600px){
+  .ngo_create_button button {
+    width: 14%;
+  }
+  .ngo_create_button {
+    top: 90%;
+    left: 80%;
+  }
+}
+@media (min-width: 1601px) and (max-width:2000px){
+  .ngo_create_button button {
+    width: 12%;
+  }
+  .ngo_create_button {
+    top: 90%;
+    left: 80%;
+  }
+}
+@media (min-width: 2001px) and (max-width:2500px){
+  .ngo_create_button button {
+    width: 9.9%;
+    height: 45px;
+  }
+  .ngo_create_button button a{
+    font-size: 25px;
+  }
+  .ngo_create_button {
+    top: 90%;
+    left: 85%;
+  }
+}
+@media (min-width: 2501px){
+  .ngo_create_button button {
+    width: 9%;
+    height: 55px;
+  }
+  .ngo_create_button button a{
+    font-size: 25px;
+  }
+  .ngo_create_button {
+    top: 90%;
+    left: 85%;
+  }
 }
