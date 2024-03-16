@@ -150,7 +150,7 @@
   text-align: center;
   color: #78be20;
 }
-.user_ngo_dash_content_events_progress h4 span{
+.user_ngo_dash_content_events_progress h4 span {
   color: #535354;
 }
 .event_progress {
@@ -248,6 +248,39 @@
   margin-right: 2px;
   font-size: 15px;
 }
+.event_not_created {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  text-transform: capitalize;
+}
+.event_not_created h2 {
+  color: #535354;
+}
+.event_not_created button {
+  width: 35%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ec2a08;
+}
+.event_not_created button:hover {
+  background-color: #bd2207;
+  text-shadow: 0 0 7px #fff;
+}
+.event_not_created button:active {
+  transform: scale(1.02);
+}
+.event_not_created button a {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+}
+
 @media (max-width: 400px) {
   .user_ngo_dash_container {
     flex-wrap: wrap;
@@ -277,11 +310,18 @@
     width: 410px;
     margin: 5px;
   }
-   .user_ngo_dash_create_event button {
-    width: 48%;
+  .user_ngo_dash_create_event button {
+    width: 68%;
   }
   .user_ngo_dash_create_event {
-    left: 27%;
+    left: 18%;
+  }
+  .event_not_created {
+    width: 100%;
+    gap: 30px;
+  }
+  .event_not_created button {
+    width: 80%;
   }
 }
 @media (min-width: 401px) and (max-width: 500px) {
@@ -332,6 +372,13 @@
   .user_ngo_dash_create_event {
     left: 55%;
   }
+  .event_not_created {
+    width: 100%;
+    gap: 30px;
+  }
+  .event_not_created button {
+    width: 65%;
+  }
 }
 @media (min-width: 501px) and (max-width: 800px) {
   .user_ngo_dash_container {
@@ -370,11 +417,18 @@
     padding: 35px 7.5px 35px 7.5px;
     gap: 10px;
   }
-   .user_ngo_dash_create_event button {
+  .user_ngo_dash_create_event button {
     width: 30%;
   }
   .user_ngo_dash_create_event {
     left: 65%;
+  }
+  .event_not_created {
+    width: 100%;
+    gap: 30px;
+  }
+  .event_not_created button {
+    width: 42%;
   }
 }
 @media (min-width: 801px) and (max-width: 1000px) {
@@ -420,6 +474,13 @@
   .user_ngo_dash_create_event {
     left: 68%;
   }
+  .event_not_created {
+    width: 100%;
+    gap: 30px;
+  }
+  .event_not_created button {
+    width: 30%;
+  }
 }
 @media (min-width: 1001px) and (max-width: 1300px) {
   .user_ngo_dash_logo img {
@@ -435,6 +496,13 @@
   }
   .user_ngo_dash_create_event {
     left: 80%;
+  }
+  .event_not_created {
+    width: 100%;
+    gap: 30px;
+  }
+  .event_not_created button {
+    width: 20%;
   }
 }
 @media (min-width: 1301px) and (max-width: 1700px) {
@@ -466,13 +534,13 @@
     width: 11%;
     height: 50px;
   }
-  .user_ngo_dash_create_event button a{
+  .user_ngo_dash_create_event button a {
     font-size: 23px;
   }
   .user_ngo_dash_create_event {
     left: 85%;
   }
-  .event_create_icon{
+  .event_create_icon {
     font-size: 20px;
     margin-right: 5px;
   }
@@ -495,18 +563,25 @@
   .user_ngo_dash_details_name h1 {
     font-size: 50px;
   }
-   .user_ngo_dash_create_event button {
+  .user_ngo_dash_create_event button {
     width: 8%;
     height: 50px;
   }
-  .user_ngo_dash_create_event button a{
+  .user_ngo_dash_create_event button a {
     font-size: 23px;
   }
   .user_ngo_dash_create_event {
     left: 85%;
   }
-  .event_create_icon{
+  .event_create_icon {
     font-size: 20px;
     margin-right: 5px;
+  }
+  .event_not_created {
+    width: 100%;
+    gap: 30px;
+  }
+  .event_not_created button {
+    width: 10%;
   }
 }

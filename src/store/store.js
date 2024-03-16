@@ -9,6 +9,7 @@ import donationDetails from "./donationDetails";
 import validationSlice from './OtpValidation'
 import ngoDetails from "./ngoDetails";
 import eventDetails from "./eventDetails";
+import socialImageDetails from "./socialImageDetails";
 
 const persistConfig = {
     key: "root",
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   validation: validationSlice,
   ngo: ngoDetails,
   event: eventDetails,
+  socialPost: socialImageDetails,
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({

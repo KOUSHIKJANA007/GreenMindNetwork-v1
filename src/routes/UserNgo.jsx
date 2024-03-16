@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllNgos, getNgoByUser, ngoAction } from '../store/ngoDetails';
-import NgoItem from '../components/NgoItem';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import UserNgoItem from '../components/UserNgoItem';
@@ -26,12 +25,14 @@ const UserNgo = () => {
     dispatch(getNgoByUser(users.id))
       .then(unwrapResult)
       .then((obj) => {
+       
         dispatch(ngoAction.setUserNgoData(obj))
       })
       .catch((err)=>{
         console.log({err});
       })
   }, [])
+  console.log("/////", userNgo)
   return (
     <>
       <div className="ngo_details_container">
@@ -40,7 +41,7 @@ const UserNgo = () => {
             <h1>your NGO is here</h1>
           </div>
           <div className="all_ngo_items_container">
-            {userNgo.id == "0"
+            {userNgo?.id == "0"
 
               ?
               <div className='ngo_not_found'>
@@ -56,8 +57,8 @@ const UserNgo = () => {
             <h1>All our partner NGOs</h1>
           </div>
           <div className="all_ngo_items_container">
-            {ngoData.map((item) =>
-              <NgoItem key={item.id} ngoDatas={item} />
+            {ngoData?.map((item) =>
+              <UserNgoItem key={item.id} ngoDatas={item} />
             )}
           </div>
         </div>

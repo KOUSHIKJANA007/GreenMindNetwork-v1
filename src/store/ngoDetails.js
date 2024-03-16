@@ -22,6 +22,15 @@ export const getAllNgos = createAsyncThunk("getAllNgos",async()=>{
     })
     return await response.json();
 })
+export const getSingleNgo = createAsyncThunk("getSingleNgo", async (ngoId) => {
+  const response = await fetch(`http://localhost:8080/api/ngo/${ngoId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+});
 export const getNgoByUser = createAsyncThunk("getNgoByUser",async(userId)=>{
     const response = await fetch(`http://localhost:8080/api/ngo/user/${userId}`,{
         method:"GET",
@@ -89,7 +98,8 @@ const ngoDetails = createSlice({
         loading: false,
         ngoData:null,
         isFetch:false,
-        userNgo:null
+        userNgo:null,
+        singleNgo:null
     },
     reducers: {
         setNgoData:(state,action)=>{
@@ -97,6 +107,9 @@ const ngoDetails = createSlice({
         },
         setUserNgoData:(state,action)=>{
             state.userNgo=action.payload;
+        },
+        setSingleNgoData:(state,action)=>{
+            state.singleNgo=action.payload;
         },
         setFetchDone:(state)=>{
             state.isFetch=true;
@@ -160,6 +173,15 @@ const ngoDetails = createSlice({
         builder.addCase(getNgoByUser.rejected,(state,action)=>{
             state.loading=false;
         })
+        builder.addCase(getSingleNgo.pending, (state, action) => {
+          state.loading = true;
+        });
+        builder.addCase(getSingleNgo.fulfilled, (state, action) => {
+          state.loading = false;
+        });
+        builder.addCase(getSingleNgo.rejected, (state, action) => {
+          state.loading = false;
+        });
     }
 })
 

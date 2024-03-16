@@ -26,7 +26,7 @@ export const uploadEventImage = createAsyncThunk("uploadEventImage", async (data
   return await response.json();
 });
 export const getEventByNgo = createAsyncThunk("getEventByNgo", async (ngoId) => {
-     const response = await fetch(`http://localhost:8080/api/event/${ngoId}`,{
+     const response = await fetch(`http://localhost:8080/api/event/ngo/${ngoId}`,{
          method: "GET",
          headers: {
            "Content-Type": "application/json",
@@ -34,6 +34,7 @@ export const getEventByNgo = createAsyncThunk("getEventByNgo", async (ngoId) => 
        });
        return await response.json();
 });
+
 
 const eventDetails = createSlice({
   name: "eventDetails",

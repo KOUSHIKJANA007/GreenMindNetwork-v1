@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import NgoItem from '../components/NgoItem'
 import { getAllNgos, ngoAction } from '../store/ngoDetails'
 import { unwrapResult } from '@reduxjs/toolkit'
+import UserNgoItem from '../components/UserNgoItem'
 
 const Ngo = () => {
     document.title = "NGO Partner Programme"
@@ -73,7 +73,7 @@ const Ngo = () => {
                     </div>
                     <div className="all_ngo_items_container">
                         {ngoData.map((item) =>
-                            <NgoItem key={item.id} ngoDatas={item} />
+                            <UserNgoItem key={item.id} ngoDatas={item} />
                         )}
                     </div>
                 </div>
