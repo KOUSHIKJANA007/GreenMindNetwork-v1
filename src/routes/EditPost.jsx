@@ -19,7 +19,6 @@ const EditPost = () => {
         dispatch(getPostById(postId))
             .then(unwrapResult)
             .then((data) => {
-                console.log("post", data);
                 setPostData(data);
             })
             .catch((err) => {
@@ -51,9 +50,6 @@ const EditPost = () => {
                                 toast.error("Image not uploaded")
                             }
                         })
-                        .catch((err) => {
-                            toast.error(err)
-                        })
                     dispatch(postAction.setPostCreatedDone());
                     toast.success("post updated successfully");
                     navigate("/userposts");
@@ -66,7 +62,7 @@ const EditPost = () => {
 
             })
             .catch((err) => {
-                toast.error(err)
+                toast.error(err.message)
             })
     }
     return (

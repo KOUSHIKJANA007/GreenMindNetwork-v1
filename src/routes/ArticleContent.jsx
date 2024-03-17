@@ -50,7 +50,7 @@ const ArticleContent = () => {
           <hr className='post_horizon' />
         </div>
         <div className="post_content" dangerouslySetInnerHTML={sanitizedData()}>
-
+              
         </div>
         {
           isLogin &&

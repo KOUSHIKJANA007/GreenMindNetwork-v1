@@ -3,7 +3,7 @@ import { localStorageWithExpiry } from "./helper";
 
 export const createPayment = createAsyncThunk("createPayment", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/donation/user/${data.userId}`, {
+    const response = await fetch(`http://localhost:8080/api/donation/user/${data.userId}/ngo/${data.ngoId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -15,14 +15,17 @@ export const createPayment = createAsyncThunk("createPayment", async (data) => {
 })
 export const updatePayment = createAsyncThunk("updatePayment", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/donation`, {
+    const response = await fetch(
+      `http://localhost:8080/api/donation/${data.eventId}`,
+      {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer" + token
+          "Content-Type": "application/json",
+          Authorization: "Bearer" + token,
         },
-        body: JSON.stringify(data)
-    })
+        body: JSON.stringify(data),
+      }
+    );
     return await response.json();
 })
 

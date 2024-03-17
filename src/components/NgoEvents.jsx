@@ -7,7 +7,7 @@ const NgoEvents = ({ event }) => {
   const{users}=useSelector((store)=>store.user);
   let percent = ((event?.collectedAmount) / (event?.targetAmount)) * 100;
   let percentage = Math.round(percent);
-  console.log("event",event);
+  console.log("ngo",event);
   return (
     <>
     {event==null
@@ -37,7 +37,7 @@ const NgoEvents = ({ event }) => {
       </div>
       :
       <div className="user_ngo_dash_content_events_buttons">
-        <button id='ngo_edit_button' type='submit'><Link>donate</Link></button>
+              <button id='ngo_edit_button' type='submit'><Link to={`/donation/${event?.ngo?.id}/${event?.id}`}>donate</Link></button>
         <button id='ngo_delete_button' type='submit'><Link>explore</Link></button>
       </div>}
     </div>

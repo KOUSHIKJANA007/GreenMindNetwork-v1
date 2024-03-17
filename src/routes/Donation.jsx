@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createPayment, updatePayment } from '../store/donationDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 const Donation = () => {
     document.title="Donate"
     const { users } = useSelector((store) => store.user);
     const amountInput = useRef();
+    const { ngoId, eventId }=useParams();
     const dispatch = useDispatch()
     const handlePay = () => {
         const amountToPay = amountInput.current.value;
+        console.log("amount",eventId);
         if (amountToPay.trim() == "") {
             toast.error("Please enter amount to procced")
             return;
@@ -20,7 +23,8 @@ const Donation = () => {
             toast.error("Please enter valid amount to procced")
             return;
         }
-        dispatch(createPayment({ amountToPay: amountToPay, userId: users?.id }))
+        console.log("ngoId",ngoId);
+        dispatch(createPayment({ amountToPay: amountToPay, userId: users?.id, ngoId: ngoId }))
             .then(unwrapResult)
             .then((res) => {
                 if (res.status == 'created') {
@@ -36,7 +40,7 @@ const Donation = () => {
                             console.log(res.razorpay_order_id);
                             console.log(res.razorpay_signature);
 
-                            dispatch(updatePayment({ paymentId: res.razorpay_payment_id, orderId: res.razorpay_order_id, status: "paid" }))
+                            dispatch(updatePayment({ paymentId: res.razorpay_payment_id, orderId: res.razorpay_order_id, status: "paid",amount:res.amount, eventId: eventId }))
                                 .then(unwrapResult)
                                 .then((res) => {
                                     toast.success("payment successfull")

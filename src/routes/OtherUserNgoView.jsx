@@ -36,7 +36,6 @@ const OtherUserNgoView = () => {
                 else {
                     dispatch(eventAction.setEvent(data));
                 }
-
             })
             .catch((err) => {
                 toast.error(err)
@@ -62,7 +61,6 @@ const OtherUserNgoView = () => {
                       <div className="user_ngo_dash_details_contact"><h3><span><MdOutlineEmail /></span>email</h3>
                           <h3><span><HiMiniDevicePhoneMobile /></span>{singleNgo?.mobile}</h3>
                           <h3><span><TbAddressBook /></span>{singleNgo?.address}</h3></div>
-
                   </div>
               </div>
               <div className="user_ngo_dash_nav_options">

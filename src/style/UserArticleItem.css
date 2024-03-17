@@ -11,7 +11,11 @@
     display: flex;
     gap: 20px;
 }
-
+.user_article_item_heading{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 .user_article_image img {
     cursor: pointer;
     height: 200px;
@@ -92,7 +96,9 @@
     .user_article_image_and_content {
         flex-wrap: wrap;
     }
-
+.user_article_image{
+    width: 100%;
+}
     .user_article_image img {
         width: 100%;
     }

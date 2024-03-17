@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
 
 import { Uploader } from "uploader"; // Installed by "react-uploader".
 import { UploadButton } from "react-uploader";
@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 
 
 const SocialPostItem = ({ ngoId }) => {
+    const [imagePre, setImagePre] = useState('');
     const [image, setImage] = useState('');
     const [caption, setCaption] = useState('');
     const dispatch = useDispatch();
@@ -18,8 +19,8 @@ const SocialPostItem = ({ ngoId }) => {
     });
     const options = { multi: false };
     const handleData = (data) => {
-        setImage(data)
-        console.log(image);
+        setImage(data.file)
+        setImagePre(data.fileUrl)
     }
     const handleCaption = (e) => {
         setCaption({ ...caption, [e.target.name]: e.target.value })
@@ -62,6 +63,7 @@ const SocialPostItem = ({ ngoId }) => {
                 toast.error(err)
             })
     }
+   
     return (
         <Form onSubmit={handleSubmitData} className='social_post_container'>
             <div className="social_post_caption">
@@ -70,13 +72,16 @@ const SocialPostItem = ({ ngoId }) => {
             </div>
             <UploadButton uploader={uploader}
                 options={options}
-                onComplete={files => (files.map(x => handleData(x.originalFile.file)))}>
+                onComplete={files => (files.map(x => handleData(x.originalFile)))}>
                 {({ onClick }) =>
                     <button className="social_post_button" onClick={onClick}>
                         select image
                     </button>
                 }
             </UploadButton>
+            <div className="social_post_caption_preview">
+                <img src={imagePre} alt="" />
+            </div>
             <div className="social_post_submit_button" >
                 <button type='submit'>Upload a image</button>
             </div>

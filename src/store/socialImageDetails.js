@@ -14,6 +14,21 @@ export const createSocialPost = createAsyncThunk("createSocialPost",async (data)
     );
     return await response.json();
   });
+export const updateSocialPost = createAsyncThunk("updateSocialPost", async (data) => {
+  let token = localStorageWithExpiry.getItem("token");
+  const response = await fetch(
+    `http://localhost:8080/api/socialImage/${data.socialId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      body: JSON.stringify(data.caption),
+    }
+  );
+  return await response.json();
+});
 export const deleteSocialPost = createAsyncThunk(
   "deleteSocialPost",
   async (socialId) => {
@@ -60,6 +75,21 @@ export const getSocialPostByNgo = createAsyncThunk("getSocialPostByNgo",async (n
     return await response.json();
   }
 );
+export const getSocialPostById = createAsyncThunk(
+  "getSocialPostById",
+  async (socialId) => {
+    const response = await fetch(
+      `http://localhost:8080/api/socialImage/${socialId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  }
+);
 const socialImageDetails = createSlice({
   name: "socialImageDetails",
   initialState: {
@@ -67,6 +97,7 @@ const socialImageDetails = createSlice({
     socialPosts: null,
     isDelete: false,
     isCreate: false,
+    isUpdate: false,
   },
   reducers: {
     setSocialPost: (state, action) => {
@@ -83,6 +114,12 @@ const socialImageDetails = createSlice({
     },
     createDone: (state) => {
       state.isCreate = false;
+    },
+    updatePending: (state) => {
+      state.isUpdate = true;
+    },
+    updateDone: (state) => {
+      state.isUpdate = false;
     },
   },
   extraReducers: (builder) => {
@@ -120,6 +157,24 @@ const socialImageDetails = createSlice({
       state.loading = false;
     });
     builder.addCase(deleteSocialPost.rejected, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(getSocialPostById.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getSocialPostById.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(getSocialPostById.rejected, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateSocialPost.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateSocialPost.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateSocialPost.rejected, (state, action) => {
       state.loading = false;
     });
   },
