@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaInstagramSquare } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '../store/helper';
+import { getNgoByUser, ngoAction } from '../store/ngoDetails';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 
 const UserProfile = () => {
+  const dispatch=useDispatch();
   document.title="My Profile"
   const { users } = useSelector((store) => store.user);
+  const { userNgo } = useSelector((store) => store.ngo);
+  useEffect(()=>{
+    dispatch(getNgoByUser(users?.id))
+    .then(unwrapResult)
+    .then((data)=>{
+      dispatch(ngoAction.setUserNgoData(data));
+    })
+  },[])
   return (
     <>
       <div className="profile_main_container">
@@ -35,7 +46,7 @@ const UserProfile = () => {
                 </div>
                 <div className="profile_nav_options">
                   <button className='profile_nav_button'><Link to="/userposts">my posts</Link></button>
-                  <button className='profile_nav_button'><Link to={`/ngo-content/${users.id}`}>my NGO</Link></button>
+                  <button className='profile_nav_button'><Link to={`/ngo-content/${users.id}/${userNgo?.id}`}>my NGO</Link></button>
                   <button className='profile_nav_button' ><Link to="/editprofile">edit profile</Link></button>
                   <button className='profile_nav_button'><Link to="">my posts</Link></button>
                 </div>

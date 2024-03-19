@@ -22,6 +22,7 @@ const RegisterNgo = () => {
     const [identityOfHead, setIdentityOfHead] = useState('');
     const [imageOfTax, setImageOfTax] = useState('');
     const [registerImage, setRegisterImage] = useState('');
+    
     const handleOnChange = (e) => {
         setNgoData({ ...ngoData, [e.target.name]: e.target.value });
         console.log(ngoData);
@@ -72,8 +73,6 @@ const RegisterNgo = () => {
         dispatch(createNgo({ ngoData: ngoData, userId: users.id }))
             .then(unwrapResult)
             .then((data) => {
-                console.log({data});
-               
                 if (data?.id) {
                     dispatch(uploadNgoLogo({ logo: logo, ngoId: data?.id }))
                         .then((obj) => {
@@ -111,7 +110,7 @@ const RegisterNgo = () => {
                     
                    
                         dispatch(ngoAction.setFetchDone());
-                        toast.success("NGO register successfully");
+                        toast.success("NGO saved successfully");
                         navigate("/ngo");
                 }
                 else{

@@ -85,7 +85,7 @@ const OtherUserNgoView = () => {
                       events == null &&
                       <NgoEvents event={null} />
                   }
-                  {toggleMenu == '2' && <NgoDetails />}
+                  {toggleMenu == '2' && <NgoDetails ngo={singleNgo}/>}
                   {toggleMenu == '3' && <NgoPhotos userNgo={singleNgo}/>}
               </div>
               { singleNgo?.user?.id==users?.id &&

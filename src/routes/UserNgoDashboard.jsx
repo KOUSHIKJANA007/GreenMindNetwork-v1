@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { HiMiniDevicePhoneMobile } from "react-icons/hi2";
 import { MdOutlineEmail } from "react-icons/md";
-import { TbAddressBook } from "react-icons/tb";
+import { GrMapLocation } from "react-icons/gr";
 import NgoDetails from '../components/NgoDetails';
 import NgoEvents from '../components/NgoEvents';
 import NgoPhotos from '../components/NgoPhotos';
@@ -17,9 +17,8 @@ import { toast } from 'react-toastify';
 import { eventAction, getEventByNgo } from '../store/eventDetails';
 
 const UserNgoDashboard = () => {
-   
+
     const { userNgo, loading } = useSelector((store) => store.ngo);
-    const { users } = useSelector((store) => store.user);
     const { progress } = useSelector((store) => store.validation);
     const { events } = useSelector((store) => store.event);
     const [toggleMenu, setToggleMenu] = useState(1);
@@ -71,9 +70,9 @@ const UserNgoDashboard = () => {
                     </div>
                     <div className="user_ngo_dash_details">
                         <div className="user_ngo_dash_details_name">  <h1>{userNgo?.name} </h1></div>
-                        <div className="user_ngo_dash_details_contact"><h3><span><MdOutlineEmail /></span>email</h3>
+                        <div className="user_ngo_dash_details_contact"><h3><span><MdOutlineEmail /></span>{userNgo?.email}</h3>
                             <h3><span><HiMiniDevicePhoneMobile /></span>{userNgo?.mobile}</h3>
-                            <h3><span><TbAddressBook /></span>{userNgo?.address}</h3></div>
+                            <h3><span><GrMapLocation /></span>{userNgo?.address}</h3></div>
 
                     </div>
                 </div>
@@ -99,7 +98,7 @@ const UserNgoDashboard = () => {
                         events == null &&
                         <NgoEvents event={null} />
                     }
-                    {toggleMenu == '2' && <NgoDetails />}
+                    {toggleMenu == '2' && <NgoDetails ngo={userNgo} />}
                     {toggleMenu == '3' && <NgoPhotos userNgo={userNgo} />}
                 </div>
                 <div className="user_ngo_dash_create_event">

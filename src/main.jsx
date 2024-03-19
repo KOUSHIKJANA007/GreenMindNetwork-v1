@@ -24,6 +24,7 @@ import '../src/style/UserProfile.css'
 import '../src/style/UserNgo.css'
 import '../src/style/UserNgoDashboard.css'
 import '../src/style/SocialPost.css'
+import '../src/style/NgoDetails.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -53,6 +54,7 @@ import UserNgo from './routes/UserNgo.jsx'
 import ProtectNgo from './user-routes/ProtectNgo.jsx'
 import UserNgoDashboard from './routes/UserNgoDashboard.jsx'
 import OtherUserNgoView from './routes/OtherUserNgoView.jsx'
+import EditNgo from './routes/EditNgo.jsx'
 
 const router = createBrowserRouter([
   {
@@ -86,6 +88,7 @@ const router = createBrowserRouter([
       { path:"/user-profile",element:<Protected Component={UserProfile}/>},
       { path:"/ngo-content/:userId/:ngoId",element:<Protected Component={UserNgoDashboard}/>},
       { path: "/ngo-details/:ngoId", element: <Protected Component={OtherUserNgoView}/>},
+      { path: "/ngo-edit/:ngoId", element: <Protected Component={EditNgo}/>},
     ]
   }
 ])

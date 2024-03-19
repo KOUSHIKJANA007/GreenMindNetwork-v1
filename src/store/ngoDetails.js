@@ -13,6 +13,21 @@ export const createNgo = createAsyncThunk("createNgo", async (data) => {
     })
     return await response.json();
 })
+export const updateNgo = createAsyncThunk("updateNgo", async (data) => {
+  let token = localStorageWithExpiry.getItem("token");
+  const response = await fetch(
+    `http://localhost:8080/api/ngo/edit/${data.ngoId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      body: JSON.stringify(data.ngoData),
+    }
+  );
+  return await response.json();
+});
 export const getAllNgos = createAsyncThunk("getAllNgos",async()=>{
     const response = await fetch("http://localhost:8080/api/ngo/",{
         method:"GET",
@@ -180,6 +195,15 @@ const ngoDetails = createSlice({
           state.loading = false;
         });
         builder.addCase(getSingleNgo.rejected, (state, action) => {
+          state.loading = false;
+        });
+        builder.addCase(updateNgo.pending, (state, action) => {
+          state.loading = true;
+        });
+        builder.addCase(updateNgo.fulfilled, (state, action) => {
+          state.loading = false;
+        });
+        builder.addCase(updateNgo.rejected, (state, action) => {
           state.loading = false;
         });
     }
