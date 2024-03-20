@@ -1,5 +1,5 @@
 .home_container {
-    background-image: url("image/home.jpg");
+    background-image: url("/public/image/home.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;

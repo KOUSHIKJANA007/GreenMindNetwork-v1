@@ -5,6 +5,7 @@ import { bankAction, updateBankDetails } from '../store/bankDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import LoadingBar from 'react-top-loading-bar';
 import { validationAction } from '../store/OtpValidation';
+import { toast } from 'react-toastify';
 
 const EditBankDetails = ({ bankDetails, handleEditForm }) => {
     const { loading } = useSelector((store) => store.bank);
@@ -18,23 +19,26 @@ const EditBankDetails = ({ bankDetails, handleEditForm }) => {
         setBankData({...bankData,[e.target.name]:e.target.value});
         console.log(bankData);
     }
-    
     const handleSubmitData =(e)=>{
-        dispatch(validationAction.setProgress(50))
         e.preventDefault();
+        if (bankData.accountNumber != document.getElementById("re-accountNumber").value){
+            toast.error("account number not match");
+            return;
+        }
+        dispatch(validationAction.setProgress(50))
         dispatch(updateBankDetails({bankData:bankData,bankId:bankDetails?.id}))
             .then(unwrapResult)
             .then((data) => {
-                handleEditForm();
                 dispatch(bankAction.setUpdatePending());
-                console.log({data});
                 dispatch(validationAction.setProgress(100))
+                toast.success("Bank details saved")
+                handleEditForm();
             })
     }
    
   return (
      <>
-     <LoadingBar color='#78be20' progress={progress}/>
+          {loading && <LoadingBar color='#78be20' progress={progress}/>}
           <Form onSubmit={handleSubmitData} className="ngo_bank_details_container">
               <h2>enter your ngo bank details</h2>
               <div className="ngo_bank_details_data">

@@ -48,7 +48,7 @@ const Header = () => {
         }
 
 
-        <div className="donation"><Link to="/donation" onClick={handleDropDownMenuClose}>donation</Link></div>
+        <div className="donation"><Link to="/donation-dashboard" onClick={handleDropDownMenuClose}>donation</Link></div>
         <div className="troggle_btn">
 
           {dropDown
@@ -72,7 +72,7 @@ const Header = () => {
               <Link onClick={handleDropDownMenuClose} to="/articles" className='drop_options'>articles</Link>
               <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>contact us</Link>
               <Link onClick={handleDropDownMenuClose} to="/ngo" className='drop_options'>NGO's</Link>
-              <div className="drop_donation"><Link to="/donation" onClick={handleDropDownMenuClose}>donation</Link></div>
+              <div className="drop_donation"><Link to="/donation-dashboard" onClick={handleDropDownMenuClose}>donation</Link></div>
             </div>
             :
             <div className={dropDown ? "dropdown_menu open" : "dropdown_menu"}>
@@ -83,7 +83,7 @@ const Header = () => {
               <Link onClick={handleDropDownMenuClose} to="/ngo" className='drop_options'>NGO's</Link>
               <Link onClick={handleDropDownMenuClose} to="/email-input" className='drop_options'>sign up</Link>
               <Link onClick={handleDropDownMenuClose} to="/signin" className='drop_options'>login</Link>
-              <div className="drop_donation"><Link to="/donation" onClick={handleDropDownMenuClose}>donation</Link></div>
+              <div className="drop_donation"><Link to="/donation-dashboard" onClick={handleDropDownMenuClose}>donation</Link></div>
             </div>
         }
       </header>

@@ -25,6 +25,7 @@ import '../src/style/UserNgo.css'
 import '../src/style/UserNgoDashboard.css'
 import '../src/style/SocialPost.css'
 import '../src/style/NgoDetails.css'
+import '../src/style/CreateEvent.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -55,6 +56,8 @@ import ProtectNgo from './user-routes/ProtectNgo.jsx'
 import UserNgoDashboard from './routes/UserNgoDashboard.jsx'
 import OtherUserNgoView from './routes/OtherUserNgoView.jsx'
 import EditNgo from './routes/EditNgo.jsx'
+import DonationDashboard from './routes/DonationDashboard.jsx'
+import CreateEvent from './routes/CreateEvent.jsx'
 
 const router = createBrowserRouter([
   {
@@ -89,6 +92,8 @@ const router = createBrowserRouter([
       { path:"/ngo-content/:userId/:ngoId",element:<Protected Component={UserNgoDashboard}/>},
       { path: "/ngo-details/:ngoId", element: <Protected Component={OtherUserNgoView}/>},
       { path: "/ngo-edit/:ngoId", element: <Protected Component={EditNgo}/>},
+      { path: "/donation-dashboard", element: <Protected Component={DonationDashboard}/>},
+      { path: "/create-event/:ngoId", element: <Protected Component={CreateEvent}/>},
     ]
   }
 ])

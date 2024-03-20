@@ -1,0 +1,111 @@
+.create_ngo_event_main_container {
+  position: relative;
+  display: flex;
+  top: 100px;
+  justify-content: center;
+}
+.create_ngo_event_container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 5px;
+  width: 50%;
+  gap: 20px;
+}
+.create_ngo_event_container h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #636466;
+  margin-bottom: 30px;
+}
+.create_ngo_event_input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.create_ngo_event_input  label{
+    text-transform: capitalize;
+    color: #78be20;
+    font-weight: 700;
+    font-size: 20px;
+}
+.create_ngo_event_input_image{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.create_ngo_event_input_image  label{
+    text-transform: capitalize;
+    color: #78be20;
+    font-weight: 700;
+    font-size: 20px;
+}
+.create_ngo_event_input input{
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid #dadada; 
+    background: transparent;
+    padding: 2px 10px;
+}
+.create_ngo_event_button {
+text-align: center;
+}
+.create_ngo_event_button button{
+    height: 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #78be20;
+    width: 20%;
+    color: white;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin: 20px 0px;
+    font-weight: 700;
+}
+.create_ngo_event_button button:hover{
+    background-color: #4f860b;
+    text-shadow: 0 0 7px #fff;
+}
+.create_ngo_event_button button:active{
+    transform: scale(1.02);
+}
+@media (max-width:400px){
+    .create_ngo_event_container{
+        width: 100%;
+        padding: 0px 10px;
+    }
+     .create_ngo_event_container h1{
+        font-size: 22px;
+     }
+     .create_ngo_event_button button{
+        width: 100%;
+     }
+}
+@media (min-width:401px) and (max-width:600px){
+    .create_ngo_event_container{
+        width: 100%;
+        padding: 0px 10px;
+    }
+     .create_ngo_event_button button{
+        width: 100%;
+     }
+}
+@media (min-width:601px) and (max-width:1000px){
+    .create_ngo_event_container{
+        width: 70%;
+        padding: 0px 10px;
+    }
+     .create_ngo_event_button button{
+        width: 50%;
+     }
+}
+@media (min-width:1001px) and (max-width:1400px){
+    .create_ngo_event_container{
+        width: 60%;
+        padding: 0px 10px;
+    }
+     .create_ngo_event_button button{
+        width: 35%;
+     }
+}

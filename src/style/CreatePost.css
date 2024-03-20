@@ -85,8 +85,12 @@
 .post_buttons button {
     height: 40px;
     width: 20%;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
     margin-right: 40px;
     border-radius: 9px;
+    cursor: pointer;
     border: none;
     outline: none;
 }
@@ -97,13 +101,13 @@
 }
 
 .post_buttons .post_button:hover {
-    background-color: #5b9f09;
-    box-shadow: 0px 0px 2px 3px #aff35d;
+    background-color: #4f860b;
+    text-shadow: 0 0 7px #fff;
 
 }
 
 .post_buttons .post_button:active {
-    scale: 1.05;
+    transform:scale(1.05);
 
 }
 
@@ -112,12 +116,13 @@
 }
 
 .post_buttons .reset_button:hover {
-    background-color: hsl(26, 93%, 40%);
+    background-color: hsl(26, 94%, 32%);
+      text-shadow: 0 0 7px #fff;
     box-shadow: 0px 0px 2px 3px hsla(26, 100%, 54%, 0.53);
 }
 
 .post_buttons .reset_button:active {
-    scale: 1.05;
+    transform: scale(1.05);
 }
 
 @media (max-width:500px) {

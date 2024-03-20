@@ -20,7 +20,7 @@ const UserNgoDashboard = () => {
 
     const { userNgo, loading } = useSelector((store) => store.ngo);
     const { progress } = useSelector((store) => store.validation);
-    const { events } = useSelector((store) => store.event);
+    const { events, isDelete } = useSelector((store) => store.event);
     const [toggleMenu, setToggleMenu] = useState(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -59,7 +59,8 @@ const UserNgoDashboard = () => {
             .catch((err) => {
                 toast.error(err)
             })
-    }, [])
+            dispatch(eventAction.setDeleteDone())
+    }, [isDelete])
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}
@@ -91,18 +92,18 @@ const UserNgoDashboard = () => {
                 <div className="user_ngo_dash_content">
                     {toggleMenu == '1' &&
                         events?.map((item) =>
-                            <NgoEvents key={item.id} event={item} />
+                            <NgoEvents key={item.id} ngo={userNgo} event={item} />
                         )}
                     {
                         toggleMenu == '1' &&
                         events == null &&
-                        <NgoEvents event={null} />
+                        <NgoEvents ngo={userNgo} event={null} />
                     }
                     {toggleMenu == '2' && <NgoDetails ngo={userNgo} />}
                     {toggleMenu == '3' && <NgoPhotos userNgo={userNgo} />}
                 </div>
                 <div className="user_ngo_dash_create_event">
-                    <button type='submit'><Link><IoIosCreate className='event_create_icon' />create event</Link></button>
+                    <button type='submit'><Link to={`/create-event/${ngoId}`}><IoIosCreate className='event_create_icon' />create event</Link></button>
                 </div>
             </div>
         </>

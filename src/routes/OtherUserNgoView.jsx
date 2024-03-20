@@ -58,7 +58,7 @@ const OtherUserNgoView = () => {
                   </div>
                   <div className="user_ngo_dash_details">
                       <div className="user_ngo_dash_details_name">  <h1>{singleNgo?.name} </h1></div>
-                      <div className="user_ngo_dash_details_contact"><h3><span><MdOutlineEmail /></span>email</h3>
+                      <div className="user_ngo_dash_details_contact"><h3><span><MdOutlineEmail /></span>{singleNgo?.email}</h3>
                           <h3><span><HiMiniDevicePhoneMobile /></span>{singleNgo?.mobile}</h3>
                           <h3><span><TbAddressBook /></span>{singleNgo?.address}</h3></div>
                   </div>
@@ -78,12 +78,12 @@ const OtherUserNgoView = () => {
               <div className="user_ngo_dash_content">
                   {toggleMenu == '1' &&
                       events?.map((item) =>
-                          <NgoEvents key={item.id} event={item} />
+                          <NgoEvents key={item.id} ngo={singleNgo} event={item} />
                       )}
                   {
                       toggleMenu == '1' &&
                       events == null &&
-                      <NgoEvents event={null} />
+                      <NgoEvents ngo={singleNgo} event={null} />
                   }
                   {toggleMenu == '2' && <NgoDetails ngo={singleNgo}/>}
                   {toggleMenu == '3' && <NgoPhotos userNgo={singleNgo}/>}

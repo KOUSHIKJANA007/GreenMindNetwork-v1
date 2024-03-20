@@ -61,8 +61,7 @@ const NgoDetails = ({ ngo }) => {
               <button><Link to={`/ngo-edit/${ngo?.id}`}>edit ngo details</Link></button>
             </div>}
         </div>
-        {/* { ngo?.user?.id==users?.id &&
-         } */}
+        {ngo?.user?.id == users?.id && 
         <div className="ngo_bank_details_conatiner">
           <div className="ngo_bank_details">
             <label htmlFor="accHolderName"><BsBank className='bank_icon' />Account Holder name</label>
@@ -76,10 +75,11 @@ const NgoDetails = ({ ngo }) => {
             <label htmlFor="ifsc"><BsBank className='bank_icon' />IFSC code</label>
             <p id='ifsc'>{bankDetails?.ifsc}</p>
           </div>
+        
           <div className='ngo_bank_edit_option'>
             <button onClick={handleEditForm}>edit bank details</button>
           </div>
-        </div>
+        </div>}
        {editOpen && <EditBankDetails handleEditForm={handleEditForm} bankDetails={bankDetails}/>}
       </div>
     </>

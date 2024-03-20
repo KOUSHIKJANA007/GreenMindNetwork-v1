@@ -1,26 +1,41 @@
 import ProgressBar from '@ramonak/react-progress-bar'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { deleteEvent, eventAction } from '../store/eventDetails'
+import { unwrapResult } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
+import { BASE_URL } from '../store/helper'
 
-const NgoEvents = ({ event }) => {
+const NgoEvents = ({ event, ngo }) => {
+  const dispatch=useDispatch();
   const { users } = useSelector((store) => store.user);
   let percent = ((event?.collectedAmount) / (event?.targetAmount)) * 100;
   let percentage = Math.round(percent);
-  console.log("ngo", event);
+  const handleDelete=()=>{
+    let c = confirm("Are your sure to delete ?")
+    if(c){
+      dispatch(deleteEvent(event?.id))
+        .then(unwrapResult)
+        .then((data) => {
+          dispatch(eventAction.setDeletePending())
+          toast.success(data.message);
+        })
+    }
+  }
   return (
     <>
-      {event == null
+      {event == null 
 
         ?
         <div className='event_not_created'>
           <h2>No evet create</h2>
-          <button><Link>create event for donation</Link></button>
+          {ngo?.user?.id == users.id && <button><Link>create event for donation</Link></button>}
         </div>
         :
         <div className='user_ngo_dash_content_events'>
           <div className="user_ngo_dash_content_events_img">
-            <img src="/image/env.avif" alt="" />
+            <img src={BASE_URL+`/api/event/image/${event?.image}`} alt="" />
           </div>
           <div className="user_ngo_dash_content_events_title">
             <h3><Link>{event?.title}</Link></h3>
@@ -33,7 +48,7 @@ const NgoEvents = ({ event }) => {
             ?
             <div className="user_ngo_dash_content_events_buttons">
               <button id='ngo_edit_button' type='submit'><Link>Edit</Link></button>
-              <button id='ngo_delete_button' type='submit'><Link>Delete</Link></button>
+              <button id='ngo_delete_button' type='submit' onClick={handleDelete}><Link>Delete</Link></button>
             </div>
             :
             <div className="user_ngo_dash_content_events_buttons">
