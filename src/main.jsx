@@ -26,6 +26,7 @@ import '../src/style/UserNgoDashboard.css'
 import '../src/style/SocialPost.css'
 import '../src/style/NgoDetails.css'
 import '../src/style/CreateEvent.css'
+import '../src/style/UserHome.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -58,6 +59,7 @@ import OtherUserNgoView from './routes/OtherUserNgoView.jsx'
 import EditNgo from './routes/EditNgo.jsx'
 import DonationDashboard from './routes/DonationDashboard.jsx'
 import CreateEvent from './routes/CreateEvent.jsx'
+import EditEvent from './routes/EditEvent.jsx'
 
 const router = createBrowserRouter([
   {
@@ -94,6 +96,7 @@ const router = createBrowserRouter([
       { path: "/ngo-edit/:ngoId", element: <Protected Component={EditNgo}/>},
       { path: "/donation-dashboard", element: <Protected Component={DonationDashboard}/>},
       { path: "/create-event/:ngoId", element: <Protected Component={CreateEvent}/>},
+      { path: "/edit-event/:eventId/:ngoId", element: <Protected Component={EditEvent}/>},
     ]
   }
 ])

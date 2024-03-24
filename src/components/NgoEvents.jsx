@@ -30,7 +30,7 @@ const NgoEvents = ({ event, ngo }) => {
         ?
         <div className='event_not_created'>
           <h2>No evet create</h2>
-          {ngo?.user?.id == users.id && <button><Link>create event for donation</Link></button>}
+          {ngo?.user?.id == users.id && <button><Link to={`/create-event/${ngo?.id}`}>create event for donation</Link></button>}
         </div>
         :
         <div className='user_ngo_dash_content_events'>
@@ -47,7 +47,7 @@ const NgoEvents = ({ event, ngo }) => {
           {event?.ngo?.user?.id == users.id
             ?
             <div className="user_ngo_dash_content_events_buttons">
-              <button id='ngo_edit_button' type='submit'><Link>Edit</Link></button>
+              <button id='ngo_edit_button' type='submit'><Link to={`/edit-event/${event?.id}/${event?.ngo?.id}`}>Edit</Link></button>
               <button id='ngo_delete_button' type='submit' onClick={handleDelete}><Link>Delete</Link></button>
             </div>
             :

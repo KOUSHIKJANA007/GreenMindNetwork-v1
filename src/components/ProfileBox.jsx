@@ -8,7 +8,7 @@ import { BASE_URL } from '../store/helper';
 import { validationAction } from '../store/OtpValidation';
 import LoadingBar from 'react-top-loading-bar';
 
-const ProfileBox = ({ users }) => {
+const ProfileBox = ({ handleToggle, users }) => {
     const { progress } = useSelector((store) => store.validation);
     const { loading } = useSelector((store) => store.user);
     const [toggleProfileCard, setToggleProfileCard] = useState(false);
@@ -33,9 +33,15 @@ const ProfileBox = ({ users }) => {
             {loading && <LoadingBar color="#78be20" progress={progress} />}
             <div className="person_box">
 
-                <Link to="#"><img className="dp_image" src={BASE_URL + "/api/user/image/" + users?.imageName} alt="" onClick={handleProfileCard} /></Link>
+                <Link to="#"><img className="dp_image" src={BASE_URL + "/api/user/image/" + users?.imageName} alt="" onClick={() => {
+                    handleProfileCard()
+                    handleToggle(0)
+                }} /></Link>
 
-                <Link className='dp_name' to="#" onClick={handleProfileCard}>{users?.fname + " " + users?.lname}</Link>
+                <Link className='dp_name' to="#" onClick={() => {
+                    handleProfileCard()
+                    handleToggle(0)
+                }}>{users?.fname + " " + users?.lname}</Link>
             </div>
             <div className={toggleProfileCard ? "profile_card_container person_box_open" : "profile_card_container"}>
                 <MdClose onClick={handleProfileCard} className='close_btn' />

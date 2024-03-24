@@ -13,6 +13,21 @@ export const createEvent = createAsyncThunk("createEvent", async (data) => {
   });
   return await response.json();
 });
+export const updateEvent = createAsyncThunk("updateEvent", async (data) => {
+  let token = localStorageWithExpiry.getItem("token");
+  const response = await fetch(
+    `http://localhost:8080/api/event/${data.eventId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      body: JSON.stringify(data.eventData),
+    }
+  );
+  return await response.json();
+});
 export const uploadEventImage = createAsyncThunk("uploadEventImage", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
   let formData=new FormData();
@@ -37,6 +52,18 @@ export const getEventByNgo = createAsyncThunk("getEventByNgo", async (ngoId) => 
          },
        });
        return await response.json();
+});
+export const getEventById = createAsyncThunk("getEventById", async (eventId) => {
+  const response = await fetch(
+    `http://localhost:8080/api/event/${eventId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return await response.json();
 });
 export const getAllEvent = createAsyncThunk("getAllEvent", async () => {
   const response = await fetch(`http://localhost:8080/api/event/`, {
@@ -97,6 +124,15 @@ const eventDetails = createSlice({
     builder.addCase(createEvent.rejected, (state, action) => {
       state.loading = false;
     })
+    builder.addCase(updateEvent.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(updateEvent.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(updateEvent.rejected, (state, action) => {
+      state.loading = false;
+    });
     builder.addCase(uploadEventImage.pending, (state, action) => {
       state.loading = true;
     })
@@ -122,6 +158,15 @@ const eventDetails = createSlice({
       state.loading = false;
     });
     builder.addCase(deleteEvent.rejected, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(getEventById.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getEventById.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(getEventById.rejected, (state, action) => {
       state.loading = false;
     });
   },

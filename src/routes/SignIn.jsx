@@ -12,7 +12,7 @@ import { validationAction } from "../store/OtpValidation";
 const SignIn = () => {
   document.title = "Login";
   window.scroll(0, 0);
-  const { loading } = useSelector((store) => store.user);
+  const { loading, users } = useSelector((store) => store.user);
   const { progress } = useSelector((store) => store.validation);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,7 +59,6 @@ const SignIn = () => {
       return;
     }
 
-    console.log(loginData);
     dispatch(loginUser(loginData))
       .then(unwrapResult)
       .then((obj) => {
@@ -67,7 +66,16 @@ const SignIn = () => {
           toast.success("Login successfully done")
           localStorageWithExpiry.setItem("data", JSON.stringify(obj.user), 7200000);
           localStorageWithExpiry.setItem("token", JSON.stringify(obj.token), 7200000);
-          dispatch(loginAction.setUser(obj.user))
+          dispatch(loginAction.setUser(obj.user));
+          obj?.user?.roles?.map((item)=>{
+            console.log(item.roleName == "ADMIN_USER");
+            if (item.roleName =="ADMIN_USER"){
+              dispatch(loginAction.setAdminUser(item))
+            }
+            else{
+              dispatch(loginAction.setAdminUser(null))
+            }
+          })
           dispatch(loginAction.doLogin())
           navigate("/userhome")
         } else {

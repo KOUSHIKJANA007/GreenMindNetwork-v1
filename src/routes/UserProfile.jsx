@@ -11,17 +11,18 @@ import { unwrapResult } from '@reduxjs/toolkit';
 
 
 const UserProfile = () => {
-  const dispatch=useDispatch();
-  document.title="My Profile"
-  const { users } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  document.title = "My Profile"
+  const { users, admin_user } = useSelector((store) => store.user);
   const { userNgo } = useSelector((store) => store.ngo);
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getNgoByUser(users?.id))
-    .then(unwrapResult)
-    .then((data)=>{
-      dispatch(ngoAction.setUserNgoData(data));
-    })
-  },[])
+      .then(unwrapResult)
+      .then((data) => {
+        dispatch(ngoAction.setUserNgoData(data));
+      })
+  }, []);
+  console.log(admin_user);
   return (
     <>
       <div className="profile_main_container">
@@ -48,7 +49,10 @@ const UserProfile = () => {
                   <button className='profile_nav_button'><Link to="/userposts">my posts</Link></button>
                   <button className='profile_nav_button'><Link to={`/ngo-content/${users.id}/${userNgo?.id}`}>my NGO</Link></button>
                   <button className='profile_nav_button' ><Link to="/editprofile">edit profile</Link></button>
-                  <button className='profile_nav_button'><Link to="">my posts</Link></button>
+                  {
+                    admin_user?.roleName =="ADMIN_USER" &&
+                      <button className='profile_nav_button'><Link to="">dashboard</Link></button>
+                    }
                 </div>
               </div>
             </div>

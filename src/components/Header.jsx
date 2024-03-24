@@ -8,11 +8,15 @@ import { useSelector } from 'react-redux';
 const Header = () => {
   const [dropDown, setDropDown] = useState();
   const { users, isLogin } = useSelector((store) => store.user);
+  const [toggleNav, setToggleNav] = useState('')
   const handleDropDownMenuOpen = () => {
     setDropDown(!dropDown);
   }
   const handleDropDownMenuClose = () => {
     setDropDown(false);
+  }
+  const handleToggle = (data) => {
+    setToggleNav(data);
   }
 
   return (
@@ -23,32 +27,35 @@ const Header = () => {
           {
             isLogin
               ?
-              <Link to="/userhome"><img src="/public/image/logo.png" alt="logo" /></Link>
+              <Link to="/userhome" onClick={() => handleToggle(0)} ><img src="/image/logo.png" alt="logo" /></Link>
               :
-              <Link to="/"><img src="image/logo.png" alt="" /></Link>
+              <Link to="/" onClick={() => handleToggle(0)} ><img src="/image/logo.png" alt="" /></Link>
           }
 
 
         </div>
         <nav className="nav_bar">
-          <Link to="#">about</Link>
-          <Link to="#" >awareness camp</Link>
-          <Link to="/articles" >Articles</Link>
-          <Link to="#" >contact us</Link>
-          <Link to="/ngo" >NGO's</Link>
+          <Link className={toggleNav == '1' ? "nav_about active_nav" : "nav_about"} onClick={() => handleToggle(1)} to="#">about</Link>
+          <Link className={toggleNav == '2' ? "nav_awc active_nav" : "nav_awc"} onClick={() => handleToggle(2)} to="#" >awareness camp</Link>
+          <Link className={toggleNav == '3' ? "nav_article active_nav" : "nav_article"} onClick={() => handleToggle(3)} to="/articles" >Articles</Link>
+          <Link className={toggleNav == '4' ? "nav_contact active_nav" : "nav_contact"} onClick={() => handleToggle(4)} to="#" >contact us</Link>
+          <Link className={toggleNav == '5' ? "nav_ngo active_nav" : "nav_ngo"} onClick={() => handleToggle(5)} to="/ngo" >NGO's</Link>
         </nav>
 
 
         {
           isLogin
             ?
-            <ProfileBox users={users} />
+            <ProfileBox handleToggle={handleToggle} users={users} />
             :
-            <LoginBox />
+            <LoginBox handleToggle={handleToggle} toggleNav={toggleNav} />
         }
 
 
-        <div className="donation"><Link to="/donation-dashboard" onClick={handleDropDownMenuClose}>donation</Link></div>
+        <div className="donation"><Link to="/donation-dashboard" onClick={() => {
+          handleDropDownMenuClose()
+          handleToggle(0)
+        }}>donation</Link></div>
         <div className="troggle_btn">
 
           {dropDown

@@ -45,7 +45,34 @@ header {
     border-bottom: 4px solid #78be20;
     color: #78be20;
 }
-
+.nav_about.active_nav{
+     border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+.nav_awc.active_nav{
+     border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+.nav_article.active_nav{
+     border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+.nav_contact.active_nav{
+     border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+.nav_ngo.active_nav{
+     border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+.nav_signup.active_nav{
+     border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
+.nav_login.active_nav{
+     border-bottom: 4px solid #78be20;
+    color: #78be20;
+}
 .login_box {
     position: relative;
     left: 8%;
