@@ -12,7 +12,7 @@ import { BsBank } from "react-icons/bs";
 import EditBankDetails from './EditBankDetails';
 
 const NgoDetails = ({ ngo }) => {
-  const { users } = useSelector((store) => store.user);
+  const { users, admin_user } = useSelector((store) => store.user);
   const { bankDetails, isUpdate } = useSelector((store) => store.bank);
   const [editOpen, setEditOpen] = useState(false);
   const dispatch = useDispatch()
@@ -22,12 +22,12 @@ const NgoDetails = ({ ngo }) => {
       .then((data) => {
         dispatch(bankAction.setBankDetails(data))
       })
-      dispatch(bankAction.setUpdateEnd())
+    dispatch(bankAction.setUpdateEnd())
   }, [isUpdate])
   const sanitizedData = () => ({
     __html: DOMPurify.sanitize(ngo?.description)
   })
-  const handleEditForm=()=>{
+  const handleEditForm = () => {
     setEditOpen(!editOpen);
   }
   return (
@@ -61,26 +61,27 @@ const NgoDetails = ({ ngo }) => {
               <button><Link to={`/ngo-edit/${ngo?.id}`}>edit ngo details</Link></button>
             </div>}
         </div>
-        {ngo?.user?.id == users?.id && 
-        <div className="ngo_bank_details_conatiner">
-          <div className="ngo_bank_details">
-            <label htmlFor="accHolderName"><BsBank className='bank_icon' />Account Holder name</label>
-            <p id='accHolderName'>{bankDetails?.accHolderName}</p>
-          </div>
-          <div className="ngo_bank_details">
-            <label htmlFor="accountNumber"><BsBank className='bank_icon' />Account number</label>
-            <p id='accountNumber'>{bankDetails?.accountNumber}</p>
-          </div>
-          <div className="ngo_bank_details">
-            <label htmlFor="ifsc"><BsBank className='bank_icon' />IFSC code</label>
-            <p id='ifsc'>{bankDetails?.ifsc}</p>
-          </div>
-        
-          <div className='ngo_bank_edit_option'>
-            <button onClick={handleEditForm}>edit bank details</button>
-          </div>
-        </div>}
-       {editOpen && <EditBankDetails handleEditForm={handleEditForm} bankDetails={bankDetails}/>}
+        {ngo?.user?.id == users?.id | admin_user?.roleName == "ADMIN_USER" &&
+          <div className="ngo_bank_details_conatiner">
+            <div className="ngo_bank_details">
+              <label htmlFor="accHolderName"><BsBank className='bank_icon' />Account Holder name</label>
+              <p id='accHolderName'>{bankDetails?.accHolderName}</p>
+            </div>
+            <div className="ngo_bank_details">
+              <label htmlFor="accountNumber"><BsBank className='bank_icon' />Account number</label>
+              <p id='accountNumber'>{bankDetails?.accountNumber}</p>
+            </div>
+            <div className="ngo_bank_details">
+              <label htmlFor="ifsc"><BsBank className='bank_icon' />IFSC code</label>
+              <p id='ifsc'>{bankDetails?.ifsc}</p>
+            </div>
+
+            {ngo?.user?.id == users?.id &&
+              <div className='ngo_bank_edit_option'>
+                <button onClick={handleEditForm}>edit bank details</button>
+              </div>}
+          </div>}
+        {editOpen && <EditBankDetails handleEditForm={handleEditForm} bankDetails={bankDetails} />}
       </div>
     </>
   )

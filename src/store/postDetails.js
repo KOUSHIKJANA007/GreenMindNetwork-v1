@@ -96,6 +96,7 @@ const postSlice = createSlice({
         singlePost: [],
         isPostCreate: false,
         DeletePost:false,
+        totalPostOfUser:0,
         error: null
     },
     reducers: {
@@ -105,6 +106,9 @@ const postSlice = createSlice({
         setSinglePost: (state, action) => {
             state.singlePost = (action.payload);
             console.log("post details", action.payload)
+        },
+        setTotalPostOfUser:(state,action)=>{
+            state.totalPostOfUser=action.payload;
         },
         setPostCreatedDone: (state) => {
             state.isPostCreate = true;

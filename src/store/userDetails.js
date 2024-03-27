@@ -70,6 +70,15 @@ export const fetchUserById = createAsyncThunk(
     return await response.json();
   }
 );
+export const fetchAllUser = createAsyncThunk("fetchAllUser", async () => {
+  const response = await fetch("http://localhost:8080/api/user/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+});
 const userSlice = createSlice({
   name: "userDetail",
   initialState: {
@@ -77,6 +86,8 @@ const userSlice = createSlice({
     error: null,
     isLogin: false,
     users: [],
+    userData: null,
+    allUsers: null,
     admin_user: null,
     isEdit: false,
   },
@@ -91,6 +102,12 @@ const userSlice = createSlice({
     },
     setUser: (state, action) => {
       state.users = action.payload;
+    },
+    setUserData: (state, action) => {
+      state.userData = action.payload;
+    },
+    setALlUser: (state, action) => {
+      state.allUsers = action.payload;
     },
     setAdminUser: (state, action) => {
       state.admin_user = action.payload;
@@ -145,13 +162,23 @@ const userSlice = createSlice({
         state.error = action.payload;
       }),
       builder.addCase(fetchUserById.pending, (state) => {
-        state.loading = true;
+        // state.loading = true;
       }),
       builder.addCase(fetchUserById.fulfilled, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
       }),
       builder.addCase(fetchUserById.rejected, (state, action) => {
-        state.loading = false;
+        // state.loading = false;
+        state.error = action.payload;
+      });
+    builder.addCase(fetchAllUser.pending, (state) => {
+      // state.loading = true;
+    }),
+      builder.addCase(fetchAllUser.fulfilled, (state, action) => {
+        // state.loading = false;
+      }),
+      builder.addCase(fetchAllUser.rejected, (state, action) => {
+        // state.loading = false;
         state.error = action.payload;
       });
   },

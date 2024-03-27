@@ -11,6 +11,7 @@ import ngoDetails from "./ngoDetails";
 import eventDetails from "./eventDetails";
 import socialImageDetails from "./socialImageDetails";
 import bankDetails from "./bankDetails";
+import adminFunctions from "./adminFunctions";
 
 const persistConfig = {
     key: "root",
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   event: eventDetails,
   socialPost: socialImageDetails,
   bank: bankDetails,
+  admin: adminFunctions,
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({

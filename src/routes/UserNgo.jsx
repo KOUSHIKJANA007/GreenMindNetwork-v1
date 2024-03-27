@@ -25,14 +25,13 @@ const UserNgo = () => {
     dispatch(getNgoByUser(users.id))
       .then(unwrapResult)
       .then((obj) => {
-       
         dispatch(ngoAction.setUserNgoData(obj))
       })
       .catch((err)=>{
         console.log({err});
       })
   }, [])
-  console.log("/////", userNgo)
+  console.log(userNgo);
   return (
     <>
       <div className="ngo_details_container">

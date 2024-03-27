@@ -68,7 +68,6 @@ const SignIn = () => {
           localStorageWithExpiry.setItem("token", JSON.stringify(obj.token), 7200000);
           dispatch(loginAction.setUser(obj.user));
           obj?.user?.roles?.map((item)=>{
-            console.log(item.roleName == "ADMIN_USER");
             if (item.roleName =="ADMIN_USER"){
               dispatch(loginAction.setAdminUser(item))
             }

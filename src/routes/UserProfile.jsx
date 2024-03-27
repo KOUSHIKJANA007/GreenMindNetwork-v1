@@ -21,8 +21,8 @@ const UserProfile = () => {
       .then((data) => {
         dispatch(ngoAction.setUserNgoData(data));
       })
+
   }, []);
-  console.log(admin_user);
   return (
     <>
       <div className="profile_main_container">
@@ -47,12 +47,12 @@ const UserProfile = () => {
                 </div>
                 <div className="profile_nav_options">
                   <button className='profile_nav_button'><Link to="/userposts">my posts</Link></button>
-                  <button className='profile_nav_button'><Link to={`/ngo-content/${users.id}/${userNgo?.id}`}>my NGO</Link></button>
+                  <button className='profile_nav_button'><Link to={`/ngo-content/${users?.id}/${userNgo?.id}`}>my NGO</Link></button>
                   <button className='profile_nav_button' ><Link to="/editprofile">edit profile</Link></button>
                   {
-                    admin_user?.roleName =="ADMIN_USER" &&
-                      <button className='profile_nav_button'><Link to="">dashboard</Link></button>
-                    }
+                    admin_user?.roleName == "ADMIN_USER" &&
+                    <button className='profile_nav_button'><Link to="/admin-dashboard">dashboard</Link></button>
+                  }
                 </div>
               </div>
             </div>

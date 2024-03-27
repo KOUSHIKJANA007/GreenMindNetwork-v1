@@ -92,11 +92,15 @@ const eventDetails = createSlice({
   initialState: {
     loading: false,
     events:null,
+    homeEvents:null,
     isDelete:false
   },
   reducers: {
     setEvent:(state,action)=>{
         state.events=action.payload;
+    },
+    setHomeEvent:(state,action)=>{
+        state.homeEvents=action.payload;
     },
     setDeletePending:(state)=>{
       state.isDelete=true;

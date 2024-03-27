@@ -7,7 +7,7 @@ import NgoDetails from '../components/NgoDetails';
 import NgoEvents from '../components/NgoEvents';
 import NgoPhotos from '../components/NgoPhotos';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNgoByUser, getSingleNgo, ngoAction } from '../store/ngoDetails';
+import { getNgoByUser } from '../store/ngoDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import LoadingBar from 'react-top-loading-bar';
 import { validationAction } from '../store/OtpValidation';

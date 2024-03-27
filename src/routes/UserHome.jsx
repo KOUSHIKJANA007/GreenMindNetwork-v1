@@ -8,15 +8,15 @@ const UserHome = () => {
     document.title = "Dashboard";
     const dispatch = useDispatch();
     const { users } = useSelector((store) => store.user);
-    const { events } = useSelector((store) => store.event);
+    const { homeEvents } = useSelector((store) => store.event);
     useEffect(() => {
         dispatch(getAllEvent())
             .then(unwrapResult)
             .then((data) => {
-                dispatch(eventAction.setEvent(data));
+                dispatch(eventAction.setHomeEvent(data));
             })
     }, [])
-    const filteredEvent = events?.filter((item) => {
+    const filteredEvent = homeEvents?.filter((item) => {
         return item?.ngo?.user?.id != users?.id;
     });
     const filteredEvent1 = filteredEvent?.filter((item, index) => {
