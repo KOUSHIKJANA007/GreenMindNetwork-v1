@@ -486,6 +486,18 @@
     gap: 20px;
     left: 0%;
   }
+   .admin_user_item_id {
+    text-align: center;
+    width: 85%;
+  }
+  .admin_user_item_name {
+    text-align: center;
+    width: 90%;
+  }
+  .admin_user_item_email {
+    text-align: center;
+    width: 90%;
+  }
 }
 @media (min-width: 1001px) and (max-width: 1400px){
 .admin_user_content_count_article{

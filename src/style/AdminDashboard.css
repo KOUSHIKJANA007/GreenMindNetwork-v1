@@ -35,6 +35,14 @@
   background-color: #78be20;
   color: white;
 }
+.admin_dash_user.active{
+  background-color: #78be20;
+  color: white;
+}
+.admin_dash_ngo.active{
+  background-color: #78be20;
+  color: white;
+}
 .admin_dash_ngo:hover {
   background-color: #78be20;
   color: white;

@@ -13,7 +13,7 @@ const AdminUserDetails = () => {
                 </div>
             </div>
             {allUsers?.map((item)=>
-                <AdminUserItem key={item?.id} users={item} />
+                <AdminUserItem key={item?.id}  users={item} />
             )}
         </div>
     )

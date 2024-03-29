@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { BASE_URL } from '../store/helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostById, postAction } from '../store/postDetails';
@@ -27,7 +27,6 @@ const ArticleContent = () => {
         toast.error({ err })
       })
   }, [])
-  console.log("single post", singlePost);
   let date = new Date(singlePost.postDate)
   let month = date.getMonth() + 1;
   let day = date.getDay();
@@ -46,7 +45,7 @@ const ArticleContent = () => {
           <h2 >{singlePost?.subTitle}</h2>
         </div>
         <div className="post_user_details">
-          <p>post by <span>{singlePost?.user?.fname + " " + singlePost?.user?.lname}</span> on <span>{'0' + month + '/0' + day + '/' + year}</span></p>
+          <p>post by <span><Link to={`/user-content/${singlePost?.user?.id}`}>{singlePost?.user?.fname + " " + singlePost?.user?.lname}</Link></span> on <span>{'0' + month + '/0' + day + '/' + year}</span></p>
           <hr className='post_horizon' />
         </div>
         <div className="post_content" dangerouslySetInnerHTML={sanitizedData()}>

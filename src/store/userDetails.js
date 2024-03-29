@@ -25,6 +25,18 @@ export const updateUser = createAsyncThunk("updateUser", async (data) => {
   });
   return await response.json();
 });
+export const deleteUser = createAsyncThunk("deleteUser", async (userId) => {
+  let token = localStorageWithExpiry.getItem("token");
+  console.log(token);
+  const response = await fetch(`http://localhost:8080/api/user/${userId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer" + token,
+    },
+  });
+  return await response.json();
+});
 
 export const loginUser = createAsyncThunk("loginUser", async (data) => {
   const response = await fetch("http://localhost:8080/api/v1/auth/login", {
@@ -90,6 +102,7 @@ const userSlice = createSlice({
     allUsers: null,
     admin_user: null,
     isEdit: false,
+    isDelete: false,
   },
   reducers: {
     doLogin: (state) => {
@@ -117,6 +130,12 @@ const userSlice = createSlice({
     },
     setEditEnd: (state) => {
       state.isEdit = false;
+    },
+    setDeleteDone: (state) => {
+      state.isDelete = true;
+    },
+    setDeleteEnd: (state) => {
+      state.isDelete = false;
     },
   },
   extraReducers: (builder) => {
@@ -179,6 +198,16 @@ const userSlice = createSlice({
       }),
       builder.addCase(fetchAllUser.rejected, (state, action) => {
         // state.loading = false;
+        state.error = action.payload;
+      });
+    builder.addCase(deleteUser.pending, (state) => {
+      state.loading = true;
+    }),
+      builder.addCase(deleteUser.fulfilled, (state, action) => {
+        state.loading = false;
+      }),
+      builder.addCase(deleteUser.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload;
       });
   },

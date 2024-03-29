@@ -28,11 +28,28 @@ export const updatePayment = createAsyncThunk("updatePayment", async (data) => {
     );
     return await response.json();
 })
-
+export const getTotalAmount = createAsyncThunk("getTotalAmount", async (userId) => {
+    const response = await fetch(
+      `http://localhost:8080/api/donation/user/${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      }
+    );
+    return await response.json();
+});
 const donationDetails = createSlice({
     name: "donationDetails",
     initialState: {
-        loading: false
+        loading: false,
+        total_donation:0
+    },
+    reducers:{
+        setDonationAmount:(state,action)=>{
+            state.total_donation=action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(createPayment.pending, (state, action) => {
@@ -53,6 +70,15 @@ const donationDetails = createSlice({
             builder.addCase(updatePayment.rejected, (state, action) => {
                 state.loading = false;
             })
+            builder.addCase(getTotalAmount.pending, (state, action) => {
+            //   state.loading = true;
+            }),
+              builder.addCase(getTotalAmount.fulfilled, (state, action) => {
+                // state.loading = false;
+              }),
+              builder.addCase(getTotalAmount.rejected, (state, action) => {
+                // state.loading = false;
+              });
     }
 })
 export const donationAction = donationDetails.actions;

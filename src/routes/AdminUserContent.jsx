@@ -6,14 +6,19 @@ import { FaSquareFacebook } from "react-icons/fa6";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchUserById, loginAction } from '../store/userDetails'
+import { deleteUser, fetchUserById, loginAction } from '../store/userDetails'
 import { unwrapResult } from "@reduxjs/toolkit";
 import { BASE_URL } from "../store/helper";
 import { postAction, postByUser } from "../store/postDetails";
+import { donationAction, getTotalAmount } from "../store/donationDetails";
+import { toast } from "react-toastify";
+import blockList, { blockListAction, blockUser, unBlockUser } from "../store/blockList";
 
 const AdminUserContent = () => {
-    const { userData } = useSelector((store) => store.user);
+    const { userData, admin_user } = useSelector((store) => store.user);
     const { totalPostOfUser } = useSelector((store) => store.post);
+    const { total_donation } = useSelector((store) => store.donation);
+    const { isBlocked } = useSelector((store) => store.blocklist);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { userId } = useParams();
@@ -33,7 +38,50 @@ const AdminUserContent = () => {
             .then((data) => {
                 dispatch(postAction.setTotalPostOfUser(data.totalElement))
             })
+        dispatch(getTotalAmount(userId))
+            .then(unwrapResult)
+            .then((data) => {
+                dispatch(donationAction.setDonationAmount(data));
+            })
     }, []);
+    const handleDeleteUser = () => {
+        let c = confirm("Are you sure?")
+        if (c) {
+            dispatch(deleteUser(userId))
+                .then(unwrapResult)
+                .then((data) => {
+                    console.log(data);
+                    if (data.success == true) {
+                        toast.success(data.message);
+                        handleContent();
+                    }
+                    else {
+                        toast.error(data.message);
+                    }
+                })
+        }
+
+    }
+    const handleBlock = () => {
+        dispatch(blockUser(userId))
+            .then(unwrapResult)
+            .then((data) => {
+                if (data.success == true) {
+                    toast.success(data.message)
+                    dispatch(blockListAction.setBlockeStatus());
+                }
+            })
+    }
+    const handleUnBlock = () => {
+        dispatch(unBlockUser(userId))
+            .then(unwrapResult)
+            .then((data) => {
+                if (data.success == true) {
+                    toast.success(data.message)
+                    dispatch(blockListAction.setUnBlockeStatus());
+                }
+            })
+    }
     return (
         <div className="admin_user_content_main_container">
             <div className='admin_user_content_container'>
@@ -83,11 +131,14 @@ const AdminUserContent = () => {
                     </div>
                     <div className="auc_action_buttons">
                         <h3>Take Action On User</h3>
+                        { admin_user?.roleName=="ADMIN_USER" &&
                         <div className="admin_user_content_buttons">
-                            <button id='admin_block_button'>block</button>
-                            <button id='admin_delete_button'>delete</button>
+                            {isBlocked ?
+                                <button onClick={handleUnBlock} id='admin_block_button'>unblock</button> :
+                                <button onClick={handleBlock} id='admin_block_button'>block</button>}
+                            <button onClick={handleDeleteUser} id='admin_delete_button'>delete</button>
                             <button onClick={handleContent} id='admin_back_button'>Back</button>
-                        </div>
+                        </div>}
                     </div>
                 </div>
 
@@ -99,7 +150,7 @@ const AdminUserContent = () => {
                 </div>
                 <div className="admin_user_content_count_donate">
                     <label htmlFor="donate">Total Donate amount</label>
-                    <p id="donate">&#8377; 90000</p>
+                    <p id="donate">&#8377; {total_donation}</p>
                 </div>
             </div>
         </div>

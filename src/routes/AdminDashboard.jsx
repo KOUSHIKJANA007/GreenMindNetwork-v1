@@ -9,16 +9,17 @@ import { unwrapResult } from '@reduxjs/toolkit';
 
 const AdminDashboard = () => {
     const { toggleNav } = useSelector((store) => store.admin);
+    const { isDelete } = useSelector((store) => store.user);
     const dispatch = useDispatch();
    useEffect(() => {
         window.scroll(0, 0)
         dispatch(fetchAllUser())
             .then(unwrapResult)
             .then((data) => {
-                console.log(data);
                 dispatch(loginAction.setALlUser(data));
             })
-    },[])
+       dispatch(loginAction.setDeleteEnd())
+    },[isDelete])
     return (
         <>
             <div className="admin_dash_main_container">
@@ -47,8 +48,8 @@ const AdminDashboard = () => {
                         </div>
                     </div>
                     <div className="admin_dash_nav_options">
-                        <div className="admin_dash_user" onClick={() => { dispatch(adminAction.setUserToggleNav())}}>users details</div>
-                        <div className="admin_dash_ngo" onClick={() => { dispatch(adminAction.setNgoToggleNav()) }}>ngo details</div>
+                        <div className={toggleNav == 1 ? "admin_dash_user active" :"admin_dash_user"} onClick={() => { dispatch(adminAction.setUserToggleNav())}}>users details</div>
+                        <div className={toggleNav == 2 ? "admin_dash_ngo active" : "admin_dash_ngo"} onClick={() => { dispatch(adminAction.setNgoToggleNav()) }}>ngo details</div>
                     </div>
                     {toggleNav == '1' && <AdminUserDetails />}
                     {toggleNav == '2' && <AdminNgoDetails />}
