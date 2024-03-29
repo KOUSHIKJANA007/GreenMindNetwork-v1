@@ -3,18 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { eventAction, getAllEvent } from '../store/eventDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import NgoEvents from '../components/NgoEvents';
+import LoadingBar from 'react-top-loading-bar';
+import { validationAction } from '../store/OtpValidation';
 
 const UserHome = () => {
     document.title = "Dashboard";
     const dispatch = useDispatch();
     const { users } = useSelector((store) => store.user);
-    const { homeEvents } = useSelector((store) => store.event);
+    const { homeEvents,loading } = useSelector((store) => store.event);
+    const { progress } = useSelector((store) => store.validation);
     useEffect(() => {
+        dispatch(validationAction.setProgress(50));
         dispatch(getAllEvent())
             .then(unwrapResult)
             .then((data) => {
                 dispatch(eventAction.setHomeEvent(data));
             })
+        dispatch(validationAction.setProgress(100));
     }, [])
     const filteredEvent = homeEvents?.filter((item) => {
         return item?.ngo?.user?.id != users?.id;
@@ -24,7 +29,8 @@ const UserHome = () => {
     });
     return (
         <>
-            <div className="user_home_main_container">
+            {loading && <LoadingBar progress={progress} color="#78be20" />}
+            <div  className="user_home_main_container">
                 <div className="user_home_container">
                     <div className="user_home_content">
                         <div className="user_home_1st_content">
@@ -33,12 +39,12 @@ const UserHome = () => {
                                 <p>Environmental awareness refers to an understanding and recognition of the various environmental issues facing our planet and the importance of taking action to address them. Here are some points highlighting aspects of environmental awareness.</p>
                             </div>
                             <div className="user_home_content_img">
-                                <img src="/image/pic1.jpg" alt="" />
+                                <img loading='lazy' src="/image/pic1.jpg" alt="" />
                             </div>
                         </div>
                         <div className="user_home_2nd_content">
                             <div className="user_home_content_img">
-                                <img src="/image/pic3.jpg" alt="" />
+                                <img loading='eager' src="/image/pic3.jpg" alt="" />
                             </div>
                             <div className="user_home_content_details">
                                 <h1>Importance of Conservation</h1>

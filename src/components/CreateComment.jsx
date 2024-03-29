@@ -23,17 +23,18 @@ const CreateComment = ({ postId }) => {
                 } else if (data.id) {
                     dispatch(commentAction.addCommentDone());
                     toast.success("comment posted")
-                    commentInput.current.value="";
+                    commentInput.current.value = "";
                 }
             })
-            .catch((err)=>{
+            .catch((err) => {
                 toast.error(err)
             })
     }
+    console.log(users.imageName);
     return (
         <div className='comment_container'>
             <div className="user_image">
-                <img src={BASE_URL + `/api/post/image/${users.imageName}`} alt="" />
+                <img src={BASE_URL + `/api/user/image/${users.imageName}`} alt="" />
             </div>
             <div className="comment_input">
                 <ReactTextareaAutosize type="text" ref={commentInput} name='comment' placeholder='Please give your opinion' />

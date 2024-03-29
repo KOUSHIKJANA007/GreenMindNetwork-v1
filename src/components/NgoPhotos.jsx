@@ -10,7 +10,7 @@ const NgoPhotos = ({ userNgo }) => {
   console.log("/..xz;xz;cx",userNgo);
   const dispatch=useDispatch();
   const{users}=useSelector((store)=>store.user);
-  const { socialPosts, isDelete, isUpdate, isCreate } = useSelector((store) => store.socialPost);
+  const { socialPosts, isDelete, isUpdate, isCreate, isImageUpload } = useSelector((store) => store.socialPost);
 
   useEffect(()=>{
     dispatch(getSocialPostByNgo(userNgo?.id))
@@ -29,7 +29,8 @@ const NgoPhotos = ({ userNgo }) => {
     dispatch(socialPostAction.deleteDone())
     dispatch(socialPostAction.createDone())
     dispatch(socialPostAction.updateDone())
-  }, [isDelete, isCreate, isUpdate])
+    dispatch(socialPostAction.imageDone())
+  }, [isDelete, isCreate, isUpdate, isImageUpload])
   return (
     <div className='ngo_photos_container'>
       {userNgo?.user?.id == users?.id && <SocialPostItem ngoId={userNgo?.id}/>}

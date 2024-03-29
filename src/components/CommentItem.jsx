@@ -14,11 +14,12 @@ const CommentItem = ({ comment }) => {
   const handleToggle = () => {
     setToggle(!toggle);
   }
+  console.log(comment.user.imageName);
   return (
     <>
       <div className='comment_item_container'>
         <div className='comm_user_img'>
-          <img src={BASE_URL + `/api/post/image/${comment?.user?.imageName}`} alt="" />
+          <img src={BASE_URL + `/api/user/image/${comment?.user?.imageName}`} alt="" />
         </div>
         {editform ?
 

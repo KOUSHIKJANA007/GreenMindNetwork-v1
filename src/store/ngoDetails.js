@@ -114,7 +114,8 @@ const ngoDetails = createSlice({
         ngoData:null,
         isFetch:false,
         userNgo:null,
-        singleNgo:null
+        singleNgo:null,
+        isEdit:false
     },
     reducers: {
         setNgoData:(state,action)=>{
@@ -131,6 +132,12 @@ const ngoDetails = createSlice({
         },
         setFetchEnd:(state)=>{
             state.isFetch=false;
+        },
+        setEditDone:(state)=>{
+            state.isEdit=true;
+        },
+        setEditEnd:(state)=>{
+            state.isEdit=false;
         }
     },
     extraReducers: (builder) => {

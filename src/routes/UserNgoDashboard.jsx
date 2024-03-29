@@ -7,7 +7,7 @@ import NgoDetails from '../components/NgoDetails';
 import NgoEvents from '../components/NgoEvents';
 import NgoPhotos from '../components/NgoPhotos';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNgoByUser } from '../store/ngoDetails';
+import { getNgoByUser, ngoAction } from '../store/ngoDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import LoadingBar from 'react-top-loading-bar';
 import { validationAction } from '../store/OtpValidation';
@@ -18,7 +18,7 @@ import { eventAction, getEventByNgo } from '../store/eventDetails';
 
 const UserNgoDashboard = () => {
 
-    const { userNgo, loading } = useSelector((store) => store.ngo);
+    const { userNgo, loading, isEdit } = useSelector((store) => store.ngo);
     const { progress } = useSelector((store) => store.validation);
     const { events, isDelete } = useSelector((store) => store.event);
     const [toggleMenu, setToggleMenu] = useState(1);
@@ -35,13 +35,14 @@ const UserNgoDashboard = () => {
             .then((data) => {
                 if (data?.user?.id == userId) {
                     dispatch(ngoAction.setUserNgoData(data))
+                    dispatch(ngoAction.setEditEnd());
                 }
                 dispatch(validationAction.setProgress(100));
             })
             .catch((err) => {
                 console.log(err);
             })
-    }, [])
+    }, [isEdit])
     useEffect(() => {
         window.scroll(0, 0);
         dispatch(getEventByNgo(ngoId))
@@ -49,6 +50,7 @@ const UserNgoDashboard = () => {
             .then((data) => {
                 if (data.length == 0) {
                     dispatch(eventAction.setEvent(null));
+                    dispatch(ngoAction.setEditEnd());
                     return;
                 }
                 else {
@@ -59,8 +61,8 @@ const UserNgoDashboard = () => {
             .catch((err) => {
                 toast.error(err)
             })
-            dispatch(eventAction.setDeleteDone())
-    }, [isDelete])
+        dispatch(eventAction.setDeleteDone())
+    }, [isDelete, isEdit])
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}

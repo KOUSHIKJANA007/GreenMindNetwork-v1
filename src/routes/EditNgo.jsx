@@ -2,7 +2,7 @@ import JoditEditor from 'jodit-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, useNavigate, useParams } from 'react-router-dom';
-import { getSingleNgo, ngoAction, updateNgo, uploadNgoLogo } from '../store/ngoDetails';
+import { getSingleNgo, ngoAction, updateNgo, uploadIdentityProof, uploadNgoLogo, uploadRegistrationProof, uploadTaxProof } from '../store/ngoDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { validationAction } from '../store/OtpValidation';
@@ -88,13 +88,15 @@ const EditNgo = () => {
                                     .then((obj) => {
                                         dispatch(uploadRegistrationProof({ registerImage: registerImage, ngoId: data?.id }))
                                             .then((obj) => {
+                                                dispatch(ngoAction.setFetchDone());
+                                                dispatch(ngoAction.setEditDone())
+                                                navigate(`/ngo-content/${users?.id}/${ngoId}`);
+                                                toast.success("NGO updated successfully");
                                             })
                                     })
                             })
                     })
-                dispatch(ngoAction.setFetchDone());
-                toast.success("NGO register successfully");
-                navigate(`/ngo-content/${users?.id}/${ngoId}`);
+                
             }
             else {
                 toast.error(data.description);

@@ -17,6 +17,7 @@ const ArticleContent = () => {
   const dispatch = useDispatch()
   document.title = singlePost?.title
   useEffect(() => {
+    window.scroll(0, 0);
     dispatch(getPostById(postId))
       .then(unwrapResult)
       .then((data) => {
@@ -49,7 +50,7 @@ const ArticleContent = () => {
           <hr className='post_horizon' />
         </div>
         <div className="post_content" dangerouslySetInnerHTML={sanitizedData()}>
-              
+
         </div>
         {
           isLogin &&

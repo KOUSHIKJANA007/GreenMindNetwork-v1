@@ -98,6 +98,7 @@ const socialImageDetails = createSlice({
     isDelete: false,
     isCreate: false,
     isUpdate: false,
+    isImageUpload: false,
   },
   reducers: {
     setSocialPost: (state, action) => {
@@ -120,6 +121,12 @@ const socialImageDetails = createSlice({
     },
     updateDone: (state) => {
       state.isUpdate = false;
+    },
+    imagePending: (state) => {
+      state.isImageUpload = true;
+    },
+    imageDone: (state) => {
+      state.isImageUpload = false;
     },
   },
   extraReducers: (builder) => {

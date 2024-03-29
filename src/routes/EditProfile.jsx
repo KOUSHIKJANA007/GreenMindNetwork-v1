@@ -29,10 +29,12 @@ const EditProfile = () => {
         dispatch(updateUser(editData))
             .then(unwrapResult)
             .then((obj) => {
+                console.log(obj);
                 dispatch(uploadUserImage({ image: image, userId: users.id }))
                     .then((data) => {
-                        if (data.payload != null) {
+                        if (data.payload != undefined) {
                             dispatch(loginAction.setEditDone())
+                            toast.success("Edit successfull")
                         }
                         else {
                             toast.error(data.payload)
@@ -42,7 +44,7 @@ const EditProfile = () => {
                         toast.error(err)
                     })
                 if (obj.id != null) {
-                    toast.success("Edit successfull")
+                   
                     dispatch(loginAction.setEditDone())
                     navigate("/userhome");
                 }

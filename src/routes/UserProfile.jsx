@@ -8,23 +8,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '../store/helper';
 import { getNgoByUser, ngoAction } from '../store/ngoDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
+import LoadingBar from 'react-top-loading-bar';
+import { validationAction } from '../store/OtpValidation';
 
 
 const UserProfile = () => {
   const dispatch = useDispatch();
   document.title = "My Profile"
   const { users, admin_user } = useSelector((store) => store.user);
-  const { userNgo } = useSelector((store) => store.ngo);
+  const { userNgo, loading } = useSelector((store) => store.ngo);
+  const { progress } = useSelector((store) => store.validation);
   useEffect(() => {
+    dispatch(validationAction.setProgress(50))
     dispatch(getNgoByUser(users?.id))
       .then(unwrapResult)
       .then((data) => {
         dispatch(ngoAction.setUserNgoData(data));
       })
-
+    dispatch(validationAction.setProgress(100));
   }, []);
   return (
     <>
+      {loading && <LoadingBar progress={progress} color="#78be20" />}
       <div className="profile_main_container">
         <div className="profile_container">
           <div className="profile_banner">

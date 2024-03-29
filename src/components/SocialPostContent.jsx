@@ -37,7 +37,7 @@ const SocialPostContent = ({ socialPosts }) => {
                     <h4>{socialPosts?.caption}</h4>
                 </div>
                 <div className="social_post_content_img">
-                    <img loading='lazy' src={BASE_URL +`/api/socialImage/image/${socialPosts?.image}`} alt="" />
+                    <img src={BASE_URL +`/api/socialImage/image/${socialPosts?.image}`} alt="" />
                 </div>
             </div>
             <div className="social_post_conten_option">

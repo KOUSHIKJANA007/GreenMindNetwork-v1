@@ -45,7 +45,8 @@ const SocialPostItem = ({ ngoId }) => {
                         if(obj.id==''){
                             toast.error("error in image upload")
                         }
-                        setImage('')
+                        setImagePre('');
+                        dispatch(socialPostAction.imagePending());
                     })
                     .catch((err) => {
                         toast.error(err)
@@ -54,9 +55,9 @@ const SocialPostItem = ({ ngoId }) => {
                         toast.error("post not upload");
                     }
                     else{
+                        dispatch(socialPostAction.createPending());
                         toast.success("Post uploaded successfully");
                         document.getElementById('caption').value="";
-                        dispatch(socialPostAction.createPending());
                     }
             })
             .catch((err) => {

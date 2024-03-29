@@ -102,6 +102,10 @@ const RegisterNgo = () => {
                                                         toast.error("reg is not uploaded");
                                                         return;
                                                     }
+
+                                                    dispatch(ngoAction.setFetchDone());
+                                                    toast.success("NGO saved successfully");
+                                                    navigate("/ngo");
                                                 })
                                         })
                                 })
@@ -109,9 +113,6 @@ const RegisterNgo = () => {
                    
                     
                    
-                        dispatch(ngoAction.setFetchDone());
-                        toast.success("NGO saved successfully");
-                        navigate("/ngo");
                 }
                 else{
                    toast.error(data.description);

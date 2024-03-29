@@ -64,7 +64,6 @@ import CreateEvent from './routes/CreateEvent.jsx'
 import EditEvent from './routes/EditEvent.jsx'
 import AdminDashboard from './routes/AdminDashboard.jsx'
 import AdminUserContent from './routes/AdminUserContent.jsx'
-
 const router = createBrowserRouter([
   {
     path: "/",
