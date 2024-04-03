@@ -31,7 +31,7 @@ const blockList = createSlice({
   },
   reducers: {
     setBlockeStatus:(state)=>{
-      state.isBlocked=true;
+      state.isBlocked="";
     },
     setUnBlockeStatus:(state)=>{
       state.isBlocked=false;

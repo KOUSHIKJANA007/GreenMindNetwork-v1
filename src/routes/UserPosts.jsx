@@ -12,7 +12,7 @@ import { Pagination } from '../components/Pagination';
 
 const UserPosts = () => {
     document.title = "My Articles";
-    const { posts, loading, DeletePost } = useSelector((store) => store.post);
+    const { posts, EditPost, loading, DeletePost } = useSelector((store) => store.post);
     const { users } = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const [pageNumber, setPageNumber] = useState(0);
@@ -28,12 +28,13 @@ const UserPosts = () => {
                 dispatch(postAction.setPost(data))
                 dispatch(postAction.setPostCreatedEnd())
                 dispatch(postAction.setDeletePostEnd())
+                dispatch(postAction.setEditPostEnd());
             })
             .catch((err) => {
                 console.log({ err });
                 toast.error(err)
             })
-    }, [DeletePost])
+    }, [DeletePost, EditPost])
 
     return (
         <>

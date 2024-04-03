@@ -9,11 +9,28 @@
 
 .admin_user_details_container {
   display: flex;
-  justify-content: flex-end;
+  justify-content:space-around;
+}
+.admin_user_details_container_back{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  width: 50%;
+}
+.admin_user_details_container_back button{
+  height: 40px;
+  width: 15%;
+   background-color: #78be20;
+  color: white;
+  font-size: large;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
 }
 .admin_user_details_container_search {
-  margin: 20px 42px 40px 10px;
+  margin: 20px 42px 0px 20px;
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 .admin_user_details_container_search input {
@@ -93,6 +110,12 @@
   font-weight: 600;
   text-transform: capitalize;
   cursor: pointer;
+}
+.admin_user_details_nouserfound{
+  margin-top: 40px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
 }
 #admin_block_button {
   background-color: #dccb0c;
@@ -295,6 +318,7 @@
     width: 95%;
     margin-left: 10px;
   }
+ 
   .auc_personal_info_contact {
     flex-direction: column;
     gap: 20px;
@@ -310,26 +334,20 @@
  .admin_user_content_count_donate{
   width: 90%;
  }
-
-
-
-
-
   .admin_user_details_main_container {
-    width: 110%;
+    width: 100%;
     position: relative;
-
-    left: -5%;
+    left: 0%;
   }
   .admin_user_details_container_search {
-    margin: 20px 20px 40px 10px;
-    width: 100%;
+    margin: 20px 20px 0px 10px;
+    width: 90%;
   }
   .admin_user_details_container_search input {
-    width: 80%;
+    width: 55%;
   }
   .admin_user_details_container_search button {
-    width: 50%;
+    width: 35%;
   }
   .admin_user_item_container {
     flex-direction: column;
@@ -357,6 +375,17 @@
   .admin_user_item_email {
     width: 95%;
     word-break: break-all;
+  }
+  .admin_user_details_container{
+    flex-direction: column-reverse;
+  }
+   .admin_user_details_container_back{
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .admin_user_details_container_back button{
+    width: 50%;
   }
 }
 @media (min-width: 401px) and (max-width: 700px) {
@@ -422,6 +451,17 @@
   }
   .admin_user_item_email {
     width: 90%;
+  }
+   .admin_user_details_container{
+    flex-direction: column-reverse;
+  }
+   .admin_user_details_container_back{
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .admin_user_details_container_back button{
+    width: 50%;
   }
 }
 @media (min-width: 701px) and (max-width: 1000px) {
@@ -497,6 +537,14 @@
   .admin_user_item_email {
     text-align: center;
     width: 90%;
+  }
+   .admin_user_details_container_back{
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .admin_user_details_container_back button{
+    width: 50%;
   }
 }
 @media (min-width: 1001px) and (max-width: 1400px){

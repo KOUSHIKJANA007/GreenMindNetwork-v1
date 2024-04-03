@@ -20,7 +20,7 @@ const UserNgoDashboard = () => {
 
     const { userNgo, loading, isEdit } = useSelector((store) => store.ngo);
     const { progress } = useSelector((store) => store.validation);
-    const { events, isDelete } = useSelector((store) => store.event);
+    const { events, isDelete, isCreate } = useSelector((store) => store.event);
     const [toggleMenu, setToggleMenu] = useState(1);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -59,10 +59,12 @@ const UserNgoDashboard = () => {
 
             })
             .catch((err) => {
-                toast.error(err)
+                toast.error(err.message);
             })
-        dispatch(eventAction.setDeleteDone())
-    }, [isDelete, isEdit])
+        dispatch(eventAction.setDeleteDone());
+        dispatch(eventAction.setCreateDone());
+    }, [isDelete, isEdit, isCreate])
+    console.log(events);
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}

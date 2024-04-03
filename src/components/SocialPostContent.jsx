@@ -9,23 +9,21 @@ import { toast } from 'react-toastify';
 import SocialPostEditItem from './SocialPostEditItem';
 
 const SocialPostContent = ({ socialPosts }) => {
-   
+    console.log(socialPosts);
     const dispatch = useDispatch();
-    const {users}=useSelector((store)=>store.user);
+    const { users } = useSelector((store) => store.user);
     const [toggle, setToggle] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
-    console.log("users", users);
-    console.log("users post", socialPosts);
     const handleToggle = () => {
         setToggle(!toggle);
     }
-    const handleDeletePost=()=>{
+    const handleDeletePost = () => {
         dispatch(deleteSocialPost(socialPosts.id))
-        .then(unwrapResult)
-        .then((data)=>{
-            dispatch(socialPostAction.deletePending());
-            toast.success(data.message)
-        })
+            .then(unwrapResult)
+            .then((data) => {
+                dispatch(socialPostAction.deletePending());
+                toast.success(data.message)
+            })
     }
     const handleEditPost = () => {
         setOpenEdit(!openEdit);
@@ -37,22 +35,24 @@ const SocialPostContent = ({ socialPosts }) => {
                     <h4>{socialPosts?.caption}</h4>
                 </div>
                 <div className="social_post_content_img">
-                    <img src={BASE_URL +`/api/socialImage/image/${socialPosts?.image}`} alt="" />
+                    <img src={BASE_URL + `/api/socialImage/image/${socialPosts?.image}`} alt="" />
                 </div>
             </div>
             <div className="social_post_conten_option">
-                {socialPosts?.ngo?.user?.id == users?.id && <CiMenuKebab onClick={handleToggle}className='social_post_conten_option_toggle' />}
+                {socialPosts?.ngo?.user?.id == users?.id && <CiMenuKebab onClick={handleToggle} className='social_post_conten_option_toggle' />}
                 <div className={toggle ? 'social_post_conten_dropdown open' : 'social_post_conten_dropdown'}>
-                    <li onClick={()=>{handleToggle()
-                    handleEditPost()}} ><Link>Edit</Link></li>
+                    <li onClick={() => {
+                        handleToggle()
+                        handleEditPost()
+                    }} ><Link>Edit</Link></li>
                     <li onClick={() => {
                         handleToggle()
                         handleDeletePost()
                     }}><Link>Delete</Link></li>
                 </div>
-                {socialPosts?.ngo?.user?.id == users?.id && <SocialPostEditItem handleEditPost={handleEditPost} openEdit={openEdit} socialId ={socialPosts?.id}/>}
+                {socialPosts?.ngo?.user?.id == users?.id && <SocialPostEditItem handleEditPost={handleEditPost} openEdit={openEdit} socialId={socialPosts?.id} />}
             </div>
-           
+
         </div>
     )
 }

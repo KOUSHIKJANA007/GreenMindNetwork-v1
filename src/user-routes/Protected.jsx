@@ -10,7 +10,7 @@ const Protected = ({ Component }) => {
     if (!isLogin) {
       navigate("/signin")
     }
-  }, []);
+  }, [isLogin]);
   return (
     <>
       {isLogin && <Component />}

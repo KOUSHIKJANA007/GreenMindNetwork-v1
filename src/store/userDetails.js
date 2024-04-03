@@ -82,6 +82,18 @@ export const fetchUserById = createAsyncThunk(
     return await response.json();
   }
 );
+export const fetchUserByEmail = createAsyncThunk(
+  "fetchUserByEmail",
+  async (email) => {
+    const response = await fetch(`http://localhost:8080/api/user/email/${email}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return await response.json();
+  }
+);
 export const fetchAllUser = createAsyncThunk("fetchAllUser", async () => {
   const response = await fetch("http://localhost:8080/api/user/", {
     method: "GET",
@@ -91,6 +103,7 @@ export const fetchAllUser = createAsyncThunk("fetchAllUser", async () => {
   });
   return await response.json();
 });
+
 const userSlice = createSlice({
   name: "userDetail",
   initialState: {
@@ -103,8 +116,17 @@ const userSlice = createSlice({
     admin_user: null,
     isEdit: false,
     isDelete: false,
+    block_status: null,
+    toggle_search:true
   },
   reducers: {
+    
+    setBlockStatus: (state, action) => {
+      state.block_status = action.payload;
+    },
+    setToggleSearch: (state, action) => {
+      state.toggle_search = action.payload;
+    },
     doLogin: (state) => {
       state.isLogin = true;
     },
@@ -207,6 +229,16 @@ const userSlice = createSlice({
         state.loading = false;
       }),
       builder.addCase(deleteUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+    builder.addCase(fetchUserByEmail.pending, (state) => {
+      state.loading = true;
+    }),
+      builder.addCase(fetchUserByEmail.fulfilled, (state, action) => {
+        state.loading = false;
+      }),
+      builder.addCase(fetchUserByEmail.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

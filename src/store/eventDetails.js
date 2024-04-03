@@ -65,6 +65,30 @@ export const getEventById = createAsyncThunk("getEventById", async (eventId) => 
   );
   return await response.json();
 });
+export const getTotalEventByNgo = createAsyncThunk(
+  "getTotalEventByNgo",
+  async (ngoId) => {
+    const response = await fetch(
+      `http://localhost:8080/api/event/length/${ngoId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  }
+);
+export const getTotalEvent = createAsyncThunk("getTotalEvent", async () => {
+  const response = await fetch(`http://localhost:8080/api/event/length`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+});
 export const getAllEvent = createAsyncThunk("getAllEvent", async () => {
   const response = await fetch(`http://localhost:8080/api/event/`, {
     method: "GET",
@@ -91,43 +115,58 @@ const eventDetails = createSlice({
   name: "eventDetails",
   initialState: {
     loading: false,
-    events:null,
-    homeEvents:null,
-    isDelete:false
+    events: null,
+    homeEvents: null,
+    isDelete: false,
+    isCreate: false,
+    total_event:'0',
+    total_event_by_ngo:'0',
   },
   reducers: {
-    setEvent:(state,action)=>{
-        state.events=action.payload;
+    setTotalEvent: (state, action) => {
+      state.total_event = action.payload;
     },
-    setHomeEvent:(state,action)=>{
-        state.homeEvents=action.payload;
+    setTotalEventByNgo: (state, action) => {
+      state.total_event_by_ngo = action.payload;
     },
-    setDeletePending:(state)=>{
-      state.isDelete=true;
+    setEvent: (state, action) => {
+      state.events = action.payload;
     },
-    setDeleteDone:(state)=>{
-      state.isDelete=false;
-    }
+    setHomeEvent: (state, action) => {
+      state.homeEvents = action.payload;
+    },
+    setDeletePending: (state) => {
+      state.isDelete = true;
+    },
+    setDeleteDone: (state) => {
+      state.isDelete = false;
+    },
+    setCreatePending: (state) => {
+      state.isCreate = true;
+    },
+    setCreateDone: (state) => {
+      state.isCreate = false;
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(getEventByNgo.pending,(state,action)=>{
-        state.loading=true;
-    })
-    builder.addCase(getEventByNgo.fulfilled,(state,action)=>{
-        state.loading=false;
-    })
-    builder.addCase(getEventByNgo.rejected,(state,action)=>{
-        state.loading=false;
-    })
+    builder.addCase(getEventByNgo.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getEventByNgo.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(getEventByNgo.rejected, (state, action) => {
+      state.loading = false;
+    });
     builder.addCase(createEvent.pending, (state, action) => {
       state.loading = true;
-    })
+    });
     builder.addCase(createEvent.fulfilled, (state, action) => {
       state.loading = false;
-    })
+    });
     builder.addCase(createEvent.rejected, (state, action) => {
       state.loading = false;
-    })
+    });
     builder.addCase(updateEvent.pending, (state, action) => {
       state.loading = true;
     });
@@ -139,13 +178,13 @@ const eventDetails = createSlice({
     });
     builder.addCase(uploadEventImage.pending, (state, action) => {
       state.loading = true;
-    })
+    });
     builder.addCase(uploadEventImage.fulfilled, (state, action) => {
       state.loading = false;
-    })
+    });
     builder.addCase(uploadEventImage.rejected, (state, action) => {
       state.loading = false;
-    })
+    });
     builder.addCase(getAllEvent.pending, (state, action) => {
       state.loading = true;
     });
@@ -172,6 +211,24 @@ const eventDetails = createSlice({
     });
     builder.addCase(getEventById.rejected, (state, action) => {
       state.loading = false;
+    });
+    builder.addCase(getTotalEventByNgo.pending, (state, action) => {
+      // state.loading = true;
+    });
+    builder.addCase(getTotalEventByNgo.fulfilled, (state, action) => {
+      // state.loading = false;
+    });
+    builder.addCase(getTotalEventByNgo.rejected, (state, action) => {
+      // state.loading = false;
+    });
+    builder.addCase(getTotalEvent.pending, (state, action) => {
+      // state.loading = true;
+    });
+    builder.addCase(getTotalEvent.fulfilled, (state, action) => {
+      // state.loading = false;
+    });
+    builder.addCase(getTotalEvent.rejected, (state, action) => {
+      // state.loading = false;
     });
   },
 });

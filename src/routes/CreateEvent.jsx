@@ -2,7 +2,7 @@ import JoditEditor from 'jodit-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, useNavigate, useParams } from 'react-router-dom';
-import { createEvent, uploadEventImage } from '../store/eventDetails';
+import { createEvent, eventAction, uploadEventImage } from '../store/eventDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
@@ -10,6 +10,7 @@ const CreateEvent = () => {
    
     const editor = useRef(null);
     const { users } = useSelector((store) => store.user);
+    const { isCreate } = useSelector((store) => store.event);
     const dispatch = useDispatch();
     const { ngoId } = useParams();
     const navigate = useNavigate()
@@ -40,6 +41,7 @@ const CreateEvent = () => {
                         .then(unwrapResult)
                         .then((obj) => {
                             console.log(obj);
+                            dispatch(eventAction.setCreatePending());
                         })
                     toast.success("Event created");
                     navigate(`/ngo-content/${users?.id}/${ngoId}`);

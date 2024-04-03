@@ -22,6 +22,7 @@ const SocialPostEditItem = ({ socialId,handleEditPost,openEdit }) => {
         dispatch(getSocialPostById(socialId))
         .then(unwrapResult)
         .then((data)=>{
+            console.log(data);
             setCaption(data);
            setImagePre(BASE_URL+`/api/socialImage/image/${data.image}`);
         })
@@ -32,7 +33,6 @@ const SocialPostEditItem = ({ socialId,handleEditPost,openEdit }) => {
     }
     const handleCaption = (e) => {
         setCaption({ ...caption, [e.target.name]: e.target.value })
-        console.log(caption);
     }
     const handleSubmitData=(e)=>{
         e.preventDefault();

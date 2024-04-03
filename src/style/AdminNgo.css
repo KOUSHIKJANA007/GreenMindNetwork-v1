@@ -1,0 +1,104 @@
+.admin_ngo_details_container{
+     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.69);
+     min-height: 300px;
+     border-radius: 10px;
+     display: flex;
+     flex-direction: column;
+}
+.admin_ngo_details_item_content{
+    border-radius: 10px;
+   background-color: #78be20;
+    margin: 20px 10px;
+    display: flex;
+    gap: 30px;
+}
+.admin_ngo_dash_details{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    gap: 10px;
+}
+.admin_ngo_item_img{
+     padding: 10px;
+     margin: 5px;
+     border-radius: 5px;
+}
+.admin_ngo_item_img img{
+    border-radius: 5px;
+    height: 170px;
+    width: 170px;
+    box-shadow: #f5f10b 1px 0px 30px 4px;
+    transition: all .2s ease-in-out .2s;
+}
+.admin_ngo_item_img img:hover{
+    transform: scale(1.02);
+}
+.admin_ngo_dash_details_name h1 a{
+    text-decoration: none;
+ text-transform: capitalize;
+ font-size: 45px;
+ color: white;
+}
+.admin_ngo_dash_details_name h1 a:hover{
+   
+    text-shadow: 0 0 7px #fff;
+}
+.admin_ngo_dash_details_contact{
+    display: flex;
+    gap: 10px;
+   
+    flex-direction: column;
+}
+.admin_ngo_dash_details_contact h3 span{
+    margin-right: 10px;
+    font-size: 25px;
+
+}
+.admin_ngo_dash_details_contact h3{
+    font-weight: 600;
+    display: flex;
+    color: white;
+}
+.admin_ngo_dash_icon{
+  color: white;
+}
+@media (max-width:400px){
+    .admin_ngo_details_item_content{
+    flex-direction: column;
+   gap: 10px;
+    }
+    .admin_ngo_item_img img{
+        height: 200px;
+        width: 100%;
+    }
+    .admin_ngo_dash_details{
+        align-items: center;
+        padding: 0px 0px 15px 10px;
+    }
+    .admin_ngo_dash_details_contact h3 span{
+        font-size: 20px;
+    }
+    .admin_ngo_dash_details_name h1 a{
+        font-size: 35px;
+    }
+}
+@media (min-width:401px) and (max-width:700px){
+     .admin_ngo_details_item_content{
+    flex-direction: column;
+   gap: 10px;
+    }
+    .admin_ngo_item_img img{
+        height: 250px;
+        width: 100%;
+    }
+    .admin_ngo_dash_details{
+        align-items: center;
+        padding: 0px 0px 15px 10px;
+    }
+    .admin_ngo_dash_details_contact h3 span{
+        font-size: 20px;
+    }
+    .admin_ngo_dash_details_name h1 a{
+        font-size: 35px;
+    }
+}

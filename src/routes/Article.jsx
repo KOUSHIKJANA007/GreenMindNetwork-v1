@@ -26,6 +26,7 @@ const Article = () => {
     dispatch(fetchPosts(pageNumber))
       .then(unwrapResult)
       .then((data) => {
+        dispatch(postAction.setTotalPost(data?.totalElement));
         dispatch(postAction.setPost(data))
         dispatch(postAction.setPostCreatedEnd())
         window.scroll(0, 0)
@@ -41,7 +42,6 @@ const Article = () => {
   const handleSearch = () => {
     dispatch(validationAction.setProgress(50));
     const keyword = searchElement.current.value;
-    console.log(keyword);
     if (!keyword.trim(" ")) {
       toast.error("Please enter anything for search")
     }

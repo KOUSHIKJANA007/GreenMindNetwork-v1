@@ -37,6 +37,15 @@ export const getAllNgos = createAsyncThunk("getAllNgos",async()=>{
     })
     return await response.json();
 })
+export const getTotalNgo = createAsyncThunk("getTotalNgo", async () => {
+  const response = await fetch("http://localhost:8080/api/ngo/length", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+});
 export const getSingleNgo = createAsyncThunk("getSingleNgo", async (ngoId) => {
   const response = await fetch(`http://localhost:8080/api/ngo/${ngoId}`, {
     method: "GET",
@@ -115,11 +124,15 @@ const ngoDetails = createSlice({
         isFetch:false,
         userNgo:null,
         singleNgo:null,
-        isEdit:false
+        isEdit:false,
+        total_ngo:'0',
     },
     reducers: {
         setNgoData:(state,action)=>{
             state.ngoData=action.payload;
+        },
+        setTotalNgo:(state,action)=>{
+            state.total_ngo=action.payload;
         },
         setUserNgoData:(state,action)=>{
             state.userNgo=action.payload;
@@ -212,6 +225,15 @@ const ngoDetails = createSlice({
         });
         builder.addCase(updateNgo.rejected, (state, action) => {
           state.loading = false;
+        });
+        builder.addCase(getTotalNgo.pending, (state, action) => {
+        //   state.loading = true;
+        });
+        builder.addCase(getTotalNgo.fulfilled, (state, action) => {
+        //   state.loading = false;
+        });
+        builder.addCase(getTotalNgo.rejected, (state, action) => {
+        //   state.loading = false;
         });
     }
 })

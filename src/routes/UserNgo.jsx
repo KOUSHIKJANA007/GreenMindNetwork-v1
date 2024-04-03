@@ -17,6 +17,12 @@ const UserNgo = () => {
       .then(unwrapResult)
       .then((data) => {
         dispatch(ngoAction.setNgoData(data))
+        if(data?.length!='0'){
+          dispatch(ngoAction.setTotalNgo(data?.length))
+        }
+        else{
+          dispatch(ngoAction.setTotalNgo('0'))
+        }
       })
     dispatch(ngoAction.setFetchEnd());
   }, [isFetch])

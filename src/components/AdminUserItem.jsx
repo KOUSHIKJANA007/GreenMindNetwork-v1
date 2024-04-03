@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { blockListAction, blockUser, unBlockUser } from '../store/blockList';
 
 const AdminUserItem = ({ users }) => {
-  const { isBlocked } = useSelector((store) => store.blocklist);
+  // const { isBlocked } = useSelector((store) => store.blocklist);
+  const { block_status } = useSelector((store) => store.user);
   const navigate = useNavigate();
-  const dispatch=useDispatch();
-  const [block, setBlock] = useState(isBlocked);
+  const dispatch = useDispatch();
+  const [block, setBlock] = useState(users?.status[0]?.status);
   const handleContent = () => {
     navigate(`/user-content/${users?.id}`);
   }
@@ -33,7 +34,6 @@ const AdminUserItem = ({ users }) => {
     }
 
   }
-
   const handleBlock = () => {
     dispatch(blockUser(users?.id))
       .then(unwrapResult)
@@ -41,7 +41,8 @@ const AdminUserItem = ({ users }) => {
         if (data.success == true) {
           toast.success(data.message)
           dispatch(blockListAction.setBlockeStatus());
-         setBlock(true);
+          dispatch(loginAction.setBlockStatus(users?.status[0]?.status));
+          setBlock("BLOCKED");
         }
       })
   }
@@ -50,9 +51,10 @@ const AdminUserItem = ({ users }) => {
       .then(unwrapResult)
       .then((data) => {
         if (data.success == true) {
-          toast.success(data.message)
+          toast.success(data.message);
           dispatch(blockListAction.setUnBlockeStatus());
-         setBlock(false);
+          dispatch(loginAction.setBlockStatus(users?.status[0]?.status));
+          setBlock("UNBLOCKED");
         }
       })
   }
@@ -72,11 +74,12 @@ const AdminUserItem = ({ users }) => {
           <p>{users?.email}</p>
         </div>
         <div className="admin_user_item_buttons">
-          {block
+          {block == 'UNBLOCKED'
             ?
-            <button id='admin_block_button' onClick={handleUnBlock}>unblock</button>
-          :
-          <button id='admin_block_button'onClick={handleBlock} >block</button>}
+            <button id='admin_block_button' onClick={handleBlock}>block</button>
+            :
+            <button id='admin_block_button' onClick={handleUnBlock} >unblock</button>
+          }
           <button onClick={handleDeleteUser} id='admin_delete_button'>delete</button>
         </div>
       </div>

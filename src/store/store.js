@@ -6,7 +6,7 @@ import storage from "redux-persist/lib/storage";
 import postDetails from "./postDetails";
 import commentDetails from "./commentDetails";
 import donationDetails from "./donationDetails";
-import validationSlice from './OtpValidation'
+import validationSlice from "./OtpValidation";
 import ngoDetails from "./ngoDetails";
 import eventDetails from "./eventDetails";
 import socialImageDetails from "./socialImageDetails";
@@ -15,10 +15,11 @@ import adminFunctions from "./adminFunctions";
 import blockList from "./blockList";
 
 const persistConfig = {
-    key: "root",
-    version: 1,
-    storage,
-}
+  key: "root",
+  version: 1,
+  storage,
+  whitelist: ["user","ngo"],
+};
 
 const reducer = combineReducers({
   user: userDetails,
@@ -35,12 +36,12 @@ const reducer = combineReducers({
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: false,
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
     }),
-})
-
+});
 
 export const persistor = persistStore(greenMindStore);
-export default greenMindStore
+export default greenMindStore;

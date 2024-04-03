@@ -79,6 +79,18 @@ export const postByUser = createAsyncThunk("postByUser", async (data) => {
     })
     return await response.json();
 })
+export const getTotalPost = createAsyncThunk("getTotalPost", async () => {
+  const response = await fetch(
+    `http://localhost:8080/api/post/length`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
+  return await response.json();
+});
 export const searchPost = createAsyncThunk("searchPost", async (keyword) => {
     const response = await fetch(`http://localhost:8080/api/post/search/${keyword}`, {
         method: "GET",
@@ -96,12 +108,17 @@ const postSlice = createSlice({
         singlePost: [],
         isPostCreate: false,
         DeletePost:false,
+        EditPost:false,
         totalPostOfUser:0,
+        total_post:'0',
         error: null
     },
     reducers: {
         setPost: (state, action) => {
             state.posts = (action.payload);
+        },
+        setTotalPost: (state, action) => {
+            state.total_post = (action.payload);
         },
         setSinglePost: (state, action) => {
             state.singlePost = (action.payload);
@@ -121,6 +138,12 @@ const postSlice = createSlice({
         },
         setDeletePostEnd:(state)=>{
             state.DeletePost=false;
+        },
+        setEditPostDone:(state)=>{
+            state.EditPost=true;
+        },
+        setEditPostEnd:(state)=>{
+            state.EditPost=false;
         }
     },
     extraReducers: (builder) => {
@@ -204,6 +227,16 @@ const postSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
+            builder.addCase(getTotalPost.pending, (state) => {
+            //   state.loading = true;
+            }),
+              builder.addCase(getTotalPost.fulfilled, (state) => {
+                // state.loading = false;
+              }),
+              builder.addCase(getTotalPost.rejected, (state, action) => {
+                // state.loading = false;
+                // state.error = action.payload;
+              });
     }
 })
 

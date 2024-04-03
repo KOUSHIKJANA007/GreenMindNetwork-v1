@@ -50,7 +50,7 @@ const EditPost = () => {
                                 toast.error("Image not uploaded")
                             }
                         })
-                    dispatch(postAction.setPostCreatedDone());
+                    dispatch(postAction.setEditPostDone());
                     toast.success("post updated successfully");
                     navigate("/userposts");
                 }

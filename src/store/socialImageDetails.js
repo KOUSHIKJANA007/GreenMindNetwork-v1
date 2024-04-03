@@ -90,6 +90,36 @@ export const getSocialPostById = createAsyncThunk(
     return await response.json();
   }
 );
+export const getTotalSocialPost = createAsyncThunk(
+  "getTotalSocialPost",
+  async () => {
+    const response = await fetch(
+      `http://localhost:8080/api/socialImage/length`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  }
+);
+export const getTotalSocialPostByNgo = createAsyncThunk(
+  "getTotalSocialPostByNgo",
+  async (ngoId) => {
+    const response = await fetch(
+      `http://localhost:8080/api/socialImage/ngo/length/${ngoId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  }
+);
 const socialImageDetails = createSlice({
   name: "socialImageDetails",
   initialState: {
@@ -99,8 +129,16 @@ const socialImageDetails = createSlice({
     isCreate: false,
     isUpdate: false,
     isImageUpload: false,
+    total_socialPost:'0',
+    total_socialPost_of_ngo:'0'
   },
   reducers: {
+    setTotalSocialPost:(state,action)=>{
+      state.total_socialPost=action.payload;
+    },
+    setTotalSocialPostByNgo:(state,action)=>{
+      state.total_socialPost_of_ngo = action.payload;
+    },
     setSocialPost: (state, action) => {
       state.socialPosts = action.payload;
     },
@@ -183,6 +221,24 @@ const socialImageDetails = createSlice({
     });
     builder.addCase(updateSocialPost.rejected, (state, action) => {
       state.loading = false;
+    });
+    builder.addCase(getTotalSocialPost.pending, (state, action) => {
+      // state.loading = true;
+    });
+    builder.addCase(getTotalSocialPost.fulfilled, (state, action) => {
+      // state.loading = false;
+    });
+    builder.addCase(getTotalSocialPost.rejected, (state, action) => {
+      // state.loading = false;
+    });
+    builder.addCase(getTotalSocialPostByNgo.pending, (state, action) => {
+      // state.loading = true;
+    });
+    builder.addCase(getTotalSocialPostByNgo.fulfilled, (state, action) => {
+      // state.loading = false;
+    });
+    builder.addCase(getTotalSocialPostByNgo.rejected, (state, action) => {
+      // state.loading = false;
     });
   },
 });

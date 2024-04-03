@@ -27,7 +27,8 @@ const CreateComment = ({ postId }) => {
                 }
             })
             .catch((err) => {
-                toast.error(err)
+                toast.error(err);
+
             })
     }
     console.log(users.imageName);

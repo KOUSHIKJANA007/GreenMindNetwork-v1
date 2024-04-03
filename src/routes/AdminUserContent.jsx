@@ -5,7 +5,7 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { deleteUser, fetchUserById, loginAction } from '../store/userDetails'
 import { unwrapResult } from "@reduxjs/toolkit";
 import { BASE_URL } from "../store/helper";
@@ -15,23 +15,25 @@ import { toast } from "react-toastify";
 import blockList, { blockListAction, blockUser, unBlockUser } from "../store/blockList";
 
 const AdminUserContent = () => {
-    const { userData, admin_user } = useSelector((store) => store.user);
+    const { userData, admin_user, block_status } = useSelector((store) => store.user);
     const { totalPostOfUser } = useSelector((store) => store.post);
     const { total_donation } = useSelector((store) => store.donation);
     const { isBlocked } = useSelector((store) => store.blocklist);
+    const [block, setBlock] = useState(userData?.status[0].status);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { userId } = useParams();
     const handleContent = () => {
         navigate("/admin-dashboard");
     }
-
     useEffect(() => {
         window.scroll(0, 0);
         dispatch(fetchUserById(userId))
             .then(unwrapResult)
             .then((data) => {
+                console.log("fetched user dta", data);
                 dispatch(loginAction.setUserData(data));
+                dispatch(loginAction.setBlockStatus(data.status[0].status))
             })
         dispatch(postByUser({ userId: userId, pageNumber: 0 }))
             .then(unwrapResult)
@@ -43,7 +45,7 @@ const AdminUserContent = () => {
             .then((data) => {
                 dispatch(donationAction.setDonationAmount(data));
             })
-    }, []);
+    }, [isBlocked]);
     const handleDeleteUser = () => {
         let c = confirm("Are you sure?")
         if (c) {
@@ -69,6 +71,7 @@ const AdminUserContent = () => {
                 if (data.success == true) {
                     toast.success(data.message)
                     dispatch(blockListAction.setBlockeStatus());
+                    setBlock("BLOCKED")
                 }
             })
     }
@@ -79,9 +82,13 @@ const AdminUserContent = () => {
                 if (data.success == true) {
                     toast.success(data.message)
                     dispatch(blockListAction.setUnBlockeStatus());
+                    setBlock("UNBLOCKED")
                 }
             })
     }
+    
+    let date=new Date(userData?.dob);
+    let age=new Date().getFullYear()-date.getFullYear();
     return (
         <div className="admin_user_content_main_container">
             <div className='admin_user_content_container'>
@@ -93,7 +100,7 @@ const AdminUserContent = () => {
                         <h1>{userData?.fname + " " + userData?.lname}</h1>
                     </div>
                     <div className="admin_user_content_age">
-                        <p>age <span>21</span></p>
+                        <p>age <span>{age}</span></p>
                     </div>
                     <div className="admin_user_content_icons">
                         <Link> <FaInstagramSquare className="user_social_icon" /></Link>
@@ -125,20 +132,21 @@ const AdminUserContent = () => {
                             </div>
                             <div className="auc_personal_info_contact_age">
                                 <label htmlFor="age">Age</label>
-                                <p id="dob">20</p>
+                                <p id="dob">{age}</p>
                             </div>
                         </div>
                     </div>
                     <div className="auc_action_buttons">
                         <h3>Take Action On User</h3>
-                        { admin_user?.roleName=="ADMIN_USER" &&
-                        <div className="admin_user_content_buttons">
-                            {isBlocked ?
-                                <button onClick={handleUnBlock} id='admin_block_button'>unblock</button> :
-                                <button onClick={handleBlock} id='admin_block_button'>block</button>}
-                            <button onClick={handleDeleteUser} id='admin_delete_button'>delete</button>
-                            <button onClick={handleContent} id='admin_back_button'>Back</button>
-                        </div>}
+                        {admin_user?.roleName == "ADMIN_USER" &&
+                            <div className="admin_user_content_buttons">
+                                {block_status == "BLOCKED" ?
+                                    <button onClick={handleUnBlock} id='admin_block_button'>unblock</button> :
+                                    <button onClick={handleBlock} id='admin_block_button'>block</button>
+                                }
+                                <button onClick={handleDeleteUser} id='admin_delete_button'>delete</button>
+                                <button onClick={handleContent} id='admin_back_button'>Back</button>
+                            </div>}
                     </div>
                 </div>
 
