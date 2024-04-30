@@ -26,12 +26,11 @@ const AdminUserContent = () => {
     const handleContent = () => {
         navigate("/admin-dashboard");
     }
+    window.scroll(0, 0);
     useEffect(() => {
-        window.scroll(0, 0);
         dispatch(fetchUserById(userId))
             .then(unwrapResult)
             .then((data) => {
-                console.log("fetched user dta", data);
                 dispatch(loginAction.setUserData(data));
                 dispatch(loginAction.setBlockStatus(data.status[0].status))
             })
@@ -71,6 +70,7 @@ const AdminUserContent = () => {
                 if (data.success == true) {
                     toast.success(data.message)
                     dispatch(blockListAction.setBlockeStatus());
+                    dispatch(loginAction.setBlockStatus("BLOCKED"));
                     setBlock("BLOCKED")
                 }
             })
@@ -79,9 +79,11 @@ const AdminUserContent = () => {
         dispatch(unBlockUser(userId))
             .then(unwrapResult)
             .then((data) => {
+                console.log(data);
                 if (data.success == true) {
                     toast.success(data.message)
                     dispatch(blockListAction.setUnBlockeStatus());
+                    dispatch(loginAction.setBlockStatus("UNBLOCKED"));
                     setBlock("UNBLOCKED")
                 }
             })

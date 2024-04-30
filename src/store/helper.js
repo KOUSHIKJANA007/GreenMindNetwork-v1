@@ -1,5 +1,6 @@
 
 export const BASE_URL = "http://localhost:8080"
+// export const BASE_URL = "http://13.201.209.254:8080";
 
 export const localStorageWithExpiry = {
     setItem: function (key, value, expiryTime) {
@@ -8,7 +9,6 @@ export const localStorageWithExpiry = {
             expiryTime: Date.now() + expiryTime
         };
         localStorage.setItem(key, JSON.stringify(result));
-        console.log(expiryTime);
     },
     isExpire: function (key) {
         let data = localStorage.getItem(key);

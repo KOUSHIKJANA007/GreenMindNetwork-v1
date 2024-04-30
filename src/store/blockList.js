@@ -1,26 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { BASE_URL } from "./helper";
 export const blockUser = createAsyncThunk("blockUser", async (userId) => {
-  const response = await fetch(
-    `http://localhost:8080/api/user/block/${userId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(BASE_URL + `/api/user/block/${userId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   return await response.json();
 });
 export const unBlockUser = createAsyncThunk("unBlockUser", async (userId) => {
-  const response = await fetch(
-    `http://localhost:8080/api/user/unblock/${userId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(BASE_URL + `/api/user/unblock/${userId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   return await response.json();
 });
 

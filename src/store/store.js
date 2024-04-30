@@ -13,12 +13,13 @@ import socialImageDetails from "./socialImageDetails";
 import bankDetails from "./bankDetails";
 import adminFunctions from "./adminFunctions";
 import blockList from "./blockList";
+import messageSlice from "./messageSlice";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["user","ngo"],
+  whitelist: ["user", "ngo"],
 };
 
 const reducer = combineReducers({
@@ -33,6 +34,7 @@ const reducer = combineReducers({
   bank: bankDetails,
   admin: adminFunctions,
   blocklist: blockList,
+  message:messageSlice
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({

@@ -10,17 +10,18 @@ import { getTotalSocialPost, socialPostAction } from '../store/socialImageDetail
 import { getTotalPost, postAction } from '../store/postDetails';
 import { eventAction, getTotalEvent } from '../store/eventDetails';
 
+
 const AdminDashboard = () => {
     const { toggleNav } = useSelector((store) => store.admin);
-    const { isDelete, allUsers } = useSelector((store) => store.user);
+    const { isDelete, allUsers, block_status } = useSelector((store) => store.user);
     const { isBlocked } = useSelector((store) => store.blocklist);
     const { total_ngo } = useSelector((store) => store.ngo);
     const { total_post } = useSelector((store) => store.post);
     const { total_socialPost } = useSelector((store) => store.socialPost);
     const { total_event } = useSelector((store) => store.event);
     const dispatch = useDispatch();
+    window.scroll(0, 0)
     useEffect(() => {
-        // window.scroll(0, 0)
         dispatch(fetchAllUser())
             .then(unwrapResult)
             .then((data) => {
@@ -30,31 +31,32 @@ const AdminDashboard = () => {
         dispatch(loginAction.setDeleteEnd());
         console.log("fetched");
         dispatch(getTotalNgo())
-        .then(unwrapResult)
-        .then((data)=>{
-            if(data?.status!='400'){
-                dispatch(ngoAction.setTotalNgo(data))
-            }
-        })
+            .then(unwrapResult)
+            .then((data) => {
+                if (data?.status != '400') {
+                    dispatch(ngoAction.setTotalNgo(data))
+                }
+            })
         dispatch(getTotalSocialPost())
-        .then(unwrapResult)
-        .then((data)=>{
-            if (data?.status != '400') {  dispatch(socialPostAction.setTotalSocialPost(data))}
-          
-        })
+            .then(unwrapResult)
+            .then((data) => {
+                if (data?.status != '400') { dispatch(socialPostAction.setTotalSocialPost(data)) }
+
+            })
         dispatch(getTotalPost())
-        .then(unwrapResult)
-        .then((data)=>{
-            if (data?.status != '400') { dispatch(postAction.setTotalPost(data))}
-           
-        })
+            .then(unwrapResult)
+            .then((data) => {
+                if (data?.status != '400') { dispatch(postAction.setTotalPost(data)) }
+
+            })
         dispatch(getTotalEvent())
-        .then(unwrapResult)
-        .then((data)=>{
-            if (data?.status != '400') { dispatch(eventAction.setTotalEvent(data))}
-           
-        })
-    }, [isDelete, isBlocked])
+            .then(unwrapResult)
+            .then((data) => {
+                if (data?.status != '400') { dispatch(eventAction.setTotalEvent(data)) }
+
+            })
+    }, [isDelete, isBlocked, block_status])
+    console.log(block_status);
     return (
         <>
             <div className="admin_dash_main_container">

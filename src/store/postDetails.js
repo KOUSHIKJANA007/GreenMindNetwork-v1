@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 
 
 
 export const fetchPosts = createAsyncThunk("fetchPosts", async (pageNumber) => {
-    const response = await fetch(`http://localhost:8080/api/posts?pageNumber=${pageNumber}`, {
+    const response = await fetch(BASE_URL + `/api/posts?pageNumber=${pageNumber}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const fetchPosts = createAsyncThunk("fetchPosts", async (pageNumber) => {
 })
 export const createPost = createAsyncThunk("createPost", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/post/${data.userId}`, {
+    const response = await fetch(BASE_URL + `/api/post/${data.userId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const createPost = createAsyncThunk("createPost", async (data) => {
 
 export const updatePost = createAsyncThunk("updatePost", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/post/${data.postId}`, {
+    const response = await fetch(BASE_URL + `/api/post/${data.postId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export const updatePost = createAsyncThunk("updatePost", async (data) => {
 })
 export const deletePost = createAsyncThunk("deletePost", async (postId) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/post/${postId}`, {
+    const response = await fetch(BASE_URL + `/api/post/${postId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const uploadPostImage = createAsyncThunk("uploadPostImage", async (data) 
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData()
     formData.append("image", data.image)
-    const response = await fetch(`http://localhost:8080/api/post/image/${data.postId}`, {
+    const response = await fetch(BASE_URL + `/api/post/image/${data.postId}`, {
         method: "POST",
         headers: {
             Authorization: "Bearer" + token
@@ -62,7 +62,7 @@ export const uploadPostImage = createAsyncThunk("uploadPostImage", async (data) 
     return await response.json();
 })
 export const getPostById = (createAsyncThunk("getPostById", async (postId) => {
-    const response = await fetch(`http://localhost:8080/api/post/${postId}`, {
+    const response = await fetch(BASE_URL + `/api/post/${postId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -71,17 +71,20 @@ export const getPostById = (createAsyncThunk("getPostById", async (postId) => {
     return await response.json();
 }))
 export const postByUser = createAsyncThunk("postByUser", async (data) => {
-    const response = await fetch(`http://localhost:8080/api/post/user/${data.userId}?pageNumber=${data.pageNumber}`, {
+    const response = await fetch(
+      BASE_URL + `/api/post/user/${data.userId}?pageNumber=${data.pageNumber}`,
+      {
         method: "GET",
         headers: {
-            "Content-type": "application/json"
-        }
-    })
+          "Content-type": "application/json",
+        },
+      }
+    );
     return await response.json();
 })
 export const getTotalPost = createAsyncThunk("getTotalPost", async () => {
   const response = await fetch(
-    `http://localhost:8080/api/post/length`,
+    BASE_URL + `/api/post/length`,
     {
       method: "GET",
       headers: {
@@ -92,7 +95,7 @@ export const getTotalPost = createAsyncThunk("getTotalPost", async () => {
   return await response.json();
 });
 export const searchPost = createAsyncThunk("searchPost", async (keyword) => {
-    const response = await fetch(`http://localhost:8080/api/post/search/${keyword}`, {
+    const response = await fetch(BASE_URL + `/api/post/search/${keyword}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json"

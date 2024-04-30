@@ -22,7 +22,6 @@ const AdminUserItem = ({ users }) => {
       dispatch(deleteUser(users?.id))
         .then(unwrapResult)
         .then((data) => {
-          console.log(data);
           if (data.success == true) {
             toast.success(data.message);
             dispatch(loginAction.setDeleteDone())

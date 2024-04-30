@@ -30,6 +30,8 @@ import '../src/style/UserHome.css'
 import '../src/style/AdminDashboard.css'
 import '../src/style/AdminUser.css'
 import '../src/style/AdminNgo.css'
+import '../src/style/ContactUs.css'
+import '../src/style/AdminChat.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -65,6 +67,8 @@ import CreateEvent from './routes/CreateEvent.jsx'
 import EditEvent from './routes/EditEvent.jsx'
 import AdminDashboard from './routes/AdminDashboard.jsx'
 import AdminUserContent from './routes/AdminUserContent.jsx'
+import ContactUs from './routes/ContactUs.jsx'
+import AdminChat from './routes/AdminChat.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,17 +106,19 @@ const router = createBrowserRouter([
       { path: "/create-event/:ngoId", element: <Protected Component={CreateEvent}/>},
       { path: "/edit-event/:eventId/:ngoId", element: <Protected Component={EditEvent}/>},
       { path: "/admin-dashboard", element: <Protected Component={AdminDashboard}/>},
+      { path: "/contact-us", element: <Protected Component={ContactUs}/>},
       { path: "/user-content/:userId", element: <Protected Component={AdminUserContent}/>},
+      { path: "/admin-chat", element: <Protected Component={AdminChat}/>},
     ]
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={greenMindStore}>
       <PersistGate loading={null} persistor={persistor}>
         <RouterProvider router={router} />
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
+  // {/* </React.StrictMode>, */}
 )

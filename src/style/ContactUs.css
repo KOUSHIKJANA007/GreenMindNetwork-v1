@@ -1,0 +1,271 @@
+.contact_us_conatiner{
+    position: relative;
+    top: 100px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    padding: 30px 5px;
+}
+.contact_us_conatiner h1{
+    text-transform: uppercase;
+    color: #636466;
+    text-align: center;
+}
+.contact_us_option_conatiner{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+      flex-wrap: wrap;
+}
+.contact_option{
+    padding: 25px 10px;
+    border: 2px solid #78be20;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 300px;
+  
+}
+.cc_location, .cc_call, .cc_chat, .cc_email{
+    background-color: #81de1049;
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    padding-top: 5px;
+    padding-left: 5px;
+    margin-bottom: 20px;
+}
+.cc_icons{
+    font-size: 30px;
+    color: #589a07;
+}
+.contact_option h4{
+    text-transform: capitalize;
+}
+.contact_option p{
+    text-transform: capitalize;
+}
+.contact_option h5{
+    font-weight: 600;
+}
+.contact_option button{
+    width: 50%;
+    height: 35px;
+    text-transform: capitalize;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    background-color: #78be20;
+    color: white;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.contact_option button:hover{
+    text-shadow: 0 0 7px #fff;
+    background-color: #4e8609;
+}
+.contact_option button:active{
+    transform: scale(1.02);
+}
+.pined_location{
+    text-align: center;
+    width: 95%;
+}
+.pined_location h1{
+    margin: 0px 0px 40px 0px;
+}
+.help_icon_button{
+    position: fixed;
+    top: 80%;
+    left: 85%;
+      background: linear-gradient(to right,  #089c08,#6dc212 80%); 
+    box-shadow: #7ed116 1px 0px 30px 4px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 99;
+}
+.help_icon_button:active{
+    transform: scale(1.02);
+}
+.help_icon{
+    font-size: 45px;
+    color: white;
+}
+
+
+/* *********************************************** CHAT DESIGN HERE *********************************************** */
+
+
+.popup_help_chat_container{
+    min-height: 350px;
+    width: 300px;
+    position: fixed;
+    left: 70%;
+    top: 30%;
+    background-color: white;
+    z-index: 99;
+     box-shadow: 0px 0.5px 5px .5px rgba(15, 0, 0, 0.934);
+     border-radius: 10px;
+}
+.chat_header_part{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 5px;
+    background: linear-gradient(to right,  #089c08 20%,#6dc212); 
+     border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.chat_body{
+    background-image: url("/public/image/chatbackground.jpg");
+    background-position: center;
+    background-size: cover;
+    min-height: 300px;
+    max-height: 300px;
+    overflow: auto;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.chat_body::-webkit-scrollbar {
+    width: 8px; 
+    background-color: #c6c6c6;
+}
+.chat_body::-webkit-scrollbar-thumb {
+    background-color: #78be20; 
+    border-radius: 5px; 
+}
+.chat_dp{
+    height: 40px;
+    width: 40px;
+    border: 2.5px solid white;
+    border-radius: 50%;
+     box-shadow: #fff 1px 0px 30px 4px;
+}
+.chat_dp img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.chat_name p{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+.chat_close{
+    margin-left: 40%;
+    cursor: pointer;
+}
+.chat_close_icon{
+    font-size: 30px;
+    color: white;
+}
+.chat_footer{
+    display: flex;
+    gap: 5px;
+    padding-left: 2px;
+    padding-bottom: 2px;
+}
+.chat_footer input{
+    width: 80%;
+    height: 35px;
+    font-size: 16px;
+    padding: 0px 5px 5px 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid #78be20;
+}
+.chat_footer button{
+    width: 40px;
+    padding-top: 5px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+     background: linear-gradient(to right,  #089c08,#6dc212 80%); 
+}
+.chat_footer button:active{
+    transform: scale(1.02);
+}
+.cc_send{
+    font-size: 25px;
+    color: white;
+}
+.outgoing_message{
+    align-self: flex-end;
+    background-color: #089c08;
+     box-shadow: 0px 0.5px 5px .5px rgba(15, 0, 0, 0.6);
+    min-height: 40px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    margin: 5px 0px;
+}
+.incomming_message{
+    background-color: #fff;
+    box-shadow: 0px 0.5px 5px .5px rgba(15, 0, 0, 0.6);
+    padding: 5px 10px 5px 10px;
+    max-width: 260px;
+    border-radius: 5px;
+    width:max-content;
+    margin: 5px 0px;
+}
+@media (max-width:330px){
+ .popup_help_chat_container{
+        left: 4%;
+        top: 20%;
+        width: 260px;
+    }
+    .chat_close{
+        margin-left: 35%;
+    }
+}
+@media (min-width:331px) and (max-width:450px){
+ .popup_help_chat_container{
+        left: 10%;
+        top: 20%;
+ }
+}
+@media(max-width:400px){
+    .contact_option{
+        width: 100%;
+    }
+    .help_icon_button{
+        left: 70%;
+    }
+   
+}
+@media (min-width:451px) and (max-width:700px){
+    .contact_option{
+        width: 65%;
+    }
+    .help_icon_button{
+        left: 75%;
+    }
+    .popup_help_chat_container{
+        left: 30%;
+        top: 20%;
+ }
+}
+@media (min-width:701px) and (max-width:800px){
+.popup_help_chat_container{
+        left: 55%;
+        top: 20%;
+ }
+}
+@media (min-width:801px) and (max-width:900px){
+.popup_help_chat_container{
+        left: 60%;
+        top: 30%;
+ }
+}
+@media (min-width:901px) and (max-width:1050px){
+.popup_help_chat_container{
+        left: 60%;
+        top: 30%;
+ }
+}

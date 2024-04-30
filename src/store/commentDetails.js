@@ -1,50 +1,53 @@
 import { createAsyncThunk, createSlice, isDraft } from "@reduxjs/toolkit";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 
 
 export const createComment = createAsyncThunk("createComment", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/comment/user/${data.userId}/post/${data.postId}`, {
+    const response = await fetch(
+      BASE_URL + `/api/comment/user/${data.userId}/post/${data.postId}`,
+      {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer" + token
+          "Content-Type": "application/json",
+          Authorization: "Bearer" + token,
         },
-        body: JSON.stringify({"content":data.commentData})
-    });
+        body: JSON.stringify({ content: data.commentData }),
+      }
+    );
     return await response.json();
 })
 export const getCommentByPost = createAsyncThunk("getCommentByPost",async(postId)=>{
-    const response = await fetch(`http://localhost:8080/api/comment/${postId}`,{
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        }
-    })
+    const response = await fetch(BASE_URL + `/api/comment/${postId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return await response.json();
 })
 
 export const deleteComment = createAsyncThunk("deleteComment", async (commentId)=>{
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/comment/${commentId}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer" + token
-        }
-    })
+    const response = await fetch(BASE_URL + `/api/comment/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+    });
     return await response.json();
 })
 export const updateComment = createAsyncThunk("updateComment",async(data)=>{
     let token = localStorageWithExpiry.getItem("token");
     console.log("edit data",data);
-    const response = await fetch(`http://localhost:8080/api/comment/${data.commentId}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer" + token
-        },
-        body: JSON.stringify({ "content": data.content.content })
+    const response = await fetch(BASE_URL + `/api/comment/${data.commentId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      body: JSON.stringify({ content: data.content.content }),
     });
     return await response.json();
 })

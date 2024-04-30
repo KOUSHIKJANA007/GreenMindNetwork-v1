@@ -99,7 +99,7 @@ const SignIn = () => {
         </div>
         <div className="login_input_box">
           <label htmlFor="password">Password</label>
-          <input className='login_input' type="password" onClick={getCookieData} name="password" onChange={handleLoginData} id='password' />
+          <input className='login_input' type="password" name="password" onChange={handleLoginData} id='password' />
         </div>
         <div className="login_input_box_check">
 

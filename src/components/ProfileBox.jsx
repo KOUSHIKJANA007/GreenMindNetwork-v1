@@ -34,8 +34,8 @@ const ProfileBox = ({ handleToggle, users }) => {
             <div className="person_box">
 
                 <Link to="#"><img className="dp_image" src={BASE_URL + "/api/user/image/" + users?.imageName} alt="" onClick={() => {
-                    handleProfileCard()
-                    handleToggle(0)
+                    handleProfileCard();
+                    handleToggle(0);
                 }} /></Link>
 
                 <Link className='dp_name' to="#" onClick={() => {

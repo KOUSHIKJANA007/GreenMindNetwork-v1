@@ -36,25 +36,22 @@ const SignUp = () => {
         dispatch(createUser(users))
             .then(unwrapResult)
             .then((obj) => {
-                if (obj.id != null && obj.id>0) {
-                    console.log(obj);
+                console.log(obj);
+                if (obj?.id != null && obj?.id>0) {
                     toast.success("Registration successfull")
                     navigate("/signin");
-                }else if(obj.id<=0){
-                    toast.error("Email already exist")
-                    navigate("/email-input")
                 }
                 else {
-                    toast.error(obj.fname)
-                    toast.error(obj.lname)
-                    toast.error(obj.email)
-                    toast.error(obj.password)
+                    toast.error(obj.fname);
+                    toast.error(obj.lname);
+                    toast.error(obj.email);
+                    toast.error(obj.password);
+                    return;
                 }
                 dispatch(validationAction.setProgress(100))
             })
             .catch((obj) => {
-                console.log({obj});
-                // toast.error("Email already exixst");
+                toast.error(obj.message);
             })
 
 

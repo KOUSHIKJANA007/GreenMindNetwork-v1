@@ -25,6 +25,9 @@ const UserNgoDashboard = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { userId, ngoId } = useParams();
+    if(ngoId=='0'){
+        navigate("/ngo");
+    }
     const handleToggle = (data) => {
         setToggleMenu(data);
     }
@@ -48,7 +51,7 @@ const UserNgoDashboard = () => {
         dispatch(getEventByNgo(ngoId))
             .then(unwrapResult)
             .then((data) => {
-                if (data.length == 0) {
+                if (data.success == false) {
                     dispatch(eventAction.setEvent(null));
                     dispatch(ngoAction.setEditEnd());
                     return;
@@ -78,7 +81,6 @@ const UserNgoDashboard = () => {
                         <div className="user_ngo_dash_details_contact"><h3><span><MdOutlineEmail /></span>{userNgo?.email}</h3>
                             <h3><span><HiMiniDevicePhoneMobile /></span>{userNgo?.mobile}</h3>
                             <h3><span><GrMapLocation /></span>{userNgo?.address}</h3></div>
-
                     </div>
                 </div>
                 <div className="user_ngo_dash_nav_options">
@@ -94,7 +96,7 @@ const UserNgoDashboard = () => {
                     </div>
                 </div>
                 <div className="user_ngo_dash_content">
-                    {toggleMenu == '1' &&
+                    {toggleMenu == '1' && events != null &&
                         events?.map((item) =>
                             <NgoEvents key={item.id} ngo={userNgo} event={item} />
                         )}

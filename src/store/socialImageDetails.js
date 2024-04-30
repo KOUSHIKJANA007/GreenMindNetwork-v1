@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 export const createSocialPost = createAsyncThunk("createSocialPost",async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/socialImage/${data.ngoId}`,
+    const response = await fetch(BASE_URL + `/api/socialImage/${data.ngoId}`,
       {
         method: "POST",
         headers: {
@@ -17,7 +17,7 @@ export const createSocialPost = createAsyncThunk("createSocialPost",async (data)
 export const updateSocialPost = createAsyncThunk("updateSocialPost", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
   const response = await fetch(
-    `http://localhost:8080/api/socialImage/${data.socialId}`,
+    BASE_URL + `/api/socialImage/${data.socialId}`,
     {
       method: "PUT",
       headers: {
@@ -34,7 +34,7 @@ export const deleteSocialPost = createAsyncThunk(
   async (socialId) => {
     let token = localStorageWithExpiry.getItem("token");
     const response = await fetch(
-      `http://localhost:8080/api/socialImage/${socialId}`,
+      BASE_URL + `/api/socialImage/${socialId}`,
       {
         method: "DELETE",
         headers: {
@@ -51,7 +51,7 @@ export const uploadSocialPostImage = createAsyncThunk("uploadSocialPostImage",as
     let formData=new FormData();
     formData.append("image",data.image);
     const response = await fetch(
-      `http://localhost:8080/api/socialImage/image/${data.socialId}`,
+      BASE_URL + `/api/socialImage/image/${data.socialId}`,
       {
         method: "POST",
         headers: {
@@ -64,7 +64,7 @@ export const uploadSocialPostImage = createAsyncThunk("uploadSocialPostImage",as
   }
 );
 export const getSocialPostByNgo = createAsyncThunk("getSocialPostByNgo",async (ngoId) => {
-    const response = await fetch(`http://localhost:8080/api/socialImage/ngo/${ngoId}`,
+    const response = await fetch(BASE_URL + `/api/socialImage/ngo/${ngoId}`,
       {
         method: "GET",
         headers: {
@@ -79,7 +79,7 @@ export const getSocialPostById = createAsyncThunk(
   "getSocialPostById",
   async (socialId) => {
     const response = await fetch(
-      `http://localhost:8080/api/socialImage/${socialId}`,
+      BASE_URL + `/api/socialImage/${socialId}`,
       {
         method: "GET",
         headers: {
@@ -94,7 +94,7 @@ export const getTotalSocialPost = createAsyncThunk(
   "getTotalSocialPost",
   async () => {
     const response = await fetch(
-      `http://localhost:8080/api/socialImage/length`,
+      BASE_URL + `/api/socialImage/length`,
       {
         method: "GET",
         headers: {
@@ -109,7 +109,7 @@ export const getTotalSocialPostByNgo = createAsyncThunk(
   "getTotalSocialPostByNgo",
   async (ngoId) => {
     const response = await fetch(
-      `http://localhost:8080/api/socialImage/ngo/length/${ngoId}`,
+      BASE_URL + `/api/socialImage/ngo/length/${ngoId}`,
       {
         method: "GET",
         headers: {

@@ -182,9 +182,10 @@ header {
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
-  padding: 8px 1px;
+  padding: 0px 0px 10px 0px;
   transition: 0.3s;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.59);
+  margin-top: 10px;
 }
 
 .drop_donation a {
@@ -206,21 +207,24 @@ header {
 }
 
 .dropdown_menu {
-  display: none;
+  visibility: hidden;
+ padding: 25px 0px;
   position: absolute;
+  left: 100%;
   right: 2rem;
   top: 80px;
-  width: 300px;
-  height: 370px;
+  width: 280px;
+  height: auto;
   background-color: white;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.69);
-  /* transition: all 20s ease-in-out 20s; */
+  transition: all 0.2s ease-in-out 0.2s;
 }
 
-.open {
-  display: block;
+.dropdown_menu.open {
+  visibility: visible;
+  transform: translateX(-110%);
 }
 
 .dropdown_menu .drop_options {
@@ -268,11 +272,14 @@ header {
 }
 
 @media (max-width: 450px) {
+  /* .dropdown_menu {
+    left: 10%;
+  } */
   .dp_image {
     height: 30px;
-    border: 1px solid black;
+    border: 2px solid #78be20;
     border-radius: 50%;
-    width: 80%;
+    width: 30px;
     background-size: cover;
   }
 

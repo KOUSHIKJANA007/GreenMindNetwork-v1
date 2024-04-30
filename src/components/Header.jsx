@@ -38,7 +38,7 @@ const Header = () => {
           <Link className={toggleNav == '1' ? "nav_about active_nav" : "nav_about"} onClick={() => handleToggle(1)} to="#">about</Link>
           <Link className={toggleNav == '2' ? "nav_awc active_nav" : "nav_awc"} onClick={() => handleToggle(2)} to="#" >awareness camp</Link>
           <Link className={toggleNav == '3' ? "nav_article active_nav" : "nav_article"} onClick={() => handleToggle(3)} to="/articles" >Articles</Link>
-          <Link className={toggleNav == '4' ? "nav_contact active_nav" : "nav_contact"} onClick={() => handleToggle(4)} to="#" >contact us</Link>
+          <Link className={toggleNav == '4' ? "nav_contact active_nav" : "nav_contact"} onClick={() => handleToggle(4)} to="/contact-us" >contact us</Link>
           <Link className={toggleNav == '5' ? "nav_ngo active_nav" : "nav_ngo"} onClick={() => handleToggle(5)} to="/ngo" >NGO's</Link>
         </nav>
 
@@ -77,7 +77,7 @@ const Header = () => {
               <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>about</Link>
               <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>awareness camp</Link>
               <Link onClick={handleDropDownMenuClose} to="/articles" className='drop_options'>articles</Link>
-              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>contact us</Link>
+              <Link onClick={handleDropDownMenuClose} to="/contact-us" className='drop_options'>contact us</Link>
               <Link onClick={handleDropDownMenuClose} to="/ngo" className='drop_options'>NGO's</Link>
               <div className="drop_donation"><Link to="/donation-dashboard" onClick={handleDropDownMenuClose}>donation</Link></div>
             </div>
@@ -86,7 +86,7 @@ const Header = () => {
               <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>about</Link>
               <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>awareness camp</Link>
               <Link onClick={handleDropDownMenuClose} to="/articles" className='drop_options'>Articles</Link>
-              <Link onClick={handleDropDownMenuClose} to="#" className='drop_options'>contact us</Link>
+              <Link onClick={handleDropDownMenuClose} to="/contact-us" className='drop_options'>contact us</Link>
               <Link onClick={handleDropDownMenuClose} to="/ngo" className='drop_options'>NGO's</Link>
               <Link onClick={handleDropDownMenuClose} to="/email-input" className='drop_options'>sign up</Link>
               <Link onClick={handleDropDownMenuClose} to="/signin" className='drop_options'>login</Link>

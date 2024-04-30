@@ -1,57 +1,51 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 
 export const createPayment = createAsyncThunk("createPayment", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/donation/user/${data.userId}/ngo/${data.ngoId}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer" + token
-        },
-        body: JSON.stringify({ "amount": data.amountToPay })
-    })
-    return await response.json();
-})
-export const updatePayment = createAsyncThunk("updatePayment", async (data) => {
-    let token = localStorageWithExpiry.getItem("token");
     const response = await fetch(
-      `http://localhost:8080/api/donation/${data.eventId}`,
+      BASE_URL + `/api/donation/user/${data.userId}/ngo/${data.ngoId}`,
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer" + token,
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ amount: data.amountToPay }),
       }
     );
     return await response.json();
 })
+export const updatePayment = createAsyncThunk("updatePayment", async (data) => {
+    let token = localStorageWithExpiry.getItem("token");
+    const response = await fetch(BASE_URL + `/api/donation/${data.eventId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+})
 export const getTotalAmount = createAsyncThunk("getTotalAmount", async (userId) => {
-    const response = await fetch(
-      `http://localhost:8080/api/donation/user/${userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        },
-      }
-    );
+    const response = await fetch(BASE_URL + `/api/donation/user/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return await response.json();
 });
 export const getTotalAmountOfNgo = createAsyncThunk(
   "getTotalAmountOfNgo",
   async (ngoId) => {
-    const response = await fetch(
-      `http://localhost:8080/api/donation/ngo/${ngoId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(BASE_URL + `/api/donation/ngo/${ngoId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return await response.json();
   }
 );

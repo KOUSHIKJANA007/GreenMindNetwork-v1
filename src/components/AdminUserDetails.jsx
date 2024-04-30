@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 
 const AdminUserDetails = () => {
     const { allUsers, userData, toggle_search } = useSelector((store) => store.user);
-    console.log(userData);
     const searchEmail=useRef();
     const dispatch=useDispatch();
     const [toggle, setToggle] = useState(toggle_search);
@@ -26,7 +25,6 @@ const AdminUserDetails = () => {
     dispatch(fetchUserByEmail(email))
     .then(unwrapResult)
     .then((data)=>{
-        console.log("nkdfdfkdlf",data);
        if(data?.id != null){
            dispatch(loginAction.setUserData(data));
        }
@@ -54,9 +52,7 @@ const AdminUserDetails = () => {
                 <AdminUserItem key={item?.id}  users={item} />
             )}
             {
-                !toggle && userData!=null && <><AdminUserItem users={userData}/>
-                
-                </>
+                !toggle && userData!=null && <><AdminUserItem users={userData}/></>
             }
             {
                 userData == null && allUsers?.length=='0' && <div className='admin_user_details_nouserfound'>No user found</div>

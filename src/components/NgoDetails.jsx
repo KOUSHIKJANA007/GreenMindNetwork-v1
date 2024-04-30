@@ -97,7 +97,7 @@ const NgoDetails = ({ ngo }) => {
             <p id='fund'>&#8377; {total_donation_ngo}</p>
           </div>
         </div>
-        {ngo?.user?.id == users?.id | admin_user?.roleName == "ADMIN_USER" &&
+        {ngo?.user?.id == users?.id || admin_user?.roleName == "ADMIN_USER" &&
           <div className="ngo_bank_details_conatiner">
             <div className="ngo_bank_details">
               <label htmlFor="accHolderName"><BsBank className='bank_icon' />Account Holder name</label>

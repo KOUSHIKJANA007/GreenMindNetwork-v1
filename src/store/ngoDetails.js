@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 
 export const createNgo = createAsyncThunk("createNgo", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(`http://localhost:8080/api/ngo/register/${data.userId}`, {
+    const response = await fetch(BASE_URL+`/api/ngo/register/${data.userId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const createNgo = createAsyncThunk("createNgo", async (data) => {
 export const updateNgo = createAsyncThunk("updateNgo", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
   const response = await fetch(
-    `http://localhost:8080/api/ngo/edit/${data.ngoId}`,
+    BASE_URL+`/api/ngo/edit/${data.ngoId}`,
     {
       method: "PUT",
       headers: {
@@ -29,7 +29,7 @@ export const updateNgo = createAsyncThunk("updateNgo", async (data) => {
   return await response.json();
 });
 export const getAllNgos = createAsyncThunk("getAllNgos",async()=>{
-    const response = await fetch("http://localhost:8080/api/ngo/",{
+    const response = await fetch(BASE_URL+`/api/ngo/`,{
         method:"GET",
         headers:{
             "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const getAllNgos = createAsyncThunk("getAllNgos",async()=>{
     return await response.json();
 })
 export const getTotalNgo = createAsyncThunk("getTotalNgo", async () => {
-  const response = await fetch("http://localhost:8080/api/ngo/length", {
+  const response = await fetch(BASE_URL+`/api/ngo/length`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export const getTotalNgo = createAsyncThunk("getTotalNgo", async () => {
   return await response.json();
 });
 export const getSingleNgo = createAsyncThunk("getSingleNgo", async (ngoId) => {
-  const response = await fetch(`http://localhost:8080/api/ngo/${ngoId}`, {
+  const response = await fetch(BASE_URL + `/api/ngo/${ngoId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const getSingleNgo = createAsyncThunk("getSingleNgo", async (ngoId) => {
   return await response.json();
 });
 export const getNgoByUser = createAsyncThunk("getNgoByUser",async(userId)=>{
-    const response = await fetch(`http://localhost:8080/api/ngo/user/${userId}`,{
+    const response = await fetch(BASE_URL+`/api/ngo/user/${userId}`,{
         method:"GET",
         headers:{
             "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const uploadNgoLogo = createAsyncThunk("uploadNgoLogo", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData();
     formData.append("image",data.logo);
-    const response = await fetch(`http://localhost:8080/api/ngo/image/ngoLogo/${data.ngoId}`, {
+    const response = await fetch(BASE_URL+`/api/ngo/image/ngoLogo/${data.ngoId}`, {
         method: "POST",
         headers: {
             Authorization: "Bearer" + token
@@ -81,7 +81,7 @@ export const uploadIdentityProof = createAsyncThunk("uploadIdentityProof", async
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData();
     formData.append("image", data.identityOfHead);
-    const response = await fetch(`http://localhost:8080/api/ngo/image/uploadIdentity/${data.ngoId}`, {
+    const response = await fetch(BASE_URL+`/api/ngo/image/uploadIdentity/${data.ngoId}`, {
         method: "POST",
         headers: {
             Authorization: "Bearer" + token
@@ -94,7 +94,7 @@ export const uploadTaxProof = createAsyncThunk("uploadTaxProof", async (data) =>
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData();
     formData.append("image", data.imageOfTax);
-    const response = await fetch(`http://localhost:8080/api/ngo/image/TaxProof/${data.ngoId}`, {
+    const response = await fetch(BASE_URL+`/api/ngo/image/TaxProof/${data.ngoId}`, {
         method: "POST",
         headers: {
             Authorization: "Bearer" + token
@@ -107,7 +107,7 @@ export const uploadRegistrationProof = createAsyncThunk("uploadRegistrationProof
     let token = localStorageWithExpiry.getItem("token");
     let formData = new FormData();
     formData.append("image", data.registerImage);
-    const response = await fetch(`http://localhost:8080/api/ngo/image/RegistrationProof/${data.ngoId}`, {
+    const response = await fetch(BASE_URL+`/api/ngo/image/RegistrationProof/${data.ngoId}`, {
         method: "POST",
         headers: {
             Authorization: "Bearer" + token

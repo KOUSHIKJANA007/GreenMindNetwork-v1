@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 
 export const createEvent = createAsyncThunk("createEvent", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
-  const response = await fetch(`http://localhost:8080/api/event/${data.ngoId}`, {
+  const response = await fetch(BASE_URL + `/api/event/${data.ngoId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,73 +15,61 @@ export const createEvent = createAsyncThunk("createEvent", async (data) => {
 });
 export const updateEvent = createAsyncThunk("updateEvent", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
-  const response = await fetch(
-    `http://localhost:8080/api/event/${data.eventId}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer" + token,
-      },
-      body: JSON.stringify(data.eventData),
-    }
-  );
+  const response = await fetch(BASE_URL + `/api/event/${data.eventId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer" + token,
+    },
+    body: JSON.stringify(data.eventData),
+  });
   return await response.json();
 });
 export const uploadEventImage = createAsyncThunk("uploadEventImage", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
   let formData=new FormData();
   formData.append("image",data.image);
-  const response = await fetch(
-    `http://localhost:8080/api/event/image/${data.eventId}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer" + token,
-      },
-      body: formData,
-    }
-  );
+  const response = await fetch(BASE_URL + `/api/event/image/${data.eventId}`, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer" + token,
+    },
+    body: formData,
+  });
   return await response.json();
 });
 export const getEventByNgo = createAsyncThunk("getEventByNgo", async (ngoId) => {
-     const response = await fetch(`http://localhost:8080/api/event/ngo/${ngoId}`,{
-         method: "GET",
-         headers: {
-           "Content-Type": "application/json",
-         },
-       });
+     const response = await fetch(BASE_URL + `/api/event/ngo/${ngoId}`, {
+       method: "GET",
+       headers: {
+         "Content-Type": "application/json",
+       },
+     });
        return await response.json();
 });
 export const getEventById = createAsyncThunk("getEventById", async (eventId) => {
-  const response = await fetch(
-    `http://localhost:8080/api/event/${eventId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(BASE_URL + `/api/event/${eventId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   return await response.json();
 });
 export const getTotalEventByNgo = createAsyncThunk(
   "getTotalEventByNgo",
   async (ngoId) => {
-    const response = await fetch(
-      `http://localhost:8080/api/event/length/${ngoId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(BASE_URL + `/api/event/length/${ngoId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return await response.json();
   }
 );
 export const getTotalEvent = createAsyncThunk("getTotalEvent", async () => {
-  const response = await fetch(`http://localhost:8080/api/event/length`, {
+  const response = await fetch(BASE_URL + `/api/event/length`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -90,7 +78,7 @@ export const getTotalEvent = createAsyncThunk("getTotalEvent", async () => {
   return await response.json();
 });
 export const getAllEvent = createAsyncThunk("getAllEvent", async () => {
-  const response = await fetch(`http://localhost:8080/api/event/`, {
+  const response = await fetch(BASE_URL + `/api/event/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -100,7 +88,7 @@ export const getAllEvent = createAsyncThunk("getAllEvent", async () => {
 });
 export const deleteEvent = createAsyncThunk("deleteEvent", async (eventId) => {
    let token = localStorageWithExpiry.getItem("token");
-  const response = await fetch(`http://localhost:8080/api/event/${eventId}`, {
+  const response = await fetch(BASE_URL + `/api/event/${eventId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

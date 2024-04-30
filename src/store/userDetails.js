@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 
 export const createUser = createAsyncThunk("createUser", async (data) => {
-  const response = await fetch("http://localhost:8080/api/v1/auth/register", {
+  const response = await fetch(BASE_URL + "/api/v1/auth/register", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -15,7 +14,7 @@ export const createUser = createAsyncThunk("createUser", async (data) => {
 export const updateUser = createAsyncThunk("updateUser", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
   console.log(token);
-  const response = await fetch(`http://localhost:8080/api/user/${data.id}`, {
+  const response = await fetch(BASE_URL + `/api/user/${data.id}`, {
     method: "PUT",
     headers: {
       "Content-type": "application/json",
@@ -28,7 +27,7 @@ export const updateUser = createAsyncThunk("updateUser", async (data) => {
 export const deleteUser = createAsyncThunk("deleteUser", async (userId) => {
   let token = localStorageWithExpiry.getItem("token");
   console.log(token);
-  const response = await fetch(`http://localhost:8080/api/user/${userId}`, {
+  const response = await fetch(BASE_URL + `/api/user/${userId}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -39,7 +38,7 @@ export const deleteUser = createAsyncThunk("deleteUser", async (userId) => {
 });
 
 export const loginUser = createAsyncThunk("loginUser", async (data) => {
-  const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+  const response = await fetch(BASE_URL + "/api/v1/auth/login", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -57,7 +56,7 @@ export const uploadUserImage = createAsyncThunk(
     formData.append("image", image);
     let token = localStorageWithExpiry.getItem("token");
     const response = await fetch(
-      `http://localhost:8080/api/user/image/upload/${data.userId}`,
+      BASE_URL + `/api/user/image/upload/${data.userId}`,
       {
         method: "POST",
         headers: {
@@ -73,7 +72,7 @@ export const uploadUserImage = createAsyncThunk(
 export const fetchUserById = createAsyncThunk(
   "fetchUserById",
   async (userId) => {
-    const response = await fetch(`http://localhost:8080/api/user/${userId}`, {
+    const response = await fetch(BASE_URL + `/api/user/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +84,7 @@ export const fetchUserById = createAsyncThunk(
 export const fetchUserByEmail = createAsyncThunk(
   "fetchUserByEmail",
   async (email) => {
-    const response = await fetch(`http://localhost:8080/api/user/email/${email}`, {
+    const response = await fetch(BASE_URL + `/api/user/email/${email}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +94,7 @@ export const fetchUserByEmail = createAsyncThunk(
   }
 );
 export const fetchAllUser = createAsyncThunk("fetchAllUser", async () => {
-  const response = await fetch("http://localhost:8080/api/user/", {
+  const response = await fetch(BASE_URL + "/api/user/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -117,10 +116,9 @@ const userSlice = createSlice({
     isEdit: false,
     isDelete: false,
     block_status: null,
-    toggle_search:true
+    toggle_search:true,
   },
   reducers: {
-    
     setBlockStatus: (state, action) => {
       state.block_status = action.payload;
     },

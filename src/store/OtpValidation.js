@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { BASE_URL } from "./helper";
 
 export const emailInput = createAsyncThunk("emailInput", async (data) => {
-    const response = await fetch("http://localhost:8080/api/email", {
+    const response = await fetch(BASE_URL+"/api/email", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -11,7 +12,7 @@ export const emailInput = createAsyncThunk("emailInput", async (data) => {
     return await response.json();
 })
 export const otpInput = createAsyncThunk("otpInput", async (data) => {
-    const response = await fetch("http://localhost:8080/api/email/verify", {
+    const response = await fetch(BASE_URL+"/api/email/verify", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -21,7 +22,7 @@ export const otpInput = createAsyncThunk("otpInput", async (data) => {
     return await response.json();
 })
 export const forgotEmail = createAsyncThunk("forgotEmail", async (data) => {
-    const response = await fetch("http://localhost:8080/api/email/forgot", {
+    const response = await fetch(BASE_URL+"/api/email/forgot", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -32,7 +33,7 @@ export const forgotEmail = createAsyncThunk("forgotEmail", async (data) => {
 })
 export const changePassword = createAsyncThunk("changePassword", async (data) => {
     console.log(data);
-    const response = await fetch("http://localhost:8080/api/email/password", {
+    const response = await fetch(BASE_URL+"/api/email/password", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

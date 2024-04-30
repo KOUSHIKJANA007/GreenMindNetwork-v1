@@ -1,26 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { localStorageWithExpiry } from "./helper";
+import { BASE_URL, localStorageWithExpiry } from "./helper";
 
 export const updateBankDetails = createAsyncThunk(
   "updateBankDetails",
   async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    const response = await fetch(
-      `http://localhost:8080/api/bank/${data.bankId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer" + token,
-        },
-        body: JSON.stringify(data.bankData),
-      }
-    );
+    const response = await fetch(BASE_URL + `/api/bank/${data.bankId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      body: JSON.stringify(data.bankData),
+    });
     return await response.json();
   }
 );
 export const getBankDetails = createAsyncThunk("getBankDetails", async (ngoId) => {
-  const response = await fetch(`http://localhost:8080/api/bank/${ngoId}`, {
+  const response = await fetch(BASE_URL+`/api/bank/${ngoId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
