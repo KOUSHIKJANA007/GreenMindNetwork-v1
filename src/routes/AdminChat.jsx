@@ -5,22 +5,26 @@ import AdminChatArea from '../components/AdminChatArea';
 import { over } from "stompjs";
 import SockJS from "sockjs-client/dist/sockjs";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserById, loginAction } from '../store/userDetails';
+import { fetchUserById } from '../store/userDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { getAllMessage, getMessageByUser, messageAction } from '../store/messageSlice';
+import { getAllMessage, messageAction } from '../store/messageSlice';
 import { BASE_URL } from '../store/helper';
+import { toast } from 'react-toastify';
 
 
 let stompClient;
 const AdminChat = () => {
     document.title = "Help Desk"
     const dispatch=useDispatch();
-    const { message_user, admin_message } = useSelector((store) => store.message);
+    const { message_user, isDeleteChat } = useSelector((store) => store.message);
     const { users } = useSelector((store) => store.user);
     const [toggleTab, setToggleTab] = useState(0);
     const [content, setContent] = useState('');
     const handleContent = (e) => {
         setContent(e.target.value);
+    }
+    const handleRefreshContent = (e) => {
+        setContent('');
     }
    useEffect(()=>{
         let socket = new SockJS("http://localhost:8080/greenmindnetwork")
@@ -65,7 +69,13 @@ const AdminChat = () => {
         }
     }
     const sendMessage = (data) => {
-        stompClient.send(`/app/message`, {}, JSON.stringify({ content: content, receiverName: data, userId: users?.id }));
+        if(content.trim()===""){
+            toast.error("Enter message first then send");
+            return;
+        }
+        else{
+            stompClient.send(`/app/message`, {}, JSON.stringify({ content: content, receiverName: data, userId: users?.id }));
+        }
     }
     function removeDuplicateObjects(array) {
         const uniqueObjects = [];
@@ -95,7 +105,8 @@ const AdminChat = () => {
                })
             }
         })
-    },[])
+        dispatch(messageAction.setDeleteEnd());
+    }, [isDeleteChat])
     return (
         <>
             <div className="help_chat_container">
@@ -114,10 +125,10 @@ const AdminChat = () => {
                                 {(item?.roles[0]?.roleName !== "ADMIN_USER" && item?.roles[1]?.roleName !== "ADMIN_USER") &&
                                 <div key={item.id} className={item?.id === toggleTab ? "help_chat_user active" : "help_chat_user"} onClick={() => { setToggleTab(item?.id) }}>
                                     <div className={item?.id === toggleTab ? "help_chat_user_dp active" : "help_chat_user_dp"}>
-                                        <img src={BASE_URL + `/api/user/image/${item.imageName}`} alt="" />
+                                        <img src={BASE_URL + `/api/user/image/${item?.imageName}`} alt="" />
                                     </div>
                                     <div className="help_chat_user_name">
-                                        <p>{item.fname}</p>
+                                        <p>{item?.fname+" "+item?.lname}</p>
                                     </div>
                                 </div>}
                             
@@ -131,7 +142,9 @@ const AdminChat = () => {
                             ?
                             <div className="help_chat_no_message"></div>
                             :
-                        <AdminChatArea  handleContent={handleContent} sendMessage={sendMessage} toggleTab={toggleTab}/>}
+                                <AdminChatArea handleContent={handleContent} sendMessage={sendMessage} 
+                                content={content}
+                                toggleTab={toggleTab} handleRefreshContent={handleRefreshContent}/>}
                     </div>
                 </div>
             </div>
