@@ -96,13 +96,13 @@ const UserNgoDashboard = () => {
                     </div>
                 </div>
                 <div className="user_ngo_dash_content">
-                    {toggleMenu == '1' && events != null &&
+                    {(toggleMenu == '1' && events?.length != '0') &&
                         events?.map((item) =>
                             <NgoEvents key={item.id} ngo={userNgo} event={item} />
                         )}
                     {
-                        toggleMenu == '1' &&
-                        events == null &&
+                        (toggleMenu == '1' &&
+                        events?.length == '0' )&&
                         <NgoEvents ngo={userNgo} event={null} />
                     }
                     {toggleMenu == '2' && <NgoDetails ngo={userNgo} />}

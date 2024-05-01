@@ -23,6 +23,7 @@ const NgoEvents = ({ event, ngo }) => {
         })
     }
   }
+  console.log("event value",event);
   return (
     <>
       {event == null 

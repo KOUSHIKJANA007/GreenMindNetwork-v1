@@ -7,9 +7,10 @@ import { deleteAllChat, messageAction } from '../store/messageSlice';
 import { BASE_URL } from '../store/helper';
 import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
+import LoadingBar from 'react-top-loading-bar';
 
 const AdminChatArea = ({ toggleTab, handleContent, sendMessage, handleRefreshContent, content }) => {
-    const { admin_message, chat_user_data } = useSelector((store) => store.message);
+    const { admin_message, chat_user_data, loading, progress } = useSelector((store) => store.message);
     const { users } = useSelector((store) => store.user);
     const dispatch = useDispatch();
 
@@ -23,29 +24,32 @@ const AdminChatArea = ({ toggleTab, handleContent, sendMessage, handleRefreshCon
                 }
             })
     }, [toggleTab]);
-    let i = 0;
+   
     function clearChat() {
         let f = confirm("are you sure to clear chat?")
         if (f) {
+            dispatch(messageAction.setProgress(30));
             dispatch(deleteAllChat(toggleTab))
                 .then(unwrapResult)
                 .then((obj) => {
-                    console.log(obj);
+                    dispatch(messageAction.setProgress(50));
                     if (obj.success == true) {
                         dispatch(deleteAllChat(users?.id))
                             .then(unwrapResult)
                             .then((data) => {
                                 dispatch(messageAction.setDeleteStart());
-                                toast.success(data.message)
+                                toast.success(data.message);
+                                dispatch(messageAction.setProgress(80));
                             })
                     }
                 })
 
         }
+        dispatch(messageAction.setProgress(100));
     }
-    console.log("i is", i);
     return (
         <>
+            {loading && <LoadingBar progress={progress} color="#78be20" />}
             <div className="help_chat_message_head">
                 <div className="help_chat_message_dp">
                     <img src={BASE_URL + `/api/user/image/${chat_user_data?.imageName}`} alt="" />

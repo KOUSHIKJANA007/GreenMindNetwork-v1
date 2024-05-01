@@ -46,6 +46,7 @@ const messageSlice = createSlice({
     chat_user_data: null,
     user_chat_message: [],
     isDeleteChat: false,
+    progress: 10,
   },
   reducers: {
     setMessageUser: (state, action) => {
@@ -65,6 +66,9 @@ const messageSlice = createSlice({
     },
     setDeleteEnd: (state) => {
       state.isDeleteChat = false;
+    },
+    setProgress: (state,action) => {
+      state.progress = action.payload;
     },
   },
   extraReducers: (builder) => {

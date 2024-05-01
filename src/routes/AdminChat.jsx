@@ -91,13 +91,10 @@ const AdminChat = () => {
         return uniqueObjects;
     }
     let finalMessageList=removeDuplicateObjects(message_user);
-    console.log(finalMessageList);
-    console.log(toggleTab);
     useEffect(()=>{
         dispatch(getAllMessage())
         .then(unwrapResult)
         .then((data)=>{
-            // console.log(data[0].user);
             if(data?.id !== null){
                data?.map((item)=>{
                    dispatch(messageAction.setMessageUser(item?.user));

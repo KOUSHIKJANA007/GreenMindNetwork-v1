@@ -153,8 +153,11 @@ const ContactUs = () => {
               )}
               </div>
               <div className="chat_footer">
-                <input type="text" onChange={handleContent} placeholder='Typing message.....' />
-                <button onClick={sendMessage}><FiSend className='cc_send' /></button>
+                <input type="text" value={content} onChange={handleContent} placeholder='Typing message.....' />
+                <button onClick={()=>{
+                  sendMessage()
+                  setContent("")
+                }}><FiSend className='cc_send' /></button>
               </div>
             </div>}
       </div>
