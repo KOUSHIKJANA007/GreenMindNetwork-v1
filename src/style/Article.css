@@ -234,6 +234,7 @@
 }
 
 @media (max-width:500px) {
+  
     .article_container {
         margin: 5px 5px 5px 5px;
         padding-left: 10px;
@@ -335,27 +336,27 @@
 
 @media (max-width:500px) {
     .all_posts_article_container {
-        width: 50%;
+        width: 95%;
+        height: auto;
         flex-direction: column;
         justify-content: center;
-
-        gap: 5px;
+        gap: 15px;
     }
 
     .post_navigation_button {
         width: 100%;
-        left: 90%;
-        gap: 5px;
+        left: 0%;
+        gap: 15px;
     }
 
     .search_article_container {
         width: 100%;
-        left: 50%;
-        gap: 5px;
+        left: 0%;
+        gap: 10px;
     }
 
     .search_article_button {
-        width: 65%;
+        width: 40%;
         font-size: 15px;
     }
 
@@ -365,10 +366,12 @@
 
     .my_posts {
         width: 80%;
+        left: 0;
     }
 
     .all_posts {
         width: 80%;
+        left: 0;
     }
 
     .my_posts a {
@@ -376,7 +379,7 @@
     }
 
     .search_article {
-        width: 50%;
+        width: 70%;
     }
 }
 

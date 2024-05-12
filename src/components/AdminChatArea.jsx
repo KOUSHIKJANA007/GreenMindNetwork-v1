@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoSendSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserById } from '../store/userDetails';
@@ -13,14 +13,16 @@ const AdminChatArea = ({ toggleTab, handleContent, sendMessage, handleRefreshCon
     const { admin_message, chat_user_data, loading, progress } = useSelector((store) => store.message);
     const { users } = useSelector((store) => store.user);
     const dispatch = useDispatch();
+    const [userLoading, setUserLoading] = useState(false);
 
-
-    useEffect(() => {
+    useEffect(() => { 
+        setUserLoading(true);
         dispatch(fetchUserById(toggleTab))
             .then(unwrapResult)
             .then((data) => {
                 if (data != null) {
                     dispatch(messageAction.setChatUserData(data));
+                    setUserLoading(false);
                 }
             })
     }, [toggleTab]);
@@ -40,15 +42,29 @@ const AdminChatArea = ({ toggleTab, handleContent, sendMessage, handleRefreshCon
                                 dispatch(messageAction.setDeleteStart());
                                 toast.success(data.message);
                                 dispatch(messageAction.setProgress(80));
+                                
                             })
                     }
                 })
 
         }
         dispatch(messageAction.setProgress(100));
+        // window.location.reload();
     }
     return (
         <>
+        {userLoading && 
+            <div class="loader-wrapper">
+            <div className="chat-loader">
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            </div>}
             {loading && <LoadingBar progress={progress} color="#78be20" />}
             <div className="help_chat_message_head">
                 <div className="help_chat_message_dp">
@@ -62,12 +78,12 @@ const AdminChatArea = ({ toggleTab, handleContent, sendMessage, handleRefreshCon
             <div className="help_chat_message_head_body">
                 {admin_message?.map((item) =>
                     <>
-                        {(item?.userId !== users?.id || item?.user?.id !== users?.id) && item?.userId === toggleTab &&
+                        {((item?.userId !== users?.id || item?.user?.id !== users?.id) && (item?.userId === toggleTab)) &&
                             <div className='admin_incomming_message'>
                                 <h5>{chat_user_data?.fname + " " + chat_user_data?.lname}</h5>
                                 <p>{item?.content}</p>
                             </div>}
-                        {(item?.userId === users?.id || item?.user?.id === users?.id) &&
+                        {(item?.userId === users?.id || item?.user?.id === users?.id) && (Number(item?.receiverName)===toggleTab) &&
                             <div className='admin_outgoing_message'>
                                 <h5>{users?.fname + " " + users?.lname}</h5>
                                 <p>{item?.content}</p>

@@ -22,15 +22,13 @@ const NgoPhotos = ({ userNgo }) => {
         dispatch(socialPostAction.setSocialPost(data));
       })
       .catch((err) => {
-        toast.error(err.message)
+        toast.error(err.message);
       })
-    dispatch(socialPostAction.deleteDone())
-    dispatch(socialPostAction.createDone())
-    dispatch(socialPostAction.updateDone())
-    dispatch(socialPostAction.imageDone())
-    console.log("fetched");
-    console.log(socialPosts);
-  }, [isDelete, isCreate, isUpdate, isImageUpload])
+    dispatch(socialPostAction.deleteDone());
+    dispatch(socialPostAction.createDone());
+    dispatch(socialPostAction.updateDone());
+    dispatch(socialPostAction.imageDone());
+  }, [isDelete, isCreate, isUpdate, isImageUpload]);
 
   return (
     <div className='ngo_photos_container'>

@@ -25,11 +25,9 @@ const AdminDashboard = () => {
         dispatch(fetchAllUser())
             .then(unwrapResult)
             .then((data) => {
-                console.log(data);
                 dispatch(loginAction.setALlUser(data));
             })
         dispatch(loginAction.setDeleteEnd());
-        console.log("fetched");
         dispatch(getTotalNgo())
             .then(unwrapResult)
             .then((data) => {
@@ -55,8 +53,7 @@ const AdminDashboard = () => {
                 if (data?.status != '400') { dispatch(eventAction.setTotalEvent(data)) }
 
             })
-    }, [isDelete, isBlocked, block_status])
-    console.log(block_status);
+    }, [isDelete, isBlocked, block_status]);
     return (
         <>
             <div className="admin_dash_main_container">

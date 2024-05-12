@@ -39,9 +39,8 @@ const UserArticleItem = ({ article }) => {
                 </div>
            </div>
             <div className="user_article_item_buttons">
-                <button className='post_comment_button' type="submit"><Link to="">Comment</Link></button>
                 <button className='post_update_button' type="submit"><Link to={`/editpost/${article.id}`}>Update</Link></button>
-                <button className='post_delete_button' type="submit" onClick={handleDeletePost}><Link to="">Delete</Link></button>
+                <button className='post_delete_button' type="submit" onClick={handleDeletePost}><Link to="#">Delete</Link></button>
             </div>
         </div>
     )

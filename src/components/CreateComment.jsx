@@ -13,7 +13,6 @@ const CreateComment = ({ postId }) => {
     const commentInput = useRef();
     const handleComment = () => {
         const commentData = commentInput.current.value;
-        console.log("comment", commentData);
         dispatch(createComment({ postId: postId, userId: users.id, commentData: commentData }))
             .then(unwrapResult)
             .then((data) => {
@@ -31,7 +30,6 @@ const CreateComment = ({ postId }) => {
 
             })
     }
-    console.log(users.imageName);
     return (
         <div className='comment_container'>
             <div className="user_image">
@@ -47,4 +45,4 @@ const CreateComment = ({ postId }) => {
     )
 }
 
-export default CreateComment
+export default CreateComment;

@@ -4,25 +4,29 @@ footer {
     top: 100px;
     bottom: 20px;
     z-index: 1;
+    padding-bottom: 20px;
 }
 
 .info {
-    margin-left: 200px;
-    margin-top: 30px;
+    margin-top: 50px;
     padding-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    gap: 12%;
-    list-style-type: none;
+    justify-content: space-around;
+    list-style-type: none; 
 }
 
 .info ul li {
     list-style-type: none;
     line-height: 1.7;
 }
+.info ul li b{
+    text-transform: uppercase;
+}
 
 .info ul li a {
     text-decoration: none;
+    text-transform: capitalize;
     color: black;
 }
 
@@ -83,13 +87,26 @@ hr {
 
 @media (max-width:500px) {
     .info {
-        margin-left: 40px;
+        margin-left: 10px;
+        margin-right: 10px;
+        gap: 15px;
+        justify-content: center;
+    }
+    .info ul{
+        width: 45%;
     }
 }
 
-@media (max-width:500px) {
+@media (min-width:501px) and (max-width:900px) {
     .social_icons {
         gap: 10%;
 
     }
+    .info{
+        margin: 0px 10px 0px 10px;
+        justify-content: center;
+    }
+    .info ul{
+    width: 40%;
+}
 }

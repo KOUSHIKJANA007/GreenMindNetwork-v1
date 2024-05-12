@@ -5,6 +5,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { Link } from 'react-router-dom';
 import UserNgoItem from '../components/UserNgoItem';
 import { FaCashRegister } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 const UserNgo = () => {
   document.title = "NGO Dashboard"
@@ -34,10 +35,9 @@ const UserNgo = () => {
         dispatch(ngoAction.setUserNgoData(obj))
       })
       .catch((err)=>{
-        console.log({err});
+        toast.error(err)
       })
-  }, [])
-  console.log(userNgo);
+  }, []);
   return (
     <>
       <div className="ngo_details_container">

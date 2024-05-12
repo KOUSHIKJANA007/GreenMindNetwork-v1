@@ -27,7 +27,7 @@ const AdminChat = () => {
         setContent('');
     }
    useEffect(()=>{
-        let socket = new SockJS("http://localhost:8080/greenmindnetwork")
+        let socket = new SockJS(BASE_URL+"/greenmindnetwork")
         stompClient = over(socket);
         const connectAndSubscribe = () => {
            stompClient.connect({}, onConnected, onError);
@@ -55,7 +55,6 @@ const AdminChat = () => {
         dispatch(fetchUserById(userId))
         .then(unwrapResult)
         .then((data)=>{
-            console.log(data);
             if(data?.id != null || data?.id != undefined){
                 dispatch(messageAction.setMessageUser(data));
             }
@@ -63,7 +62,6 @@ const AdminChat = () => {
     }
     const onUserMessage = (payload) => {
         let data = JSON.parse(payload?.body);
-        console.log(data);
         if (data != null) {
             dispatch(messageAction.setAdminMessage(data));
         }
@@ -95,6 +93,7 @@ const AdminChat = () => {
         dispatch(getAllMessage())
         .then(unwrapResult)
         .then((data)=>{
+            console.log(data);
             if(data?.id !== null){
                data?.map((item)=>{
                    dispatch(messageAction.setMessageUser(item?.user));
@@ -103,7 +102,7 @@ const AdminChat = () => {
             }
         })
         dispatch(messageAction.setDeleteEnd());
-    }, [isDeleteChat])
+    },[isDeleteChat]);
     return (
         <>
             <div className="help_chat_container">
@@ -117,7 +116,7 @@ const AdminChat = () => {
                             <h1>users</h1>
                         </div>
                        
-                        {finalMessageList.map((item)=>
+                        {finalMessageList?.map((item)=>
                       <>
                                 {(item?.roles[0]?.roleName !== "ADMIN_USER" && item?.roles[1]?.roleName !== "ADMIN_USER") &&
                                 <div key={item.id} className={item?.id === toggleTab ? "help_chat_user active" : "help_chat_user"} onClick={() => { setToggleTab(item?.id) }}>

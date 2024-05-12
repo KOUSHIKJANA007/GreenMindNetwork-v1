@@ -40,7 +40,6 @@ export const deleteComment = createAsyncThunk("deleteComment", async (commentId)
 })
 export const updateComment = createAsyncThunk("updateComment",async(data)=>{
     let token = localStorageWithExpiry.getItem("token");
-    console.log("edit data",data);
     const response = await fetch(BASE_URL + `/api/comment/${data.commentId}`, {
       method: "PUT",
       headers: {

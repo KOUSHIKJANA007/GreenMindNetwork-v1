@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import SocialPostEditItem from './SocialPostEditItem';
 
 const SocialPostContent = ({ socialPosts }) => {
-    console.log(socialPosts);
     const dispatch = useDispatch();
     const { users } = useSelector((store) => store.user);
     const [toggle, setToggle] = useState(false);

@@ -44,10 +44,6 @@ const Donation = () => {
                         image: "http://localhost:5173/userhome",
                         order_id: res.id,
                         handler: function (res) {
-                            console.log(res.razorpay_payment_id);
-                            console.log(res.razorpay_order_id);
-                            console.log(res.razorpay_signature);
-
                             dispatch(updatePayment({ paymentId: res.razorpay_payment_id, orderId: res.razorpay_order_id, status: "paid", amount: res.amount, eventId: eventId }))
                                 .then(unwrapResult)
                                 .then((res) => {

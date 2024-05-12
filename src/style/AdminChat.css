@@ -146,11 +146,11 @@
   gap: 10px;
   align-items: center;
 }
-.help_chat_message_send button:active{
-    transform: scale(1.02);
+.help_chat_message_send button:active {
+  transform: scale(1.02);
 }
-.help_chat_message_send textarea:focus{
-    border: 1.5px solid #78be20;
+.help_chat_message_send textarea:focus {
+  border: 1.5px solid #78be20;
 }
 .help_chat_message_send textarea {
   height: 60px;
@@ -169,7 +169,7 @@
   width: 50px;
   border-radius: 50%;
   border: none;
-   background: linear-gradient(to right,  #089c08,#6dc212 80%);
+  background: linear-gradient(to right, #089c08, #6dc212 80%);
 }
 .admin_message_send_icon {
   font-size: 30px;
@@ -202,20 +202,19 @@
   background-position: center;
   background-size: cover;
 }
-.clear_chat_button{
-   position: absolute;
-   left: 95%;
-   border: none;
-   background-color: white;
-   cursor: pointer;
+.clear_chat_button {
+  position: absolute;
+  left: 95%;
+  border: none;
+  background-color: white;
+  cursor: pointer;
 }
-.clear_chat_icon{
-    font-size: 28px;
-    color:#45c40a;
+.clear_chat_icon {
+  font-size: 28px;
+  color: #45c40a;
 }
-.clear_chat_button:active
-{
-    transform: scale(1.03);
+.clear_chat_button:active {
+  transform: scale(1.03);
 }
 @media (max-width: 400px) {
   .help_chat_container {
@@ -246,7 +245,7 @@
     background-repeat: no-repeat;
     background-position: center;
   }
-  .clear_chat_button{
+  .clear_chat_button {
     left: 90%;
   }
 }
@@ -282,10 +281,72 @@
   .help_chat_user_area {
     align-items: center;
   }
-   .clear_chat_button{
+  .clear_chat_button {
     left: 90%;
   }
 }
+
+/* ***********************************************CHAT LOADER************************************************ */
+
+.chat-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.loader-wrapper {
+  position: absolute;
+  height: 88%;
+  width: 70%;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); /* Safari 9+, Safari on iOS 9+ */
+  -moz-backdrop-filter: blur(5px); /* Firefox */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Adjust the alpha value for the desired opacity */
+}
+.typing-indicator {
+  display: flex;
+}
+
+.typing-indicator span {
+  width: 20px;
+  height: 20px;
+  background-color: #65b00b;
+  border-radius: 50%;
+  margin-right: 5px;
+  animation: typing 0.8s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes typing {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
 @media (min-width: 501px) and (max-width: 600px) {
   .help_chat_container {
     width: 95%;

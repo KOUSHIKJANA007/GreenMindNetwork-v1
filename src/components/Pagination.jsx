@@ -13,7 +13,7 @@ export const Pagination = ({ posts, handlePageNumber }) => {
             <div className="page_number_buttons">
 
                 {[...Array(posts.posts.totalPage)].map((item, index) =>
-                    <div className="middle_button">
+                    <div key={index} className="middle_button">
                         <button type='submit' className='page_numbers' id={posts.posts.pageNumber == index?'active':''} onClick={() => handlePageNumber(index)}>{index + 1}</button>
                     </div>
                 )}

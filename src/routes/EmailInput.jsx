@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar';
 
 const EmailInput = () => {
+    window.scroll(0, 0);
     document.title = "Sign Up"
     const { loading, progress } = useSelector((store) => store.validation)
     const navigate = useNavigate()
@@ -17,6 +18,7 @@ const EmailInput = () => {
         setEmail({ ...email, [e.target.name]: e.target.value });
     }
     const handleSubmit = () => {
+       
         dispatch(validationAction.setProgress(50))
         if (document.getElementById("email").value.trim() == '') {
             toast.error("Plaese enter email id");

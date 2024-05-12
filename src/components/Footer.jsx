@@ -5,8 +5,10 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
+    const { isLogin }=useSelector((store)=>store.user);
     return (
         <>
             <footer>
@@ -18,15 +20,21 @@ const Footer = () => {
                     </ul>
                     <ul className="get_to_know">
                         <li><b>get to know</b></li>
-                        <li><Link to="#">blog</Link></li>
-                        <li><Link to="#">news</Link></li>
+                        <li><Link to="/articles">blog</Link></li>
+                        <li><Link to="/articles">news</Link></li>
                         <li><Link to="#">meet our team</Link></li>
                     </ul>
                     <ul className="connect">
                         <li><b>connect</b></li>
-                        <li><Link to="#">contact us</Link></li>
+                        <li><Link to="/contact-us">contact us</Link></li>
                         <li><Link to="#">jobs & internships</Link></li>
                         <li><Link to="#">business partnerships</Link></li>
+                    </ul>
+                    <ul className="connect">
+                        <li><b>get involve</b></li>
+                        {!isLogin && <li><Link to="/email-input">create account</Link></li>}
+                        <li><Link to="#"> about our journy</Link></li>
+                        <li><Link to="#"> awareness camps</Link></li>
                     </ul>
                 </div>
                 <hr />

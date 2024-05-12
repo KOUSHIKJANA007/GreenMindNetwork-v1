@@ -32,7 +32,7 @@ const ForgotEmail = () => {
                     navigate("/forgot-email/forgot-otp-input");
                 }
                 else {
-                    toast.success(data.message);
+                    toast.error(data.message);
                 }
                 dispatch(validationAction.setProgress(100));
             })

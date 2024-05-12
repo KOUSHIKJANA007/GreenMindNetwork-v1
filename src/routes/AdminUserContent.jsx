@@ -32,12 +32,12 @@ const AdminUserContent = () => {
             .then(unwrapResult)
             .then((data) => {
                 dispatch(loginAction.setUserData(data));
-                dispatch(loginAction.setBlockStatus(data.status[0].status))
+                dispatch(loginAction.setBlockStatus(data?.status[0]?.status))
             })
         dispatch(postByUser({ userId: userId, pageNumber: 0 }))
             .then(unwrapResult)
             .then((data) => {
-                dispatch(postAction.setTotalPostOfUser(data.totalElement))
+                dispatch(postAction.setTotalPostOfUser(data?.totalElement))
             })
         dispatch(getTotalAmount(userId))
             .then(unwrapResult)
@@ -51,13 +51,12 @@ const AdminUserContent = () => {
             dispatch(deleteUser(userId))
                 .then(unwrapResult)
                 .then((data) => {
-                    console.log(data);
-                    if (data.success == true) {
-                        toast.success(data.message);
+                    if (data?.success == true) {
+                        toast.success(data?.message);
                         handleContent();
                     }
                     else {
-                        toast.error(data.message);
+                        toast.error(data?.message);
                     }
                 })
         }
@@ -67,8 +66,8 @@ const AdminUserContent = () => {
         dispatch(blockUser(userId))
             .then(unwrapResult)
             .then((data) => {
-                if (data.success == true) {
-                    toast.success(data.message)
+                if (data?.success == true) {
+                    toast.success(data?.message)
                     dispatch(blockListAction.setBlockeStatus());
                     dispatch(loginAction.setBlockStatus("BLOCKED"));
                     setBlock("BLOCKED")
@@ -79,9 +78,8 @@ const AdminUserContent = () => {
         dispatch(unBlockUser(userId))
             .then(unwrapResult)
             .then((data) => {
-                console.log(data);
-                if (data.success == true) {
-                    toast.success(data.message)
+                if (data?.success == true) {
+                    toast.success(data?.message)
                     dispatch(blockListAction.setUnBlockeStatus());
                     dispatch(loginAction.setBlockStatus("UNBLOCKED"));
                     setBlock("UNBLOCKED")
@@ -90,7 +88,8 @@ const AdminUserContent = () => {
     }
     
     let date=new Date(userData?.dob);
-    let age=new Date().getFullYear()-date.getFullYear();
+    let age_in_year=new Date().getFullYear()-date.getFullYear();
+    let age_in_month=new Date().getMonth()-date.getMonth();
     return (
         <div className="admin_user_content_main_container">
             <div className='admin_user_content_container'>
@@ -102,7 +101,7 @@ const AdminUserContent = () => {
                         <h1>{userData?.fname + " " + userData?.lname}</h1>
                     </div>
                     <div className="admin_user_content_age">
-                        <p>age <span>{age}</span></p>
+                        <p>age <span>{age_in_year} Year {age_in_month} Month</span></p>
                     </div>
                     <div className="admin_user_content_icons">
                         <Link> <FaInstagramSquare className="user_social_icon" /></Link>
@@ -134,7 +133,7 @@ const AdminUserContent = () => {
                             </div>
                             <div className="auc_personal_info_contact_age">
                                 <label htmlFor="age">Age</label>
-                                <p id="dob">{age}</p>
+                                <p id="dob"><span>{age_in_year} Year {age_in_month} Month</span></p>
                             </div>
                         </div>
                     </div>

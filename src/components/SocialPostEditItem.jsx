@@ -22,7 +22,6 @@ const SocialPostEditItem = ({ socialId,handleEditPost,openEdit }) => {
         dispatch(getSocialPostById(socialId))
         .then(unwrapResult)
         .then((data)=>{
-            console.log(data);
             setCaption(data);
            setImagePre(BASE_URL+`/api/socialImage/image/${data.image}`);
         })

@@ -66,8 +66,7 @@ const UserNgoDashboard = () => {
             })
         dispatch(eventAction.setDeleteDone());
         dispatch(eventAction.setCreateDone());
-    }, [isDelete, isEdit, isCreate])
-    console.log(events);
+    }, [isDelete, isEdit, isCreate]);
     return (
         <>
             {loading && <LoadingBar color="#78be20" progress={progress} />}

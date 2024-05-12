@@ -14,7 +14,6 @@ const CommentItem = ({ comment }) => {
   const handleToggle = () => {
     setToggle(!toggle);
   }
-  console.log(comment.user.imageName);
   return (
     <>
       <div className='comment_item_container'>

@@ -72,7 +72,7 @@ const Ngo = () => {
                         <h1>our partner NGOS is here </h1>
                     </div>
                     <div className="all_ngo_items_container">
-                        {ngoData.map((item) =>
+                        {ngoData?.map((item) =>
                             <UserNgoItem key={item.id} ngoDatas={item} />
                         )}
                     </div>

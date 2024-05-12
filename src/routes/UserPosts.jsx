@@ -24,14 +24,12 @@ const UserPosts = () => {
         dispatch(postByUser({ pageNumber: pageNumber, userId: users.id }))
             .then(unwrapResult)
             .then((data) => {
-                console.log({ data });
                 dispatch(postAction.setPost(data))
                 dispatch(postAction.setPostCreatedEnd())
                 dispatch(postAction.setDeletePostEnd())
                 dispatch(postAction.setEditPostEnd());
             })
             .catch((err) => {
-                console.log({ err });
                 toast.error(err)
             })
     }, [DeletePost, EditPost])
