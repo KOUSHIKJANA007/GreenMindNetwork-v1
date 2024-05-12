@@ -131,6 +131,7 @@
     padding: 5px 10px;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 .chat_body::-webkit-scrollbar {
     width: 8px; 
@@ -200,18 +201,22 @@
     align-self: flex-end;
     background-color: #089c08;
      box-shadow: 0px 0.5px 5px .5px rgba(15, 0, 0, 0.6);
-    min-height: 40px;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     margin: 5px 0px;
+    max-width: 93%;
+}
+.outgoing_message p{
+    word-wrap: break-word;
 }
 .incomming_message{
     background-color: #fff;
     box-shadow: 0px 0.5px 5px .5px rgba(15, 0, 0, 0.6);
     padding: 5px 10px 5px 10px;
-    max-width: 260px;
+     max-width: 93%;
     border-radius: 5px;
     width:max-content;
+    word-wrap: break-word;
     margin: 5px 0px;
 }
 @media (max-width:330px){
