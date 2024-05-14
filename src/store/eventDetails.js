@@ -105,6 +105,7 @@ const eventDetails = createSlice({
     loading: false,
     events: null,
     homeEvents: null,
+    single_event:null,
     isDelete: false,
     isCreate: false,
     total_event:'0',
@@ -119,6 +120,9 @@ const eventDetails = createSlice({
     },
     setEvent: (state, action) => {
       state.events = action.payload;
+    },
+    setSingleEvent: (state, action) => {
+      state.single_event = action.payload;
     },
     setHomeEvent: (state, action) => {
       state.homeEvents = action.payload;

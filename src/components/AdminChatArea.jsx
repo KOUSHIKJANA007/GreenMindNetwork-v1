@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import LoadingBar from 'react-top-loading-bar';
 
 const AdminChatArea = ({ toggleTab, handleContent, sendMessage, handleRefreshContent, content }) => {
-    const { admin_message, chat_user_data, loading, progress } = useSelector((store) => store.message);
+    const { admin_message, chat_user_data, loading, progress, isDeleteChat } = useSelector((store) => store.message);
     const { users } = useSelector((store) => store.user);
     const dispatch = useDispatch();
     const [userLoading, setUserLoading] = useState(false);
@@ -25,7 +25,7 @@ const AdminChatArea = ({ toggleTab, handleContent, sendMessage, handleRefreshCon
                     setUserLoading(false);
                 }
             })
-    }, [toggleTab]);
+    }, [toggleTab, isDeleteChat]);
    
     function clearChat() {
         let f = confirm("are you sure to clear chat?")

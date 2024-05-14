@@ -1,0 +1,108 @@
+.event-add-body {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: -600px;
+  display: flex;
+  z-index: 99;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  -moz-backdrop-filter: blur(5px); /* Adjust blur level as needed */
+  -webkit-backdrop-filter: blur(5px); /* Safari 9+, Safari on iOS 9+ */
+  backdrop-filter: blur(5px); /* Firefox */
+  visibility: hidden;
+  transition: all .2s ease-in-out .2s;
+}
+.event-add-progress-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 20px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.59);
+}
+.event-add-body.active {
+  visibility: visible;
+  transform: translateY(600px);
+}
+.event-add-progress-container h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.event-add-progress-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.event-add-progress-caption label {
+  color: #78be20;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.event-add-progress-caption input:focus {
+  border: 2px solid #78be20;
+}
+.event-add-progress-caption input {
+  padding: 2px 10px;
+  outline: none;
+  border: 2px solid #dedede;
+  border-radius: 5px;
+  height: 30px;
+  font-size: 18px;
+}
+.event-add-progress-image {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.event-add-progress-image label {
+  color: #78be20;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.event-add-progress-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.event-add-progress-description label {
+  color: #78be20;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.event-add-progress-description textarea {
+  padding: 2px 10px;
+  outline: none;
+  border: 2px solid #dedede;
+  border-radius: 10px;
+  font-size: 18px;
+}
+.event-add-progress-description textarea:focus {
+  border: 2px solid #78be20;
+}
+.event-add-progress-submit-button {
+  text-align: center;
+}
+.event-add-progress-submit-button button {
+  height: 40px;
+  width: 20%;
+  border: none;
+  background-color: #22ad06;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.event-add-progress-submit-button button:hover {
+  text-shadow: 0 0 7px #fff;
+  background-color: #2b7c05;
+}
+.event-add-progress-submit-button button:active {
+  transform: scale(1.02);
+}

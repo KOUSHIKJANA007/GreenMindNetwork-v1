@@ -50,7 +50,7 @@ export const deletePost = createAsyncThunk("deletePost", async (postId) => {
 })
 export const uploadPostImage = createAsyncThunk("uploadPostImage", async (data) => {
     let token = localStorageWithExpiry.getItem("token");
-    let formData = new FormData()
+    let formData = new FormData();
     formData.append("image", data.image)
     const response = await fetch(BASE_URL + `/api/post/image/${data.postId}`, {
         method: "POST",

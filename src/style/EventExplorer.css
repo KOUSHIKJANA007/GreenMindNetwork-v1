@@ -1,0 +1,315 @@
+.event-explorer-container {
+  position: relative;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.event-header-details {
+  display: flex;
+  justify-content: space-between;
+  width: 92%;
+  background-color: #78be20;
+  padding: 25px 25px 25px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.59);
+  gap: 20px;
+}
+.event_explorer_title {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.event-ngo-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 45px;
+}
+.event-ngo-logo a img {
+  width: 200px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.59);
+  border-radius: 5px;
+  box-shadow: #f5f10b 1px 0px 30px 4px;
+  transition: transform 0.2s ease-in-out 0.2s;
+}
+.event-ngo-logo a img:hover {
+  transform: scale(1.02);
+}
+.event-ngo-logo p {
+  font-size: 22px;
+  text-transform: capitalize;
+  font-weight: 600;
+  color: white;
+}
+.event-ngo-logo p span a {
+  text-decoration: none;
+  color: #78be20;
+  background-color: white;
+  padding: 5px 5px 10px 5px;
+  border-radius: 5px;
+  text-shadow: 0 0 7px #78be20;
+}
+.event_explorer_title h1 {
+  color: white;
+  text-shadow: 0 0 4px #000;
+  margin-bottom: 40px;
+  text-transform: capitalize;
+  text-align: center;
+}
+.event-banner-image {
+  box-shadow: #f5f10b 1px 0px 30px 4px;
+  width: 70%;
+  border-radius: 8px;
+  height: 400px;
+}
+.event-banner-image img {
+  width: 100%;
+  border-radius: 8px;
+  height: 400px;
+}
+
+/* **********************************EVENT PROGRESS TRACKER****************************************** */
+.event-progress-main-body {
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.39);
+  border-radius: 10px;
+  width: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
+}
+.event-progress-points {
+  display: flex;
+  margin-top: 70px;
+  margin-left: 50px;
+}
+.event-progress-points li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 50px;
+}
+.event-progress-points li .icon {
+  font-size: 35px;
+  color: #78be20;
+  cursor: pointer;
+}
+.event-progress-points li .text {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #78be20;
+  text-align: center;
+  width: 80px;
+}
+.event-progress-points li .progress .uil {
+  display: none;
+}
+.event-progress-points li .progress {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(184, 179, 179, 0.781);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  margin: 12px 0;
+  position: relative;
+  cursor: pointer;
+}
+.progress::after {
+  content: "";
+  position: absolute;
+  width: 152px;
+  height: 5px;
+  background-color: rgba(184, 179, 179, 0.781);
+  right: 30px;
+}
+.event-progress-points li .progress p {
+  font-size: 13px;
+}
+.event-progress-points li .active {
+  background-color: #78be20;
+}
+.event-progress-points li .active::after {
+  background-color: #78be20;
+}
+.event-progress-points li .active p {
+  display: none;
+}
+.event-progress-points li .active .uil {
+  display: flex;
+  font-size: 21px;
+}
+.event-tracker-headline{
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.event-tracker-headline p{
+  font-size: 30px;
+  text-align: center;
+}
+.event-tracker-headline h1{
+  font-size: 40px;
+  text-transform: uppercase;
+  text-align: center;
+}
+@media (max-width:1000px){
+  .event-progress-points{
+    flex-direction: column;
+  }
+  .event-progress-points li{
+    flex-direction: row;
+  }
+  .progress::after{
+    width: 8px;
+    height: 70px;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+  .event-progress-points li .icon{
+    margin: 30px 0;
+  }
+  .event-progress-points li .progress{
+    margin: 0px 0px 0px 30px;
+
+  }
+  .event-progress-points li .text{
+    text-align: start;
+    margin-left: 20px;
+  }
+}
+@media (min-width:1001px) and (max-width:1200px){
+  .event-progress-main-body{
+    /* padding-left: 90px; */
+    width: 95%;
+  }
+  .event-progress-points{
+    margin-left: 100px;
+  }
+}
+@media (max-width: 400px) {
+  .event-header-details {
+    width: 90%;
+  }
+  .event-header-details {
+    flex-direction: column;
+    gap: 40px;
+    padding: 15px 15px 15px 15px;
+  }
+  .event-banner-image {
+    width: 100%;
+    height: 200px;
+  }
+  .event-banner-image img {
+    width: 100%;
+    height: 200px;
+  }
+  .event-ngo-logo p {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+  }
+  .event_explorer_title h1 {
+    text-align: center;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 600px) {
+  .event-header-details {
+    width: 90%;
+  }
+  .event-banner-image {
+    width: 100%;
+    height: 250px;
+  }
+  .event-banner-image img {
+    width: 100%;
+    height: 250px;
+  }
+  .event-header-details {
+    flex-direction: column;
+    gap: 40px;
+    padding: 15px 15px 15px 15px;
+  }
+  .event_explorer_title h1 {
+    text-align: center;
+  }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .event-header-details {
+    width: 90%;
+  }
+  .event-banner-image {
+    width: 100%;
+    height: 300px;
+  }
+  .event-banner-image img {
+    width: 100%;
+    height: 300px;
+  }
+  .event-header-details {
+    flex-direction: column;
+    gap: 40px;
+    padding: 15px 15px 15px 15px;
+  }
+  .event_explorer_title h1 {
+    text-align: center;
+  }
+}
+@media (min-width: 901px) and (max-width: 1100px) {
+  .event-banner-image {
+    width: 70%;
+    height: 390px;
+  }
+  .event-header-details {
+    padding: 15px 20px 15px 15px;
+  }
+  .event-banner-image img {
+    width: 100%;
+    border-radius: 10px;
+    height: 390px;
+  }
+  .event_explorer_title h1 {
+    text-align: center;
+  }
+}
+@media (min-width: 1101px) and (max-width: 1300px) {
+  .event-banner-image {
+    width: 70%;
+    height: 390px;
+  }
+  .event-header-details {
+    padding: 15px 20px 15px 15px;
+  }
+  .event-banner-image img {
+    width: 100%;
+    border-radius: 10px;
+    height: 390px;
+  }
+  .event_explorer_title h1 {
+    text-align: center;
+  }
+}
+@media (min-width: 1700px) {
+  .event-banner-image {
+    width: 50%;
+    height: 420px;
+  }
+  .event-banner-image img {
+    width: 100%;
+    border-radius: 10px;
+    height: 420px;
+  }
+}

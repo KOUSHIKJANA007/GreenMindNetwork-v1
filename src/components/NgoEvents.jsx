@@ -38,7 +38,7 @@ const NgoEvents = ({ event, ngo }) => {
             <img src={BASE_URL+`/api/event/image/${event?.image}`} alt="" />
           </div>
           <div className="user_ngo_dash_content_events_title">
-            <h3><Link>{event?.title}</Link></h3>
+            <h3><Link to={`/event-explorer/${event?.id}`}>{event?.title}</Link></h3>
           </div>
           <div className="user_ngo_dash_content_events_progress">
             <h4 htmlFor="bar"><span>Target Amount </span>&#8377;{event?.targetAmount}</h4>

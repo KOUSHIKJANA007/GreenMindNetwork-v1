@@ -14,6 +14,7 @@ import bankDetails from "./bankDetails";
 import adminFunctions from "./adminFunctions";
 import blockList from "./blockList";
 import messageSlice from "./messageSlice";
+import eventProgressSlice from "./eventProgressSlice";
 
 const persistConfig = {
   key: "root",
@@ -34,7 +35,8 @@ const reducer = combineReducers({
   bank: bankDetails,
   admin: adminFunctions,
   blocklist: blockList,
-  message:messageSlice
+  message:messageSlice,
+  eventProgress:eventProgressSlice,
 });
 const persistedReducer = persistReducer(persistConfig, reducer);
 const greenMindStore = configureStore({
