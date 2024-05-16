@@ -34,6 +34,7 @@ import '../src/style/ContactUs.css'
 import '../src/style/AdminChat.css'
 import '../src/style/AddProgress.css'
 import '../src/style/EventExplorer.css'
+import '../src/style/ViewProgress.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './routes/Home'
 import SignIn from './routes/SignIn'
@@ -109,7 +110,7 @@ const router = createBrowserRouter([
       { path: "/create-event/:ngoId", element: <Protected Component={CreateEvent}/>},
       { path: "/edit-event/:eventId/:ngoId", element: <Protected Component={EditEvent}/>},
       { path: "/admin-dashboard", element: <Protected Component={AdminDashboard}/>},
-      { path: "/contact-us", element: <Protected Component={ContactUs}/>},
+      { path: "/contact-us", element: <ContactUs/>},
       { path: "/user-content/:userId", element: <Protected Component={AdminUserContent}/>},
       { path: "/admin-chat", element: <Protected Component={AdminChat}/>},
       { path: "/event-explorer/:eventId", element: <Protected Component={EventExplorer}/>},
@@ -118,11 +119,11 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={greenMindStore}>
       <PersistGate loading={null} persistor={persistor}>
         <RouterProvider router={router} />
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
+  // {/* </React.StrictMode>, */}
 )

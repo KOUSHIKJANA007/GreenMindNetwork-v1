@@ -24,9 +24,7 @@ const EditPost = () => {
             .catch((err) => {
                 toast.error({ err })
             })
-    }, [])
-
-    console.log("postData", postData);
+    }, []);
     const handleOnChange = (e) => {
         setPostData({ ...postData, [e.target.name]: e.target.value })
     }

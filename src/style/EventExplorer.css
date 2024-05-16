@@ -148,27 +148,106 @@
   display: flex;
   font-size: 21px;
 }
-.event-tracker-headline{
+.event-tracker-headline {
   margin-top: 15px;
   margin-bottom: 20px;
 }
-.event-tracker-headline p{
-  font-size: 30px;
+.event-tracker-headline p {
+  font-size: 25px;
   text-align: center;
+  padding: 0px 20px;
+  font-weight: 500;
+  color: #4b4b4b;
+  text-wrap: balance;
 }
-.event-tracker-headline h1{
+.event-tracker-headline h1 {
   font-size: 40px;
   text-transform: uppercase;
   text-align: center;
+  color: #4b4b4b;
 }
-@media (max-width:1000px){
-  .event-progress-points{
+.event-explorer-description {
+  width: 92%;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.39);
+  padding: 20px 20px 50px 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.event-explorer-description h1 {
+  text-transform: uppercase;
+  color: #4b4b4b;
+  text-align: center;
+}
+.event-explorer-description button {
+  height: 40px;
+  width: 20%;
+  border: none;
+  background-color: #22ad06;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 30px 0px;
+  align-self: center;
+}
+.event-explorer-description button a {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.event-explorer-description button:hover {
+  text-shadow: 0 0 7px #fff;
+  background-color: #2b7c05;
+}
+.event-explorer-description button:active {
+  transform: scale(1.02);
+}
+.event-explorer-amount-con {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 95%;
+}
+.event-explorer-bugget {
+  padding: 5px 15px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.39);
+  border-radius: 7px;
+}
+.event-explorer-bugget h2 {
+  text-transform: uppercase;
+  font-weight: 650;
+  color: #4b4b4b;
+}
+.event-explorer-bugget p {
+  font-size: 21px;
+  font-weight: 700;
+  color: #78be20;
+}
+.event-explorer-collect {
+  padding: 5px 15px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.39);
+  border-radius: 7px;
+}
+.event-explorer-collect h2 {
+  text-transform: uppercase;
+  font-weight: 650;
+  color: #4b4b4b;
+}
+.event-explorer-collect p {
+  font-size: 21px;
+  font-weight: 700;
+  color: #78be20;
+}
+@media (max-width: 1000px) {
+  .event-progress-points {
     flex-direction: column;
   }
-  .event-progress-points li{
+  .event-progress-points li {
     flex-direction: row;
   }
-  .progress::after{
+  .progress::after {
     width: 8px;
     height: 70px;
     left: 50%;
@@ -176,24 +255,23 @@
     transform: translateX(-50%);
     z-index: -1;
   }
-  .event-progress-points li .icon{
+  .event-progress-points li .icon {
     margin: 30px 0;
   }
-  .event-progress-points li .progress{
+  .event-progress-points li .progress {
     margin: 0px 0px 0px 30px;
-
   }
-  .event-progress-points li .text{
+  .event-progress-points li .text {
     text-align: start;
     margin-left: 20px;
   }
 }
-@media (min-width:1001px) and (max-width:1200px){
-  .event-progress-main-body{
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .event-progress-main-body {
     /* padding-left: 90px; */
     width: 95%;
   }
-  .event-progress-points{
+  .event-progress-points {
     margin-left: 100px;
   }
 }
@@ -224,6 +302,21 @@
   .event_explorer_title h1 {
     text-align: center;
   }
+  .event-explorer-amount-con {
+    flex-direction: column;
+    text-align: center;
+  }
+  .event-explorer-description{
+    width: 90%;
+    padding: 10px;
+  }
+  .event-tracker-headline p{
+    padding: 0 10px;
+    text-wrap: balance;
+  }
+  .event-explorer-description button{
+    width: 55%;
+  }
 }
 
 @media (min-width: 401px) and (max-width: 600px) {
@@ -246,6 +339,21 @@
   .event_explorer_title h1 {
     text-align: center;
   }
+  .event-explorer-amount-con {
+    flex-direction: column;
+    text-align: center;
+  }
+ .event-explorer-description{
+    width: 90%;
+    padding: 10px;
+  }
+  .event-tracker-headline p{
+    padding: 0 10px;
+    text-wrap: balance;
+  }
+  .event-explorer-description button{
+    width: 50%;
+  }
 }
 @media (min-width: 601px) and (max-width: 900px) {
   .event-header-details {
@@ -266,6 +374,16 @@
   }
   .event_explorer_title h1 {
     text-align: center;
+  }
+  .event-explorer-description{
+    width: 90%;
+  }
+  .event-tracker-headline p{
+    padding: 0 10px;
+    text-wrap: balance;
+  }
+  .event-explorer-description button{
+    width: 35%;
   }
 }
 @media (min-width: 901px) and (max-width: 1100px) {

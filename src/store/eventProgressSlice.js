@@ -13,6 +13,21 @@ export const getProgressByEvent = createAsyncThunk(
     return await response.json();
   }
 );
+export const getProgressByEventAndProgress = createAsyncThunk(
+  "getProgressByEventAndProgress",
+  async (data) => {
+    const response = await fetch(
+      BASE_URL + `/progress/event-progress/${data.progress_no}/event/${data.eventId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  }
+);
 export const addEventProgress = createAsyncThunk(
   "addEventProgress",
   async (data) => {
@@ -24,6 +39,35 @@ export const addEventProgress = createAsyncThunk(
         Authorization: "Bearer" + token,
       },
       body:JSON.stringify(data.progressData),
+    });
+    return await response.json();
+  }
+);
+export const updateEventProgress = createAsyncThunk(
+  "updateEventProgress",
+  async (data) => {
+    let token = localStorageWithExpiry.getItem("token");
+    const response = await fetch(BASE_URL + `/progress/${data.progressId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
+      body: JSON.stringify(data.progressData),
+    });
+    return await response.json();
+  }
+);
+export const deleteEventProgress = createAsyncThunk(
+  "deleteEventProgress",
+  async (progressId) => {
+    let token = localStorageWithExpiry.getItem("token");
+    const response = await fetch(BASE_URL + `/progress/${progressId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
+      },
     });
     return await response.json();
   }
@@ -53,16 +97,34 @@ const eventProgressSlice = createSlice({
     loading: false,
     progressList:[],
     add_progress:false,
+    progress_data:null,
+    isDeleteProgress:false,
+    isEditProgress:false,
   },
   reducers: {
     setProgressList:(state,action)=>{
       state.progressList=action.payload;
+    },
+    setProgressValue:(state,action)=>{
+      state.progress_data=action.payload;
     },
     setAddProgressStart:(state)=>{
       state.add_progress=true;
     },
     setAddProgressEnd:(state)=>{
       state.add_progress=false;
+    },
+    setDeleteProgressStart:(state)=>{
+      state.isDeleteProgress=true;
+    },
+    setDeleteProgressEnd:(state)=>{
+      state.isDeleteProgress=false;
+    },
+    setEditProgressStart:(state)=>{
+      state.isEditProgress=true;
+    },
+    setEditProgressEnd:(state)=>{
+      state.isEditProgress=false;
     },
   },
   extraReducers: (builder) => {
@@ -91,6 +153,33 @@ const eventProgressSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(uploadProgressImage.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(getProgressByEventAndProgress.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getProgressByEventAndProgress.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(getProgressByEventAndProgress.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(deleteEventProgress.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteEventProgress.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(deleteEventProgress.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(updateEventProgress.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateEventProgress.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(updateEventProgress.rejected, (state) => {
       state.loading = false;
     });
   },

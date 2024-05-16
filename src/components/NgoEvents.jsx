@@ -58,7 +58,7 @@ const NgoEvents = ({ event, ngo }) => {
                 :
                 <button id='ngo_edit_button' type='submit'><Link to={`/donation/${event?.ngo?.id}/${event?.id}`}>donate</Link></button>
               }
-              <button id='ngo_delete_button' type='submit'><Link>explore</Link></button>
+              <button id='ngo_delete_button' type='submit'><Link to={`/event-explorer/${event?.id}`}>explore</Link></button>
             </div>}
         </div>
       }

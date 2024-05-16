@@ -9,17 +9,33 @@ import { LuView } from "react-icons/lu";
 import { IoMdCheckmark } from "react-icons/io";
 import AddProgress from '../components/AddProgress';
 import { toast } from 'react-toastify';
+import EventProgressView from '../components/EventProgressView';
+import EditProgress from '../components/EditProgress';
+import DOMPurify from 'dompurify';
 
 const EventExplorer = () => {
+  document.title = "Event Details"
+  const [scroll, setScroll] = useState([]);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [scroll]);
   const { eventId } = useParams();
   const dispatch = useDispatch();
   const { single_event } = useSelector((store) => store.event);
-  const { progressList, add_progress } = useSelector((store) => store.eventProgress);
+  const { progressList, add_progress, isDeleteProgress, isEditProgress } = useSelector((store) => store.eventProgress);
   const { users } = useSelector((store) => store.user);
   const [openAddProgress, setOpenAddProgress] = useState(false);
+  const [openViewProgress, setOpenViewProgress] = useState(false);
+  const [openEditProgress, setOpenEditProgress] = useState(false);
   const [progressData, setProgressData] = useState(0);
   const handleOpenAddProgress = () => {
     setOpenAddProgress(!openAddProgress);
+  }
+  const handleOpenViewProgress = () => {
+    setOpenViewProgress(!openViewProgress);
+  }
+  const handleEditViewProgress = () => {
+    setOpenEditProgress(!openEditProgress);
   }
   useEffect(() => {
     dispatch(getProgressByEvent(eventId))
@@ -42,13 +58,19 @@ const EventExplorer = () => {
       .catch((err) => {
         console.log(err);
       })
-      dispatch(progressAction.setAddProgressEnd());
-  }, [add_progress]);
+    dispatch(progressAction.setAddProgressEnd());
+    dispatch(progressAction.setDeleteProgressEnd());
+    dispatch(progressAction.setEditProgressEnd());
+  }, [add_progress, isDeleteProgress, isEditProgress]);
   let progressOne = progressList.filter((item) => item.progress === 1);
   let progressTwo = progressList.filter((item) => item.progress === 2);
   let progressThree = progressList.filter((item) => item.progress === 3);
   let progressFour = progressList.filter((item) => item.progress === 4);
   let progressFive = progressList.filter((item) => item.progress === 5);
+
+  const sanitizedData = () => ({
+    __html: DOMPurify.sanitize(single_event?.description)
+  })
   return (
     <div className='event-explorer-container'>
 
@@ -84,9 +106,23 @@ const EventExplorer = () => {
 
 
           <li>
-            <LuView className='icon' />
+            <LuView onClick={() => {
+              if (progressOne[0]?.progress === 1) {
+                handleOpenViewProgress();
+              }
+              else {
+                toast.error("Progress not update yet")
+              }
+              setProgressData(1)
+            }} className='icon' />
             <div onClick={() => {
-              handleOpenAddProgress()
+              if (single_event?.ngo?.user?.id !== users?.id) { return; }
+              if (progressOne[0]?.progress !== 1) {
+                handleOpenAddProgress()
+              }
+              else {
+                handleEditViewProgress();
+              }
               setProgressData(1)
             }} className={progressOne[0]?.progress === 1 ? "active progress one" : "progress one"}>
               <p>1</p>
@@ -98,18 +134,36 @@ const EventExplorer = () => {
 
 
           <li>
-            <LuView className='icon' />
+            <LuView onClick={() => {
+              if (progressTwo[0]?.progress === 2) {
+                handleOpenViewProgress();
+              }
+              else {
+                toast.error("Progress not update yet")
+              }
+              setProgressData(2)
+            }} className='icon' />
             {progressOne[0]?.progress === 1
               ?
               <div onClick={() => {
-                handleOpenAddProgress()
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                if (progressTwo[0]?.progress !== 2) {
+                  handleOpenAddProgress()
+                }
+                else {
+                  handleEditViewProgress();
+                }
                 setProgressData(2)
+
               }} className={progressTwo[0]?.progress === 2 ? "active progress two" : "progress two"}>
                 <p>2</p>
                 <IoMdCheckmark className='uil' />
               </div>
               :
-              <div onClick={() => { toast.error("please update start point") }} className={progressTwo[0]?.progress === 2 ? "active progress two" : "progress two"}>
+              <div onClick={() => {
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                toast.error("please update start point")
+              }} className={progressTwo[0]?.progress === 2 ? "active progress two" : "progress two"}>
                 <p>2</p>
                 <IoMdCheckmark className='uil' />
               </div>}
@@ -119,18 +173,35 @@ const EventExplorer = () => {
 
 
           <li>
-            <LuView className='icon' />
+            <LuView onClick={() => {
+              if (progressThree[0]?.progress === 3) {
+                handleOpenViewProgress();
+              }
+              else {
+                toast.error("Progress not update yet")
+              }
+              setProgressData(3)
+            }} className='icon' />
             {(progressOne[0]?.progress === 1 && progressTwo[0]?.progress === 2)
               ?
               <div onClick={() => {
-                handleOpenAddProgress()
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                if (progressThree[0]?.progress !== 3) {
+                  handleOpenAddProgress()
+                }
+                else {
+                  handleEditViewProgress();
+                }
                 setProgressData(3)
               }} className={progressThree[0]?.progress === 3 ? "active progress three" : "progress three"}>
                 <p>3</p>
                 <IoMdCheckmark className='uil' />
               </div>
               :
-              <div onClick={() => { toast.error("Please update previous check point") }} className={progressThree[0]?.progress === 3 ? "active progress three" : "progress three"}>
+              <div onClick={() => {
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                toast.error("Please update previous check point")
+              }} className={progressThree[0]?.progress === 3 ? "active progress three" : "progress three"}>
                 <p>3</p>
                 <IoMdCheckmark className='uil' />
               </div>}
@@ -140,18 +211,35 @@ const EventExplorer = () => {
 
 
           <li>
-            <LuView className='icon' />
+            <LuView onClick={() => {
+              if (progressFour[0]?.progress === 4) {
+                handleOpenViewProgress();
+              }
+              else {
+                toast.error("Progress not update yet")
+              }
+              setProgressData(4)
+            }} className='icon' />
             {(progressOne[0]?.progress === 1 && progressTwo[0]?.progress === 2 && progressThree[0]?.progress === 3)
               ?
               <div onClick={() => {
-                handleOpenAddProgress()
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                if (progressFour[0]?.progress !== 4) {
+                  handleOpenAddProgress()
+                }
+                else {
+                  handleEditViewProgress();
+                }
                 setProgressData(4)
               }} className={progressFour[0]?.progress === 4 ? "active progress four" : "progress four"}>
                 <p>4</p>
                 <IoMdCheckmark className='uil' />
               </div>
               :
-              <div onClick={() => { toast.error("Please update previous check point") }} className={progressFour[0]?.progress === 4 ? "active progress four" : "progress four"}>
+              <div onClick={() => {
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                toast.error("Please update previous check point")
+              }} className={progressFour[0]?.progress === 4 ? "active progress four" : "progress four"}>
                 <p>4</p>
                 <IoMdCheckmark className='uil' />
               </div>}
@@ -160,18 +248,35 @@ const EventExplorer = () => {
 
 
           <li>
-            <LuView className='icon' />
+            <LuView onClick={() => {
+              if (progressFive[0]?.progress === 5) {
+                handleOpenViewProgress();
+              }
+              else {
+                toast.error("Progress not update yet")
+              }
+              setProgressData(5)
+            }} className='icon' />
             {(progressOne[0]?.progress === 1 && progressTwo[0]?.progress === 2 && progressThree[0]?.progress === 3 && progressFour[0]?.progress === 4)
               ?
               <div onClick={() => {
-                handleOpenAddProgress()
-                setProgressData(5)
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                if (progressFive[0]?.progress !== 5) {
+                  handleOpenAddProgress()
+                }
+                else {
+                  handleEditViewProgress();
+                }
+                setProgressData(5);
               }} className={progressFive[0]?.progress === 5 ? "active progress five" : "progress five"}>
                 <p>5</p>
                 <IoMdCheckmark className='uil' />
               </div>
               :
-              <div onClick={() => { toast.error("Please update previous check point") }} className={progressFive[0]?.progress === 5 ? "active progress five" : "progress five"}>
+              <div onClick={() => {
+                if (single_event?.ngo?.user?.id !== users?.id) { return; }
+                toast.error("Please update previous check point")
+              }} className={progressFive[0]?.progress === 5 ? "active progress five" : "progress five"}>
                 <p>5</p>
                 <IoMdCheckmark className='uil' />
               </div>}
@@ -179,11 +284,49 @@ const EventExplorer = () => {
           </li>
         </ul>
       </div>
-
-      <div className="event-explorer-description">
-
+      <div className="event-explorer-amount-con">
+        <div className="event-explorer-collect">
+          <h2>target amount</h2>
+          <p>&#8377; {single_event?.targetAmount}</p>
+        </div>
+        <div className="event-explorer-bugget">
+          <h2>collected amount</h2>
+          <p>&#8377; {single_event?.collectedAmount}</p>
+        </div>
       </div>
-      <AddProgress eventId={eventId} progressData={progressData} handleOpenAddProgress={handleOpenAddProgress} openAddProgress={openAddProgress} />
+      <div className="event-explorer-description" >
+        <h1>know more about this event</h1>
+        <div dangerouslySetInnerHTML={sanitizedData()}></div>
+        {
+        single_event?.ngo?.user?.id===users?.id &&
+        <button><Link  to={`/edit-event/${single_event?.id}/${single_event?.ngo?.id}`}>Edit Event Details</Link></button>
+        }
+      </div>
+      <AddProgress 
+        eventId={eventId} 
+        progressData={progressData} 
+        handleOpenAddProgress={handleOpenAddProgress} 
+        openAddProgress={openAddProgress} 
+      />
+
+      <EventProgressView
+        progressData={progressData}
+        eventId={eventId}
+        openViewProgress={openViewProgress}
+        handleOpenViewProgress={handleOpenViewProgress}
+        handleEditViewProgress={handleEditViewProgress}
+        progressTwo={progressTwo}
+        progressThree={progressThree}
+        progressFour={progressFour}
+        progressFive={progressFive}
+      />
+
+      <EditProgress 
+        eventId={eventId} 
+        handleEditViewProgress={handleEditViewProgress} 
+        openEditProgress={openEditProgress} 
+        progressData={progressData} 
+      />
     </div>
   )
 }

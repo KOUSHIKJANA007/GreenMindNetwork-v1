@@ -23,7 +23,7 @@ const ContactUs = () => {
   const [content, setContent] = useState('');
   const navigate=useNavigate();
   const [toggleHelp, setToggleHelp] = useState(true);
-  const { users, admin_user } = useSelector((store) => store.user);
+  const { users, admin_user, isLogin } = useSelector((store) => store.user);
   const { user_chat_message } = useSelector((store) => store.message);
   const handleToggleHelp = () => {
     setToggleHelp(!toggleHelp)
@@ -93,11 +93,16 @@ const ContactUs = () => {
             <h4>chat to support</h4>
             <p>Chat with us to any query </p>
             {
-              admin_user?.roleName == "ADMIN_USER"
-              ?
-                <button onClick={() => { navigate("/admin-chat") }}>chat with us</button>
-              :
-              <button onClick={handleToggleHelp}>chat with us</button>
+              isLogin &&
+              <>
+              {
+                  admin_user?.roleName == "ADMIN_USER"
+                    ?
+                    <button onClick={() => { navigate("/admin-chat") }}>chat with us</button>
+                    :
+                    <button onClick={handleToggleHelp}>chat with us</button>
+              }
+              </>
             }
           </div>
           <div className="contact_option">
@@ -111,57 +116,63 @@ const ContactUs = () => {
           <h1>our office location</h1>
           <iframe referrerPolicy='origin' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.107760635245!2d87.32683227348468!3d22.424969538368508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1d5b3be928a48b%3A0xd243dc802e8c7d!2sN.K.%20Chatterjee%20Memorial%20Maternity%20cum%20Nursing%20Home!5e0!3m2!1sen!2sin!4v1713467401085!5m2!1sen!2sin" width="100%" height="350" style={{ border: "0" }} loading="lazy" ></iframe>
         </div>
-        {
-          toggleHelp
-            ?
-            <div className="help_icon_button" >
-              {admin_user?.roleName == "ADMIN_USER"
-              ?
-               <PiChatsLight className='help_icon' onClick={()=>{navigate("/admin-chat")}} />
-               :
-              <PiChatsLight className='help_icon' onClick={()=>{handleToggleHelp()
-              connect()
-              }} />
-              }
-            </div>
-            :
-            <div className="popup_help_chat_container">
-              <div className="chat_header_part">
-                <div className="chat_dp">
-                  <img src="/image/college.jpg" alt="" />
+        { isLogin &&
+          <>
+          {
+              toggleHelp
+                ?
+                <div className="help_icon_button" >
+                  {admin_user?.roleName == "ADMIN_USER"
+                    ?
+                    <PiChatsLight className='help_icon' onClick={() => { navigate("/admin-chat") }} />
+                    :
+                    <PiChatsLight className='help_icon' onClick={() => {
+                      handleToggleHelp()
+                      connect()
+                    }} />
+                  }
                 </div>
-                <div className="chat_name">
-                  <p>Admin</p>
+                :
+                <div className="popup_help_chat_container">
+                  <div className="chat_header_part">
+                    <div className="chat_dp">
+                      <img src="/image/college.jpg" alt="" />
+                    </div>
+                    <div className="chat_name">
+                      <p>Admin</p>
+                    </div>
+                    <div className="chat_close">
+                      <IoClose onClick={handleToggleHelp} className='chat_close_icon' />
+                    </div>
+                  </div>
+                  <div className="chat_body">
+                    {user_chat_message?.map((item) =>
+
+                      <>
+                        {(item?.userId !== undefined && Number(item?.receiverName) === users?.id) &&
+                          <div className='incomming_message'>
+                            <h5>Admin</h5>
+                            <p>{item?.content}</p>
+                          </div>}
+                        {(item.userId === users?.id || item?.user?.id === users?.id) &&
+                          <div className='outgoing_message'>
+                            <h5>{users?.fname + " " + users?.lname}</h5>
+                            <p>{item?.content}</p>
+                          </div>}
+                      </>
+                    )}
+                  </div>
+                  <div className="chat_footer">
+                    <input type="text" value={content} onChange={handleContent} placeholder='Typing message.....' />
+                    <button onClick={() => {
+                      sendMessage()
+                      setContent("")
+                    }}><FiSend className='cc_send' /></button>
+                  </div>
                 </div>
-                <div className="chat_close">
-                  <IoClose onClick={handleToggleHelp} className='chat_close_icon' />
-                </div>
-              </div>
-              <div className="chat_body">
-                {user_chat_message?.map((item)=>
-              
-              <>
-                    {(item?.userId !== undefined && Number(item?.receiverName) === users?.id) &&
-                      <div className='incomming_message'>
-                      <h5>Admin</h5>
-                      <p>{item?.content}</p>
-                    </div>}
-                    {(item.userId === users?.id || item?.user?.id === users?.id) &&
-                      <div className='outgoing_message'>
-                        <h5>{users?.fname + " " + users?.lname}</h5>
-                        <p>{item?.content}</p>
-                    </div>}
-              </>
-              )}
-              </div>
-              <div className="chat_footer">
-                <input type="text" value={content} onChange={handleContent} placeholder='Typing message.....' />
-                <button onClick={()=>{
-                  sendMessage()
-                  setContent("")
-                }}><FiSend className='cc_send' /></button>
-              </div>
-            </div>}
+          }
+          </>
+          }
       </div>
     </>
   )
