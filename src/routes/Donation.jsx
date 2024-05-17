@@ -5,6 +5,7 @@ import { createPayment, updatePayment } from '../store/donationDetails';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { BASE_URL } from '../store/helper';
 
 const Donation = () => {
     document.title = "Donate"
@@ -41,7 +42,7 @@ const Donation = () => {
                         amount: res.amount,
                         currency: "INR",
                         name: "Green Mind Network Donation",
-                        image: "http://localhost:5173/userhome",
+                        image: BASE_URL +"/api/v1/auth/logo/image/logo.png",
                         order_id: res.id,
                         handler: function (res) {
                             dispatch(updatePayment({ paymentId: res.razorpay_payment_id, orderId: res.razorpay_order_id, status: "paid", amount: res.amount, eventId: eventId }))
