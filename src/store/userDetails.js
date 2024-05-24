@@ -13,7 +13,6 @@ export const createUser = createAsyncThunk("createUser", async (data) => {
 });
 export const updateUser = createAsyncThunk("updateUser", async (data) => {
   let token = localStorageWithExpiry.getItem("token");
-  console.log(token);
   const response = await fetch(BASE_URL + `/api/user/${data.id}`, {
     method: "PUT",
     headers: {
@@ -26,7 +25,6 @@ export const updateUser = createAsyncThunk("updateUser", async (data) => {
 });
 export const deleteUser = createAsyncThunk("deleteUser", async (userId) => {
   let token = localStorageWithExpiry.getItem("token");
-  console.log(token);
   const response = await fetch(BASE_URL + `/api/user/${userId}`, {
     method: "DELETE",
     headers: {

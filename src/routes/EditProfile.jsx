@@ -6,6 +6,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../store/helper";
 import LoadingBar from "react-top-loading-bar";
+import { RiImageEditFill } from "react-icons/ri";
 
 
 const EditProfile = () => {
@@ -14,7 +15,8 @@ const EditProfile = () => {
     const dispatch = useDispatch();
     const { users, loading } = useSelector((store) => store.user);
     const [editData, setEditData] = useState('');
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState('');
+    const [imagePre, setImagePre] = useState('');
     const handleOnChange = (e) => {
         setEditData({ ...editData, [e.target.name]: e.target.value });
 
@@ -22,14 +24,14 @@ const EditProfile = () => {
     useEffect(() => {
         window.scroll(0, 0)
         setEditData(users)
-    }, [])
+        setImagePre(BASE_URL+"/api/user/image/"+users?.imageName);
+    }, []);
     const handleSubmitEditData = (e) => {
         e.preventDefault();
 
         dispatch(updateUser(editData))
             .then(unwrapResult)
             .then((obj) => {
-                console.log(obj);
                 dispatch(uploadUserImage({ image: image, userId: users.id }))
                     .then((data) => {
                         if (data.payload != undefined) {
@@ -58,7 +60,14 @@ const EditProfile = () => {
 
     }
     const handleImageUpload = (event) => {
-        setImage(event.target.files[0]);
+        if (event.target.files[0].type === "image/webp" || event.target.files[0].type === "image/jpg" || event.target.files[0].type === "image/jpeg" || event.target.files[0].type === "image/png" || event.target.files[0].type === "image/gif"){
+            setImage(event.target.files[0]);
+            setImagePre(URL.createObjectURL(event.target.files[0]));
+        }
+        else{
+            toast.error("upload .jpg, .jpeg, .png, .gif,.webp file");
+        }
+       
     }
 
     return (
@@ -67,9 +76,12 @@ const EditProfile = () => {
             <Form encType="multipart/form-data" className="signup_container" onSubmit={handleSubmitEditData}>
                 <h1>Edit Profile Details</h1>
                 <div className="profile_image">
+                    <label htmlFor='file_upload' className="profile_image_edit">
 
-                    <label htmlFor='file_upload'>
-                        <img src={BASE_URL + "/api/user/image/" + users.imageName} alt="" />
+                    <RiImageEditFill className="profile_image_edit_icon"/>
+                    </label>
+                    <label >
+                        <img src={imagePre} alt="" />
                     </label>
                     <input type="file" id='file_upload' name="image" onChange={handleImageUpload} />
 

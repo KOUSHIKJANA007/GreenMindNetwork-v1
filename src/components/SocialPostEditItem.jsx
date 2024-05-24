@@ -23,12 +23,12 @@ const SocialPostEditItem = ({ socialId,handleEditPost,openEdit }) => {
         .then(unwrapResult)
         .then((data)=>{
             setCaption(data);
-           setImagePre(BASE_URL+`/api/socialImage/image/${data.image}`);
+           setImagePre(BASE_URL+`/api/socialImage/image/${data?.image}`);
         })
     },[])
     const handleData = (data) => {
-        setImage(data.file)
-        setImagePre(data.fileUrl)
+        setImage(data?.file)
+        setImagePre(data?.fileUrl)
     }
     const handleCaption = (e) => {
         setCaption({ ...caption, [e.target.name]: e.target.value })
